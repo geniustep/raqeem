@@ -33,8 +33,18 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   // Standalone output is used for self-hosted (Docker) deployments.
   // `next start` (used locally and by Playwright) needs the default output.
+  // Never set BUILD_STANDALONE=1 on Vercel — it breaks the default Next.js output layout.
   ...(process.env.BUILD_STANDALONE === "1" ? { output: "standalone" as const } : {}),
   poweredByHeader: false,
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/ar",
+        permanent: false,
+      },
+    ];
+  },
   async headers() {
     return [
       {
