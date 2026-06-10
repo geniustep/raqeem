@@ -1,0 +1,713 @@
+{
+  "common": {
+    "brandName": "Raqeem",
+    "brandTagline": "Plateforme numérique complète pour la gestion des établissements éducatifs",
+    "brandAudience": "Écoles • Instituts • Centres de soutien • Centres de langues",
+    "logoAlt": "Logo Raqeem",
+    "learnMore": "En savoir plus",
+    "requestDemo": "Demander une démo",
+    "discoverPlatform": "Découvrir la plateforme",
+    "login": "Se connecter",
+    "skipToContent": "Aller au contenu",
+    "backToHome": "Retour à l'accueil",
+    "breadcrumbHome": "Accueil"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "solutions": "Solutions",
+    "features": "Fonctionnalités",
+    "institutions": "Établissements",
+    "about": "À propos",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "demo": "Demander une démo",
+    "login": "Se connecter",
+    "timetable": "Emploi du temps",
+    "security": "Sécurité et permissions",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "mainMenu": "Menu principal",
+    "languageSwitcher": "Choisir la langue"
+  },
+  "hero": {
+    "title": "La gestion de votre établissement devient plus simple",
+    "description": "Raqeem réunit l'administration, les enseignants, les parents et les élèves dans un écosystème numérique unifié : assiduité, devoirs, résultats, emploi du temps et communication scolaire.",
+    "primaryCta": "Demander une démo",
+    "secondaryCta": "Découvrir la plateforme",
+    "audience": "Pour les écoles, instituts, centres de soutien et centres de langues",
+    "mockupTitle": "Tableau de bord",
+    "mockupSubtitle": "Une vue unifiée de votre établissement",
+    "mockupAttendance": "Assiduité du jour",
+    "mockupHomework": "Devoirs",
+    "mockupTimetable": "Emploi du temps",
+    "mockupMessages": "Communication",
+    "mockupMobileTitle": "Application mobile",
+    "mockupImageAlt": "Aperçu de l'interface Raqeem sur le web et le mobile"
+  },
+  "institutionsSection": {
+    "title": "Une plateforme pour tous les établissements éducatifs",
+    "description": "Raqeem s'adapte à la nature de chaque établissement, de l'école unique au réseau d'annexes.",
+    "schools": {
+      "title": "Écoles",
+      "description": "Gestion complète des niveaux, des classes, de l'assiduité, des résultats et de la communication avec les parents."
+    },
+    "institutes": {
+      "title": "Instituts",
+      "description": "Organisation des programmes, des matières, des emplois du temps et des examens dans un seul système."
+    },
+    "tutoringCenters": {
+      "title": "Centres de soutien",
+      "description": "Suivi précis des groupes, des séances, des devoirs et de la progression des élèves."
+    },
+    "languageCenters": {
+      "title": "Centres de langues",
+      "description": "Gestion des niveaux linguistiques, des groupes, des ressources pédagogiques et de l'évaluation."
+    }
+  },
+  "problemSolution": {
+    "title": "Fini la dispersion entre fichiers, messages et applications",
+    "intro": "Beaucoup d'établissements gèrent leur quotidien avec des outils éparpillés et déconnectés : l'information se perd et les efforts se répètent.",
+    "problems": {
+      "p1": "Données dispersées entre plusieurs fichiers",
+      "p2": "Communication désorganisée entre administration, enseignants et familles",
+      "p3": "Difficulté à suivre l'assiduité au quotidien",
+      "p4": "Suivi insuffisant des devoirs et des résultats",
+      "p5": "Absence de vision unifiée de l'établissement"
+    },
+    "solutionTitle": "La solution",
+    "solution": "Raqeem réunit le fonctionnement quotidien de l'établissement dans une seule plateforme, avec des permissions claires et une expérience connectée.",
+    "beforeLabel": "Avant Raqeem",
+    "afterLabel": "Avec Raqeem",
+    "before": {
+      "b1": "Tableaux éparpillés et dossiers papier",
+      "b2": "Messages perdus entre plusieurs applications",
+      "b3": "Rapports compilés à la main en fin de période"
+    },
+    "after": {
+      "a1": "Une base de données unifiée pour tout l'établissement",
+      "a2": "Des canaux de communication organisés par rôle et par classe",
+      "a3": "Des indicateurs et rapports disponibles à tout moment"
+    }
+  },
+  "features": {
+    "title": "Tout ce dont votre établissement a besoin, sur une seule plateforme",
+    "description": "Six modules complémentaires couvrent le fonctionnement quotidien, de l'administration à la communication.",
+    "administration": {
+      "title": "Administration",
+      "description": "Gestion complète des dossiers des élèves, des enseignants et des parents, avec des permissions fines et des rapports clairs.",
+      "points": {
+        "1": "Dossiers des élèves et des parents",
+        "2": "Dossiers des enseignants et des matières",
+        "3": "Classes et niveaux scolaires",
+        "4": "Permissions précises par rôle",
+        "5": "Rapports et indicateurs prêts à l'emploi"
+      }
+    },
+    "attendance": {
+      "title": "Assiduité",
+      "description": "Saisie quotidienne rapide des présences, absences, retards et départs anticipés, avec correction administrative possible.",
+      "points": {
+        "1": "Présent, absent, en retard",
+        "2": "Départ anticipé",
+        "3": "Saisie quotidienne rapide par classe",
+        "4": "Correction administrative tracée",
+        "5": "Notification des parents"
+      }
+    },
+    "homework": {
+      "title": "Devoirs et ressources",
+      "description": "Création et publication des devoirs, suivi des rendus, ressources pédagogiques et pièces jointes organisées.",
+      "points": {
+        "1": "Création et publication des devoirs",
+        "2": "Suivi des rendus",
+        "3": "Ressources pédagogiques organisées",
+        "4": "Pièces jointes protégées",
+        "5": "Suivi de lecture et de consultation"
+      }
+    },
+    "timetable": {
+      "title": "Emploi du temps",
+      "description": "Construction de l'emploi du temps en brouillon, détection des conflits, puis publication organisée.",
+      "points": {
+        "1": "Vue du jour et de la semaine",
+        "2": "Séance en cours et séance suivante",
+        "3": "Brouillons avant publication",
+        "4": "Détection des conflits",
+        "5": "Publication organisée pour tous les rôles"
+      }
+    },
+    "exams": {
+      "title": "Examens et résultats",
+      "description": "Calendriers d'examens avec consignes et pièces jointes, saisie des résultats et publication par rôle.",
+      "points": {
+        "1": "Calendrier des examens",
+        "2": "Consignes et pièces jointes",
+        "3": "Saisie des résultats",
+        "4": "Publication organisée des résultats",
+        "5": "Affichage des résultats selon le rôle"
+      }
+    },
+    "communication": {
+      "title": "Communication",
+      "description": "Canaux, annonces et messages organisés par classe et par audience, avec une protection claire des périmètres.",
+      "points": {
+        "1": "Canaux organisés",
+        "2": "Annonces de l'établissement",
+        "3": "Messages directs",
+        "4": "Communication par classe et par audience",
+        "5": "Protection des périmètres administratifs"
+      }
+    }
+  },
+  "roles": {
+    "title": "Une expérience conçue pour chaque rôle",
+    "description": "Chaque utilisateur de Raqeem trouve les outils dont il a besoin au quotidien, sans complexité ni bruit.",
+    "tablistLabel": "Choisir le rôle",
+    "administration": {
+      "label": "Administration",
+      "title": "Vision globale et contrôle clair",
+      "description": "Un tableau de bord unifié pour suivre l'assiduité, les résultats, l'emploi du temps et la communication de toutes les classes.",
+      "points": {
+        "1": "Indicateurs quotidiens de l'établissement",
+        "2": "Gestion des dossiers et des permissions",
+        "3": "Correction administrative tracée",
+        "4": "Annonces pour tout l'établissement"
+      }
+    },
+    "teachers": {
+      "label": "Enseignant",
+      "title": "Des outils quotidiens rapides",
+      "description": "Saisir l'assiduité, publier les devoirs et entrer les résultats en quelques minutes, depuis le web ou le mobile.",
+      "points": {
+        "1": "Appel de la classe en quelques secondes",
+        "2": "Publication des devoirs et des ressources",
+        "3": "Saisie des résultats",
+        "4": "Séance en cours et séance suivante"
+      }
+    },
+    "parents": {
+      "label": "Parent",
+      "title": "Suivre ses enfants facilement",
+      "description": "Assiduité, devoirs, résultats et annonces de l'établissement, réunis en un seul endroit.",
+      "points": {
+        "1": "Suivi de l'assiduité des enfants",
+        "2": "Consultation des devoirs",
+        "3": "Résultats dès leur publication",
+        "4": "Annonces et messages de l'établissement"
+      }
+    },
+    "students": {
+      "label": "Élève",
+      "title": "Tout ce qu'il lui faut au même endroit",
+      "description": "Emploi du temps, devoirs, ressources et résultats dans une interface simple et claire.",
+      "points": {
+        "1": "Emploi du temps quotidien",
+        "2": "Devoirs et rendus",
+        "3": "Ressources pédagogiques",
+        "4": "Résultats dès leur publication"
+      }
+    }
+  },
+  "product": {
+    "title": "Une expérience unifiée sur le web et le mobile",
+    "description": "Les mêmes données, les mêmes permissions, et une expérience connectée entre le web et le mobile.",
+    "web": "Tableau de bord web de l'administration",
+    "teacherApp": "Application enseignant",
+    "parentApp": "Application parent",
+    "studentApp": "Application élève",
+    "placeholderNote": "Interface du produit"
+  },
+  "timetableSection": {
+    "title": "Un emploi du temps organisé et vérifiable avant publication",
+    "description": "Dans Raqeem, l'emploi du temps n'est pas un simple tableau : c'est un système complet qui passe par des étapes claires avant d'atteindre enseignants, élèves et familles.",
+    "points": {
+      "1": "Configuration des jours de travail",
+      "2": "Jours fermés et demi-journées",
+      "3": "Horaires de cours et pauses",
+      "4": "Enseignant, classe et salle pour chaque séance",
+      "5": "Détection automatique des conflits",
+      "6": "Brouillon avant publication",
+      "7": "Vue du jour et de la semaine",
+      "8": "Séance en cours et séance suivante"
+    },
+    "flowTitle": "Parcours de publication",
+    "flow": {
+      "setup": "Configuration",
+      "draft": "Brouillon",
+      "validate": "Vérification",
+      "review": "Révision",
+      "publish": "Publication"
+    },
+    "cta": "Découvrir l'emploi du temps"
+  },
+  "security": {
+    "title": "Chaque utilisateur ne voit que ce qui le concerne",
+    "description": "Dans Raqeem, les permissions reposent sur le rôle et le périmètre, et sont toujours vérifiées côté serveur.",
+    "points": {
+      "1": "Permissions par rôle",
+      "2": "Isolation totale des données de chaque établissement",
+      "3": "Périmètres administratifs précis",
+      "4": "Protection des pièces jointes",
+      "5": "Le parent ne voit que ses enfants",
+      "6": "L'enseignant ne voit que ses classes",
+      "7": "L'élève ne voit que ses données",
+      "8": "Vérification côté serveur"
+    },
+    "cta": "Découvrir la sécurité et les permissions"
+  },
+  "multiTenant": {
+    "title": "D'un établissement unique à un réseau d'établissements",
+    "description": "Raqeem convient à l'établissement indépendant comme aux groupes scolaires et instituts à annexes multiples.",
+    "points": {
+      "1": "Gestion d'une école unique dans le moindre détail",
+      "2": "Plusieurs annexes sous une même enseigne",
+      "3": "Un directeur général qui voit tout le réseau",
+      "4": "Un directeur indépendant pour chaque établissement",
+      "5": "Permissions définies par établissement",
+      "6": "Une expérience unifiée dans toutes les annexes"
+    }
+  },
+  "languagesSection": {
+    "title": "Une interface dans la langue de vos utilisateurs",
+    "description": "Raqeem fonctionne en arabe, français, anglais et espagnol, avec une prise en charge complète de l'écriture de droite à gauche."
+  },
+  "socialProof": {
+    "title": "Construit avec et pour les établissements éducatifs",
+    "description": "Les parcours de Raqeem ont été conçus avec des administrateurs et des enseignants qui vivent les défis quotidiens des établissements. Demandez une démo et faites-vous votre propre avis."
+  },
+  "faq": {
+    "title": "Questions fréquentes",
+    "description": "Des réponses concises aux questions les plus fréquentes sur la plateforme Raqeem.",
+    "viewAll": "Toutes les questions fréquentes",
+    "items": {
+      "q1": {
+        "question": "Quels types d'établissements Raqeem sert-il ?",
+        "answer": "Raqeem sert les écoles, les instituts, les centres de soutien et les centres de langues, qu'il s'agisse d'un établissement unique ou d'un réseau d'annexes."
+      },
+      "q2": {
+        "question": "Les enseignants et les parents ont-ils besoin d'une longue formation ?",
+        "answer": "Non. Les interfaces sont conçues pour être simples et directes, et chaque rôle ne voit que les outils dont il a besoin au quotidien."
+      },
+      "q3": {
+        "question": "Raqeem fonctionne-t-il sur mobile ?",
+        "answer": "Oui. Raqeem fonctionne sur le web et via une application mobile, avec les mêmes données et les mêmes permissions."
+      },
+      "q4": {
+        "question": "Comment les données de l'établissement sont-elles protégées ?",
+        "answer": "Les données de chaque établissement sont totalement isolées, et les permissions sont appliquées côté serveur : chaque utilisateur ne voit que ce qui relève de son rôle et de son périmètre."
+      },
+      "q5": {
+        "question": "Raqeem prend-il en charge plusieurs langues ?",
+        "answer": "Oui. L'interface est disponible en arabe, français, anglais et espagnol, avec une prise en charge complète des deux sens d'écriture."
+      },
+      "q6": {
+        "question": "Peut-on gérer plusieurs annexes depuis un seul compte ?",
+        "answer": "Oui. Raqeem prend en charge les groupes d'établissements à annexes multiples, avec un directeur général pour le réseau et un directeur indépendant pour chaque établissement."
+      },
+      "q7": {
+        "question": "Comment démarrer avec Raqeem ?",
+        "answer": "Remplissez le formulaire de demande de démo et notre équipe vous contactera pour organiser une présentation adaptée à votre établissement."
+      },
+      "q8": {
+        "question": "Peut-on relire l'emploi du temps avant sa publication ?",
+        "answer": "Oui. L'emploi du temps est construit en brouillon, les conflits sont détectés et la version est relue, puis publiée de façon organisée pour tous."
+      }
+    }
+  },
+  "ctaSection": {
+    "title": "Prêt à simplifier la gestion de votre établissement ?",
+    "description": "Demandez une démo en direct et voyez comment Raqeem réunit votre établissement dans un seul écosystème.",
+    "button": "Demander une démo"
+  },
+  "footer": {
+    "tagline": "Raqeem — Plateforme numérique complète pour la gestion des établissements éducatifs",
+    "description": "Un écosystème unifié qui relie l'administration, les enseignants, les parents et les élèves dans les écoles, instituts, centres de soutien et centres de langues.",
+    "solutions": "Solutions",
+    "institutions": "Établissements",
+    "resources": "Ressources",
+    "company": "Entreprise",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "contact": "Contact",
+    "login": "Se connecter",
+    "language": "Langue",
+    "rights": "© {year} Raqeem. Tous droits réservés.",
+    "facebook": "Facebook",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn"
+  },
+  "forms": {
+    "common": {
+      "required": "Ce champ est obligatoire",
+      "invalidEmail": "Saisissez une adresse e-mail valide",
+      "invalidPhone": "Saisissez un numéro de téléphone valide",
+      "tooShort": "Le texte est trop court",
+      "tooLong": "Le texte est trop long",
+      "consentRequired": "L'acceptation de la politique de confidentialité est obligatoire",
+      "submitting": "Envoi en cours…",
+      "genericError": "Impossible d'envoyer la demande. Réessayez plus tard.",
+      "selectPlaceholder": "Choisir…",
+      "optional": "Facultatif"
+    },
+    "demo": {
+      "title": "Demander une démo",
+      "description": "Remplissez le formulaire et notre équipe vous contactera pour organiser une présentation adaptée à votre établissement.",
+      "submit": "Envoyer la demande",
+      "successTitle": "Votre demande a bien été reçue",
+      "successMessage": "Merci de votre intérêt pour Raqeem. Notre équipe vous contactera prochainement pour organiser la démonstration.",
+      "errorTitle": "Échec de l'envoi",
+      "fields": {
+        "organizationName": "Nom de l'établissement",
+        "organizationType": "Type d'établissement",
+        "city": "Ville",
+        "estimatedStudentCount": "Nombre approximatif d'élèves",
+        "fullName": "Nom complet",
+        "jobTitle": "Fonction",
+        "phone": "Téléphone",
+        "email": "E-mail",
+        "preferredLanguage": "Langue de contact préférée",
+        "message": "Votre message",
+        "privacyConsent": "J'accepte le traitement de mes données conformément à la politique de confidentialité"
+      },
+      "organizationTypes": {
+        "school": "École",
+        "institute": "Institut",
+        "tutoring_center": "Centre de soutien",
+        "language_center": "Centre de langues",
+        "other": "Autre"
+      },
+      "studentCounts": {
+        "less_than_100": "Moins de 100",
+        "100_to_300": "De 100 à 300",
+        "301_to_700": "De 301 à 700",
+        "701_to_1500": "De 701 à 1500",
+        "more_than_1500": "Plus de 1500"
+      }
+    },
+    "contact": {
+      "title": "Contactez-nous",
+      "description": "Une question sur Raqeem ? Écrivez-nous et nous vous répondrons au plus vite.",
+      "submit": "Envoyer le message",
+      "successTitle": "Votre message a été envoyé",
+      "successMessage": "Merci de nous avoir contactés. Nous vous répondrons dans les plus brefs délais.",
+      "errorTitle": "Échec de l'envoi",
+      "fields": {
+        "name": "Nom",
+        "organization": "Établissement",
+        "phone": "Téléphone",
+        "email": "E-mail",
+        "subject": "Objet",
+        "message": "Message",
+        "privacyConsent": "J'accepte le traitement de mes données conformément à la politique de confidentialité"
+      }
+    }
+  },
+  "pages": {
+    "solutions": {
+      "title": "Une solution complète pour le fonctionnement quotidien",
+      "intro": "Raqeem couvre tout le cycle de la vie scolaire : des dossiers des élèves aux résultats, de l'emploi du temps à la communication avec les familles.",
+      "rolesTitle": "Quatre rôles, une seule expérience",
+      "rolesIntro": "Découvrez ce que Raqeem apporte à chaque rôle de votre établissement."
+    },
+    "featuresPage": {
+      "title": "Les fonctionnalités de Raqeem en détail",
+      "intro": "Six modules complémentaires couvrent l'administration, l'assiduité, les devoirs, l'emploi du temps, les examens et la communication."
+    },
+    "institutions": {
+      "schools": {
+        "title": "Raqeem pour les écoles",
+        "intro": "Du primaire au lycée, Raqeem réunit la gestion de l'école dans un système unique et clair.",
+        "points": {
+          "1": "Gestion des niveaux, des classes et des matières",
+          "2": "Saisie quotidienne de l'assiduité par classe",
+          "3": "Devoirs et ressources pour chaque matière",
+          "4": "Emploi du temps organisé et vérifiable",
+          "5": "Résultats transmis aux parents dès publication",
+          "6": "Communication organisée entre administration et familles"
+        }
+      },
+      "institutes": {
+        "title": "Raqeem pour les instituts",
+        "intro": "Raqeem organise les programmes, les matières et les examens de l'institut et relie l'administration aux enseignants et aux apprenants.",
+        "points": {
+          "1": "Organisation des programmes et des matières",
+          "2": "Emploi du temps flexible des séances",
+          "3": "Suivi de l'assiduité par groupe",
+          "4": "Calendriers d'examens avec consignes claires",
+          "5": "Résultats publiés selon le rôle",
+          "6": "Canaux de communication pour chaque programme"
+        }
+      },
+      "tutoringCenters": {
+        "title": "Raqeem pour les centres de soutien",
+        "intro": "Raqeem aide les centres de soutien à organiser les groupes et les séances et à tenir les familles informées en permanence.",
+        "points": {
+          "1": "Groupes flexibles par niveau et par matière",
+          "2": "Appel rapide à chaque séance",
+          "3": "Devoirs et ressources pour chaque groupe",
+          "4": "Suivi de la progression de chaque élève",
+          "5": "Notification des parents en cas d'absence",
+          "6": "Planification claire des séances et des salles"
+        }
+      },
+      "languageCenters": {
+        "title": "Raqeem pour les centres de langues",
+        "intro": "Du test de niveau au certificat, Raqeem organise le parcours de l'apprenant dans le centre de langues.",
+        "points": {
+          "1": "Niveaux linguistiques et groupes organisés",
+          "2": "Emploi du temps des groupes et des salles",
+          "3": "Ressources pédagogiques pour chaque niveau",
+          "4": "Suivi de l'assiduité et de la régularité",
+          "5": "Évaluations et résultats clairs",
+          "6": "Communication directe avec apprenants et familles"
+        }
+      }
+    },
+    "rolesPages": {
+      "administration": {
+        "title": "Raqeem pour l'administration",
+        "intro": "Une vision globale et un contrôle clair sur tous les détails de l'établissement, des dossiers aux indicateurs.",
+        "points": {
+          "1": "Tableau de bord quotidien de l'assiduité et des activités",
+          "2": "Gestion des dossiers des élèves, enseignants et parents",
+          "3": "Réglage des permissions et des périmètres administratifs",
+          "4": "Construction, révision et publication de l'emploi du temps",
+          "5": "Correction administrative tracée des registres d'assiduité",
+          "6": "Annonces pour tout l'établissement ou des audiences ciblées"
+        }
+      },
+      "teachers": {
+        "title": "Raqeem pour les enseignants",
+        "intro": "Des outils quotidiens rapides qui réduisent le temps administratif et laissent place à l'enseignement.",
+        "points": {
+          "1": "Appel de la classe en quelques secondes",
+          "2": "Publication des devoirs et suivi des rendus",
+          "3": "Partage des ressources et des pièces jointes",
+          "4": "Saisie et publication des résultats",
+          "5": "Affichage de la séance en cours et de la suivante",
+          "6": "Communication avec l'administration et les familles dans un périmètre clair"
+        }
+      },
+      "parents": {
+        "title": "Raqeem pour les parents",
+        "intro": "Suivre ses enfants facilement : assiduité, devoirs, résultats et annonces de l'établissement au même endroit.",
+        "points": {
+          "1": "Notifications de présence, d'absence et de retard",
+          "2": "Consultation des devoirs des enfants",
+          "3": "Résultats dès leur publication",
+          "4": "Emploi du temps toujours à jour",
+          "5": "Annonces et messages de l'établissement",
+          "6": "Suivi de plusieurs enfants depuis un seul compte"
+        }
+      },
+      "students": {
+        "title": "Raqeem pour les élèves",
+        "intro": "Tout ce dont l'élève a besoin au même endroit : emploi du temps, devoirs, ressources et résultats.",
+        "points": {
+          "1": "Emploi du temps quotidien et hebdomadaire",
+          "2": "Devoirs et dates de rendu",
+          "3": "Rendu des devoirs via la plateforme",
+          "4": "Ressources pédagogiques et pièces jointes",
+          "5": "Résultats dès leur publication",
+          "6": "Annonces de la classe et de l'établissement"
+        }
+      }
+    },
+    "timetablePage": {
+      "title": "L'emploi du temps dans Raqeem",
+      "intro": "Un système complet pour construire et relire l'emploi du temps avant publication, pas un simple tableau.",
+      "setupTitle": "Une configuration précise",
+      "setupText": "Définissez les jours de travail, les jours fermés et les demi-journées, ainsi que les horaires de cours et les pauses selon votre établissement.",
+      "buildTitle": "Une construction en brouillon",
+      "buildText": "Associez chaque séance à un enseignant, une classe et une salle, et travaillez sur un brouillon que personne ne voit avant qu'il soit prêt.",
+      "validateTitle": "Une vérification des conflits",
+      "validateText": "Raqeem détecte les conflits d'enseignant, de classe et de salle avant la publication : les erreurs n'atteignent jamais les utilisateurs.",
+      "publishTitle": "Une publication organisée",
+      "publishText": "Après révision, l'emploi du temps est publié pour tous : vue du jour et de la semaine, séance en cours et séance suivante pour chaque utilisateur."
+    },
+    "securityPage": {
+      "title": "Sécurité et permissions dans Raqeem",
+      "intro": "Un principe gouverne la plateforme : chaque utilisateur ne voit que ce qui le concerne, et la vérification se fait toujours côté serveur.",
+      "rolesTitle": "Des permissions par rôle",
+      "rolesText": "Chaque rôle dans Raqeem — administration, enseignant, parent, élève — dispose de permissions précisément définies. Le parent ne voit que ses enfants, l'enseignant que ses classes, l'élève que ses données.",
+      "isolationTitle": "L'isolation des données des établissements",
+      "isolationText": "Les données de chaque établissement sont totalement isolées des autres. Dans les réseaux d'annexes, les permissions sont définies par établissement, avec des périmètres administratifs précis dans chacun.",
+      "attachmentsTitle": "La protection des pièces jointes",
+      "attachmentsText": "Les ressources et pièces jointes sont protégées par les mêmes règles de permissions : seuls ceux qui y ont droit peuvent y accéder.",
+      "serverTitle": "Une vérification côté serveur",
+      "serverText": "Chaque requête est vérifiée sur le serveur avant exécution. L'interface ne décide pas des permissions : elle les reflète."
+    },
+    "about": {
+      "title": "À propos de Raqeem",
+      "intro": "Raqeem est une plateforme numérique complète pour la gestion des établissements éducatifs, qui réunit administration, enseignants, parents et élèves dans un seul écosystème.",
+      "missionTitle": "Notre mission",
+      "missionText": "Nous croyons que le temps d'un établissement éducatif doit être consacré à l'enseignement, pas à la paperasse. Nous construisons donc des outils qui simplifient le quotidien et relient tous les acteurs de la communauté éducative par une expérience claire et fiable.",
+      "visionTitle": "Notre vision",
+      "visionText": "Que la bonne information soit disponible pour la bonne personne au bon moment, dans chaque établissement éducatif, quelle que soit sa taille.",
+      "valuesTitle": "Nos valeurs",
+      "values": {
+        "1": {
+          "title": "Clarté",
+          "text": "Des interfaces simples et un langage compréhensible pour tous les rôles."
+        },
+        "2": {
+          "title": "Fiabilité",
+          "text": "Des données précises et des permissions toujours respectées."
+        },
+        "3": {
+          "title": "Confidentialité",
+          "text": "Les données des établissements et des familles sont une responsabilité que nous prenons au sérieux."
+        }
+      }
+    },
+    "privacy": {
+      "title": "Politique de confidentialité",
+      "updated": "Dernière mise à jour : juin 2026",
+      "sections": {
+        "intro": {
+          "title": "Introduction",
+          "text": "Cette politique explique comment le site Raqeem traite les données que vous fournissez via ses formulaires. Elle s'applique à ce site vitrine ; la plateforme Raqeem elle-même est régie par des accords distincts avec les établissements."
+        },
+        "collection": {
+          "title": "Les données que nous collectons",
+          "text": "Lors de l'envoi d'une demande de démo ou d'un message de contact, nous ne collectons que les données que vous saisissez : nom et type de l'établissement, coordonnées et contenu de votre message."
+        },
+        "use": {
+          "title": "Comment nous utilisons les données",
+          "text": "Nous utilisons ces données pour répondre à votre demande, organiser la démonstration et communiquer avec vous au sujet de Raqeem. Nous ne vendons pas vos données et ne les partageons pas avec des tiers à des fins marketing."
+        },
+        "retention": {
+          "title": "Conservation des données",
+          "text": "Nous conservons les données des demandes le temps nécessaire à leur traitement et à leur suivi, puis nous les supprimons ou les anonymisons."
+        },
+        "analytics": {
+          "title": "Analytique",
+          "text": "Si l'analytique est activée, nous ne mesurons que les visites de pages et les interactions générales, sans transmettre le contenu des messages, les numéros de téléphone, les adresses e-mail ni les noms des établissements."
+        },
+        "rights": {
+          "title": "Vos droits",
+          "text": "Vous pouvez à tout moment demander l'accès à vos données, leur rectification ou leur suppression en nous contactant via la page Contact."
+        }
+      }
+    },
+    "terms": {
+      "title": "Conditions d'utilisation",
+      "updated": "Dernière mise à jour : juin 2026",
+      "sections": {
+        "intro": {
+          "title": "Introduction",
+          "text": "Ces conditions régissent votre utilisation du site vitrine de Raqeem. En utilisant le site, vous acceptez ces conditions."
+        },
+        "site": {
+          "title": "Utilisation du site",
+          "text": "Ce site présente la plateforme Raqeem et propose des formulaires de contact et de demande de démo. Les formulaires doivent être utilisés avec des informations exactes et à des fins légitimes uniquement."
+        },
+        "ip": {
+          "title": "Propriété intellectuelle",
+          "text": "Le nom Raqeem, son logo et tout le contenu du site appartiennent à leurs détenteurs. Le logo ne peut être réutilisé, modifié ou redessiné sans autorisation écrite."
+        },
+        "platform": {
+          "title": "La plateforme Raqeem",
+          "text": "L'utilisation de la plateforme Raqeem elle-même est régie par des accords distincts conclus avec les établissements éducatifs ; ces conditions ne créent aucun droit d'utilisation de la plateforme."
+        },
+        "liability": {
+          "title": "Limitation de responsabilité",
+          "text": "Nous veillons à l'exactitude et à la mise à jour du contenu du site, sans garantir l'absence totale d'erreurs. Nous déclinons toute responsabilité pour les dommages indirects résultant de l'utilisation du site."
+        },
+        "changes": {
+          "title": "Modification des conditions",
+          "text": "Nous pouvons mettre à jour ces conditions de temps à autre ; la poursuite de l'utilisation du site après une mise à jour vaut acceptation de la nouvelle version."
+        }
+      }
+    }
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "description": "Désolé, la page que vous recherchez n'existe pas ou a été déplacée.",
+    "backHome": "Retour à l'accueil"
+  },
+  "errorPage": {
+    "title": "Une erreur inattendue s'est produite",
+    "description": "Nous nous excusons pour ce dysfonctionnement. Vous pouvez réessayer.",
+    "retry": "Réessayer"
+  },
+  "metadata": {
+    "siteName": "رقيم | Raqeem",
+    "home": {
+      "title": "Raqeem — Plateforme numérique complète pour la gestion des établissements éducatifs",
+      "description": "Raqeem est une plateforme de gestion pour écoles, instituts, centres de soutien et centres de langues : assiduité, devoirs, résultats, emploi du temps et communication scolaire."
+    },
+    "solutions": {
+      "title": "Solutions",
+      "description": "Découvrez comment Raqeem couvre tout le cycle scolaire : administration, assiduité, devoirs, résultats, emploi du temps et communication."
+    },
+    "features": {
+      "title": "Fonctionnalités",
+      "description": "Les fonctionnalités de Raqeem en détail : administration, assiduité, devoirs et ressources, emploi du temps, examens et résultats, communication."
+    },
+    "schools": {
+      "title": "Raqeem pour les écoles",
+      "description": "Une plateforme complète pour la gestion des écoles : niveaux, classes, assiduité, devoirs, résultats et communication avec les parents."
+    },
+    "institutes": {
+      "title": "Raqeem pour les instituts",
+      "description": "Organisation des programmes, matières, emplois du temps, examens et résultats de l'institut dans un seul système numérique."
+    },
+    "tutoringCenters": {
+      "title": "Raqeem pour les centres de soutien",
+      "description": "Gestion des groupes de soutien, des séances, de l'assiduité, des devoirs, du suivi des élèves et de la communication avec les familles."
+    },
+    "languageCenters": {
+      "title": "Raqeem pour les centres de langues",
+      "description": "Gestion des niveaux linguistiques, des groupes, des ressources pédagogiques, de l'évaluation et de la communication dans les centres de langues."
+    },
+    "administration": {
+      "title": "Raqeem pour l'administration",
+      "description": "Vision globale et contrôle clair : indicateurs quotidiens, gestion des dossiers, permissions, emploi du temps et communication organisée."
+    },
+    "teachers": {
+      "title": "Raqeem pour les enseignants",
+      "description": "Des outils quotidiens rapides pour l'enseignant : appel, publication des devoirs et saisie des résultats depuis le web ou le mobile."
+    },
+    "parents": {
+      "title": "Raqeem pour les parents",
+      "description": "Suivez l'assiduité, les devoirs, les résultats et l'emploi du temps de vos enfants ainsi que les annonces de l'établissement au même endroit."
+    },
+    "students": {
+      "title": "Raqeem pour les élèves",
+      "description": "Tout ce dont l'élève a besoin : emploi du temps, devoirs, ressources et résultats dans une interface simple."
+    },
+    "timetable": {
+      "title": "Emploi du temps",
+      "description": "Un système complet pour construire l'emploi du temps : configuration, brouillon, détection des conflits, révision puis publication organisée."
+    },
+    "security": {
+      "title": "Sécurité et permissions",
+      "description": "Permissions par rôle, isolation totale des données des établissements et vérification côté serveur : chaque utilisateur ne voit que ce qui le concerne."
+    },
+    "about": {
+      "title": "À propos de Raqeem",
+      "description": "Découvrez la mission, la vision et les valeurs de Raqeem : une plateforme numérique complète pour la gestion des établissements éducatifs."
+    },
+    "demo": {
+      "title": "Demander une démo",
+      "description": "Demandez une démonstration en direct de la plateforme Raqeem et voyez comment elle simplifie la gestion de votre établissement."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Contactez l'équipe Raqeem pour toute question sur la plateforme ou pour obtenir des informations complémentaires."
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "description": "Des réponses aux questions les plus fréquentes sur la plateforme Raqeem de gestion des établissements éducatifs."
+    },
+    "privacy": {
+      "title": "Politique de confidentialité",
+      "description": "Comment le site Raqeem traite vos données : collecte, utilisation, conservation et vos droits."
+    },
+    "terms": {
+      "title": "Conditions d'utilisation",
+      "description": "Les conditions qui régissent l'utilisation du site vitrine de Raqeem."
+    }
+  }
+}
