@@ -35,11 +35,10 @@ test.describe("desktop header", () => {
     await expect(page).toHaveURL(/\/en\/demo$/);
   });
 
-  test("login link points to the app URL", async ({ page }) => {
+  test("platform login button opens tenant modal", async ({ page }) => {
     await page.goto("/en");
-    const login = page.locator("header").getByRole("link", { name: "Log in" });
-    await expect(login).toHaveAttribute("href", /app\.raqeem\.ma/);
-    await expect(login).toHaveAttribute("rel", /noopener/);
+    await page.locator("header").getByRole("button", { name: "Access the platform" }).click();
+    await expect(page.getByRole("dialog", { name: "Sign in to Raqeem" })).toBeVisible();
   });
 
   test("footer internal links resolve", async ({ page, request }) => {

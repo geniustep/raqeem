@@ -21,13 +21,23 @@
     "faq": "Preguntas frecuentes",
     "contact": "Contacto",
     "demo": "Solicitar una demo",
-    "login": "Iniciar sesión",
+    "login": "Acceder a la plataforma",
     "timetable": "Horario",
     "security": "Seguridad y permisos",
     "openMenu": "Abrir el menú",
     "closeMenu": "Cerrar el menú",
     "mainMenu": "Menú principal",
     "languageSwitcher": "Elegir idioma"
+  },
+  "platformLogin": {
+    "title": "Acceso a Raqeem",
+    "institutionCode": "Código de la institución",
+    "placeholder": "school",
+    "continue": "Continuar",
+    "close": "Cerrar",
+    "invalidSlug": "Introduce un código de institución válido",
+    "tenantNotFound": "Código de institución no encontrado o no disponible",
+    "verifying": "Verificando..."
   },
   "hero": {
     "title": "Gestionar tu institución educativa ahora es más simple",

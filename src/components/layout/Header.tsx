@@ -7,9 +7,9 @@ import { Logo } from "@/components/brand/Logo";
 import { LanguageSwitcher } from "@/components/navigation/LanguageSwitcher";
 import { MobileMenu } from "@/components/navigation/MobileMenu";
 import { INSTITUTION_LINKS, NAV_LINKS } from "@/components/navigation/links";
+import { PlatformLoginModal } from "@/features/platform-login/PlatformLoginModal";
 import { Link } from "@/i18n/navigation";
 import { track } from "@/lib/analytics";
-import { APP_URL } from "@/lib/constants";
 
 export function Header() {
   const t = useTranslations("navigation");
@@ -17,6 +17,7 @@ export function Header() {
   const tInstitutions = useTranslations("institutionsSection");
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -120,15 +121,16 @@ export function Header() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <LanguageSwitcher />
-          <a
-            href={APP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => track("login_open")}
-            className="rounded-lg px-3 py-2 text-sm font-semibold text-brand-navy transition hover:text-brand-teal-700"
+          <button
+            type="button"
+            onClick={() => {
+              track("login_open");
+              setLoginOpen(true);
+            }}
+            className="inline-flex h-11 items-center justify-center rounded-xl border border-brand-navy-100 px-4 text-sm font-semibold text-brand-navy transition hover:border-brand-teal hover:text-brand-teal-700"
           >
             {t("login")}
-          </a>
+          </button>
           <Link
             href="/demo"
             onClick={() => track("demo_cta_click")}
@@ -148,7 +150,12 @@ export function Header() {
         </button>
       </div>
 
-      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+      <MobileMenu
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        onOpenLogin={() => setLoginOpen(true)}
+      />
+      <PlatformLoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
     </header>
   );
 }

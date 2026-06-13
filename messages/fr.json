@@ -21,13 +21,23 @@
     "faq": "FAQ",
     "contact": "Contact",
     "demo": "Demander une démo",
-    "login": "Se connecter",
+    "login": "Accéder à la plateforme",
     "timetable": "Emploi du temps",
     "security": "Sécurité et permissions",
     "openMenu": "Ouvrir le menu",
     "closeMenu": "Fermer le menu",
     "mainMenu": "Menu principal",
     "languageSwitcher": "Choisir la langue"
+  },
+  "platformLogin": {
+    "title": "Connexion à Raqeem",
+    "institutionCode": "Code de l'établissement",
+    "placeholder": "school",
+    "continue": "Continuer",
+    "close": "Fermer",
+    "invalidSlug": "Veuillez saisir un code d'établissement valide",
+    "tenantNotFound": "Code d'établissement introuvable ou indisponible",
+    "verifying": "Vérification..."
   },
   "hero": {
     "title": "La gestion de votre établissement devient plus simple",

@@ -4,7 +4,6 @@ import { X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 import { Link } from "@/i18n/navigation";
-import { APP_URL } from "@/lib/constants";
 import { track } from "@/lib/analytics";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { INSTITUTION_LINKS, NAV_LINKS } from "./links";
@@ -12,11 +11,12 @@ import { INSTITUTION_LINKS, NAV_LINKS } from "./links";
 interface MobileMenuProps {
   open: boolean;
   onClose: () => void;
+  onOpenLogin: () => void;
 }
 
 const FOCUSABLE = 'a[href], button:not([disabled]), select, [tabindex]:not([tabindex="-1"])';
 
-export function MobileMenu({ open, onClose }: MobileMenuProps) {
+export function MobileMenu({ open, onClose, onOpenLogin }: MobileMenuProps) {
   const t = useTranslations("navigation");
   const tInstitutions = useTranslations("institutionsSection");
   const panelRef = useRef<HTMLDivElement>(null);
@@ -129,15 +129,17 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
         </nav>
 
         <div className="mt-auto flex flex-col gap-3 pt-8">
-          <a
-            href={APP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => track("login_open")}
+          <button
+            type="button"
+            onClick={() => {
+              track("login_open");
+              onClose();
+              onOpenLogin();
+            }}
             className="inline-flex h-12 items-center justify-center rounded-xl border border-brand-navy-100 px-5 text-base font-semibold text-brand-navy transition hover:border-brand-teal hover:text-brand-teal-700"
           >
             {t("login")}
-          </a>
+          </button>
           <Link
             href="/demo"
             onClick={() => {

@@ -21,13 +21,23 @@
     "faq": "الأسئلة الشائعة",
     "contact": "تواصل معنا",
     "demo": "طلب عرض توضيحي",
-    "login": "تسجيل الدخول",
+    "login": "الدخول إلى المنصة",
     "timetable": "استعمال الزمن",
     "security": "الأمان والصلاحيات",
     "openMenu": "افتح القائمة",
     "closeMenu": "أغلق القائمة",
     "mainMenu": "القائمة الرئيسية",
     "languageSwitcher": "اختر اللغة"
+  },
+  "platformLogin": {
+    "title": "الدخول إلى رقيم",
+    "institutionCode": "رمز المؤسسة",
+    "placeholder": "school",
+    "continue": "متابعة",
+    "close": "إغلاق",
+    "invalidSlug": "يرجى إدخال رمز مؤسسة صالح",
+    "tenantNotFound": "رمز المؤسسة غير موجود أو غير متاح",
+    "verifying": "جاري التحقق..."
   },
   "hero": {
     "title": "إدارة مؤسستك التعليمية أصبحت أبسط",

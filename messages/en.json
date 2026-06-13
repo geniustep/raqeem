@@ -21,13 +21,23 @@
     "faq": "FAQ",
     "contact": "Contact",
     "demo": "Request a demo",
-    "login": "Log in",
+    "login": "Access the platform",
     "timetable": "Timetable",
     "security": "Security & permissions",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "mainMenu": "Main menu",
     "languageSwitcher": "Choose language"
+  },
+  "platformLogin": {
+    "title": "Sign in to Raqeem",
+    "institutionCode": "Institution code",
+    "placeholder": "school",
+    "continue": "Continue",
+    "close": "Close",
+    "invalidSlug": "Please enter a valid institution code",
+    "tenantNotFound": "Institution code not found or unavailable",
+    "verifying": "Verifying..."
   },
   "hero": {
     "title": "Managing your educational institution just got simpler",
