@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { Mail, MessageCircle, Phone } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { LanguageSwitcher } from "@/components/navigation/LanguageSwitcher";
 import { INSTITUTION_LINKS } from "@/components/navigation/links";
@@ -37,6 +38,28 @@ export async function Footer() {
     { label: t("linkedin"), href: SOCIAL_LINKS.linkedin },
   ].filter((social) => social.href !== "");
 
+  const contactLinks = [
+    {
+      label: t("email"),
+      value: "contact@raqeem.ma",
+      href: "mailto:contact@raqeem.ma",
+      icon: Mail,
+    },
+    {
+      label: t("phone"),
+      value: "06 61 33 98 92",
+      href: "tel:+212661339892",
+      icon: Phone,
+    },
+    {
+      label: t("whatsapp"),
+      value: "+212 6 64 06 18 63",
+      href: `https://wa.me/212664061863?text=${encodeURIComponent(t("whatsappMessage"))}`,
+      icon: MessageCircle,
+      external: true,
+    },
+  ];
+
   return (
     <footer className="border-t border-brand-navy-100 bg-brand-ivory">
       <div className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
@@ -51,6 +74,41 @@ export async function Footer() {
             <div className="mt-6">
               <p className="mb-2 text-sm font-semibold text-brand-navy">{t("language")}</p>
               <LanguageSwitcher id="language-switcher-footer" />
+            </div>
+            <div className="mt-7">
+              <p className="text-sm font-bold text-brand-navy">{t("contactDetails")}</p>
+              <ul className="mt-3 grid gap-2 sm:grid-cols-3 lg:grid-cols-1">
+                {contactLinks.map((contact) => {
+                  const Icon = contact.icon;
+
+                  return (
+                    <li key={contact.label}>
+                      <a
+                        href={contact.href}
+                        target={contact.external ? "_blank" : undefined}
+                        rel={contact.external ? "noopener noreferrer" : undefined}
+                        className="group flex items-center gap-3 rounded-xl border border-brand-navy-100 bg-white/70 px-3 py-2.5 transition hover:border-brand-teal-300 hover:bg-white"
+                        aria-label={`${contact.label}: ${contact.value}`}
+                      >
+                        <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-brand-teal-50 text-brand-teal-700 transition group-hover:bg-brand-teal-100">
+                          <Icon className="size-4" aria-hidden="true" />
+                        </span>
+                        <span className="min-w-0">
+                          <span className="block text-xs text-brand-navy-700/65">
+                            {contact.label}
+                          </span>
+                          <span
+                            className="block truncate text-sm font-semibold text-brand-navy"
+                            dir="ltr"
+                          >
+                            {contact.value}
+                          </span>
+                        </span>
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
           </div>
 
