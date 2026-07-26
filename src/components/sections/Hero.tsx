@@ -1,4 +1,4 @@
-import { CalendarClock, FileCheck, MessagesSquare, UserCheck } from "lucide-react";
+import { ChartNoAxesCombined, CircleDollarSign, GraduationCap, UserRoundPlus } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Link } from "@/i18n/navigation";
@@ -7,10 +7,10 @@ export async function Hero() {
   const t = await getTranslations("hero");
 
   const mockupCards = [
-    { icon: UserCheck, label: t("mockupAttendance") },
-    { icon: FileCheck, label: t("mockupHomework") },
-    { icon: CalendarClock, label: t("mockupTimetable") },
-    { icon: MessagesSquare, label: t("mockupMessages") },
+    { icon: UserRoundPlus, label: t("mockupAttendance") },
+    { icon: GraduationCap, label: t("mockupHomework") },
+    { icon: CircleDollarSign, label: t("mockupTimetable") },
+    { icon: ChartNoAxesCombined, label: t("mockupMessages") },
   ];
 
   return (

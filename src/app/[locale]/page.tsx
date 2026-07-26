@@ -6,6 +6,7 @@ import { FaqSection } from "@/components/sections/FaqSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { Hero } from "@/components/sections/Hero";
 import { InstitutionsSection } from "@/components/sections/InstitutionsSection";
+import { SchoolJourneySection } from "@/components/sections/SchoolJourneySection";
 import { LanguagesSection } from "@/components/sections/LanguagesSection";
 import { MultiTenantSection } from "@/components/sections/MultiTenantSection";
 import { ProblemSolution } from "@/components/sections/ProblemSolution";
@@ -54,7 +55,7 @@ export default async function HomePage({ params }: PageProps) {
       <JsonLd data={softwareApplicationJsonLd({ name: "Raqeem", description })} />
       <JsonLd data={faqPageJsonLd(faqItems)} />
       <Hero />
-      <InstitutionsSection />
+      {locale === "ar" ? <SchoolJourneySection /> : <InstitutionsSection />}
       <ProblemSolution />
       <FeaturesSection />
       <RolesSection />
@@ -63,7 +64,7 @@ export default async function HomePage({ params }: PageProps) {
       <SecuritySection />
       <MultiTenantSection />
       <LanguagesSection />
-      <SocialProofSection />
+      {locale === "ar" ? null : <SocialProofSection />}
       <FaqSection compact />
       <CtaSection />
     </>
