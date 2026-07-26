@@ -10,6 +10,7 @@ import { getEnv } from "./env";
 
 export interface EmailMessage {
   to: string;
+  replyTo?: string;
   subject: string;
   text: string;
 }
@@ -32,6 +33,7 @@ export async function sendEmail(message: EmailMessage): Promise<boolean> {
       body: JSON.stringify({
         from: env.EMAIL_FROM,
         to: [message.to],
+        ...(message.replyTo ? { reply_to: message.replyTo } : {}),
         subject: message.subject,
         text: message.text,
       }),

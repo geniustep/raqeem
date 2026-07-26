@@ -43,20 +43,21 @@ export async function POST(request: Request): Promise<NextResponse<FormApiRespon
 
     const env = getEnv();
     const data = parsed.data;
-    const to = env.CONTACT_TO_EMAIL ?? env.DEMO_TO_EMAIL;
-    if (to) {
-      await sendEmail({
-        to,
-        subject: `Raqeem contact — ${data.subject}`,
-        text: [
-          `Name: ${data.name}`,
-          `Organization: ${data.organization}`,
-          `Phone: ${data.phone}`,
-          `Email: ${data.email}`,
-          "",
-          data.message,
-        ].join("\n"),
-      });
+    const delivered = await sendEmail({
+      to: env.CONTACT_TO_EMAIL,
+      replyTo: data.email,
+      subject: `Raqeem contact — ${data.subject}`,
+      text: [
+        `Name: ${data.name}`,
+        `Organization: ${data.organization}`,
+        `Phone: ${data.phone}`,
+        `Email: ${data.email}`,
+        "",
+        data.message,
+      ].join("\n"),
+    });
+    if (!delivered) {
+      return json({ ok: false, message: "delivery_failed" }, 503);
     }
 
     return json({ ok: true, message: "received" });

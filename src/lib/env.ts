@@ -26,6 +26,17 @@ const optionalEmail = z
   .optional()
   .transform((value) => (value === "" ? undefined : value));
 
+const mailbox = z
+  .string()
+  .trim()
+  .refine(
+    (value) => {
+      const match = value.match(/^(?:[^<>]+<)?([^<>]+)>?$/);
+      return match?.[1] ? z.email().safeParse(match[1].trim()).success : false;
+    },
+    { message: "Invalid email sender" },
+  );
+
 const envSchema = z.object({
   NEXT_PUBLIC_SITE_URL: isProduction ? z.url() : z.url().default("http://localhost:3000"),
   NEXT_PUBLIC_APP_URL: isProduction ? z.url() : z.url().default("https://app.raqeem.ma"),
@@ -33,9 +44,9 @@ const envSchema = z.object({
   NEXT_PUBLIC_INSTAGRAM_URL: optionalUrl,
   NEXT_PUBLIC_LINKEDIN_URL: optionalUrl,
   NEXT_PUBLIC_ANALYTICS_ID: optionalString,
-  CONTACT_TO_EMAIL: optionalEmail,
-  DEMO_TO_EMAIL: optionalEmail,
-  EMAIL_FROM: optionalEmail,
+  CONTACT_TO_EMAIL: optionalEmail.default("contact@raqeem.ma"),
+  DEMO_TO_EMAIL: optionalEmail.default("contact@raqeem.ma"),
+  EMAIL_FROM: mailbox.default("Raqeem <contact@raqeem.ma>"),
   EMAIL_PROVIDER_API_KEY: optionalString,
   TURNSTILE_SITE_KEY: optionalString,
   TURNSTILE_SECRET_KEY: optionalString,

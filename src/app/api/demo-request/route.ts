@@ -43,25 +43,26 @@ export async function POST(request: Request): Promise<NextResponse<FormApiRespon
 
     const env = getEnv();
     const data = parsed.data;
-    const to = env.DEMO_TO_EMAIL ?? env.CONTACT_TO_EMAIL;
-    if (to) {
-      await sendEmail({
-        to,
-        subject: `Raqeem demo request — ${data.organizationName}`,
-        text: [
-          `Organization: ${data.organizationName}`,
-          `Type: ${data.organizationType}`,
-          `City: ${data.city}`,
-          `Students: ${data.estimatedStudentCount}`,
-          `Name: ${data.fullName}`,
-          `Job title: ${data.jobTitle}`,
-          `Phone: ${data.phone}`,
-          `Email: ${data.email}`,
-          `Preferred language: ${data.preferredLanguage}`,
-          "",
-          data.message,
-        ].join("\n"),
-      });
+    const delivered = await sendEmail({
+      to: env.DEMO_TO_EMAIL,
+      replyTo: data.email,
+      subject: `Raqeem demo request — ${data.organizationName}`,
+      text: [
+        `Organization: ${data.organizationName}`,
+        `Type: ${data.organizationType}`,
+        `City: ${data.city}`,
+        `Students: ${data.estimatedStudentCount}`,
+        `Name: ${data.fullName}`,
+        `Job title: ${data.jobTitle}`,
+        `Phone: ${data.phone}`,
+        `Email: ${data.email}`,
+        `Preferred language: ${data.preferredLanguage}`,
+        "",
+        data.message,
+      ].join("\n"),
+    });
+    if (!delivered) {
+      return json({ ok: false, message: "delivery_failed" }, 503);
     }
 
     return json({ ok: true, message: "received" });
