@@ -219,13 +219,31 @@
     }
   },
   "product": {
-    "title": "Una experiencia unificada en web y móvil",
-    "description": "Los mismos datos, los mismos permisos y una experiencia conectada entre la web y el móvil.",
-    "web": "Panel web de administración",
-    "teacherApp": "Aplicación del profesor",
-    "parentApp": "Aplicación de la familia",
-    "studentApp": "Aplicación del alumno",
-    "placeholderNote": "Interfaz del producto"
+    "eyebrow": "Raqeem en acción",
+    "title": "Vea cómo funciona su escuela desde un solo lugar",
+    "description": "Interfaces reales diseñadas para aclarar el trabajo diario, agilizar el acceso a la información y facilitar la decisión.",
+    "screenshots": {
+      "executive": {
+        "title": "Panel ejecutivo",
+        "description": "Prioridades del día, indicadores de la escuela y decisiones que requieren atención.",
+        "alt": "Panel ejecutivo escolar de Raqeem"
+      },
+      "finance": {
+        "title": "Visibilidad financiera útil",
+        "description": "Importes vencidos, cobros, medios de pago y próximos flujos en una sola vista.",
+        "alt": "Panel de análisis financiero de Raqeem"
+      },
+      "login": {
+        "title": "Acceso con la identidad de la escuela",
+        "description": "Una puerta clara y segura que refleja la identidad del centro.",
+        "alt": "Inicio de sesión en el espacio escolar Raqeem"
+      },
+      "search": {
+        "title": "Encuentre a un alumno en segundos",
+        "description": "Búsqueda rápida de expedientes, pagos o comunicación según los permisos.",
+        "alt": "Búsqueda de alumnos de demostración segura en Raqeem"
+      }
+    }
   },
   "timetableSection": {
     "title": "Un horario organizado y revisable antes de publicarse",

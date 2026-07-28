@@ -219,13 +219,31 @@
     }
   },
   "product": {
-    "title": "One unified experience on web and mobile",
-    "description": "The same data, the same permissions, and a connected experience between web and mobile.",
-    "web": "Web admin dashboard",
-    "teacherApp": "Teacher app",
-    "parentApp": "Parent app",
-    "studentApp": "Student app",
-    "placeholderNote": "Product interface"
+    "eyebrow": "Raqeem in action",
+    "title": "See your school operate from one place",
+    "description": "Real interfaces designed to clarify daily work, speed up access to information, and bring decisions closer.",
+    "screenshots": {
+      "executive": {
+        "title": "Executive dashboard",
+        "description": "Today’s priorities, school indicators, and decisions that need attention.",
+        "alt": "Raqeem executive school dashboard"
+      },
+      "finance": {
+        "title": "Actionable financial visibility",
+        "description": "Overdue amounts, collections, payment methods, and upcoming cash flow in one view.",
+        "alt": "Raqeem financial analytics dashboard"
+      },
+      "login": {
+        "title": "A school-branded sign-in",
+        "description": "A clear and secure gateway carrying the school’s identity.",
+        "alt": "Sign in to the Raqeem school space"
+      },
+      "search": {
+        "title": "Reach a student in moments",
+        "description": "Fast search for profiles, payments, or communication according to permissions.",
+        "alt": "Privacy-safe demo student search in Raqeem"
+      }
+    }
   },
   "timetableSection": {
     "title": "An organized timetable, reviewable before publishing",

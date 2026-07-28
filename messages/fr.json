@@ -219,13 +219,31 @@
     }
   },
   "product": {
-    "title": "Une expérience unifiée sur le web et le mobile",
-    "description": "Les mêmes données, les mêmes permissions, et une expérience connectée entre le web et le mobile.",
-    "web": "Tableau de bord web de l'administration",
-    "teacherApp": "Application enseignant",
-    "parentApp": "Application parent",
-    "studentApp": "Application élève",
-    "placeholderNote": "Interface du produit"
+    "eyebrow": "Raqeem en action",
+    "title": "Voyez votre école fonctionner depuis un seul espace",
+    "description": "Des interfaces réelles conçues pour clarifier le quotidien, accélérer l’accès à l’information et faciliter la décision.",
+    "screenshots": {
+      "executive": {
+        "title": "Tableau de bord de direction",
+        "description": "Les priorités du jour, les indicateurs de l’école et les décisions qui nécessitent une intervention.",
+        "alt": "Tableau de bord de direction de la plateforme Raqeem"
+      },
+      "finance": {
+        "title": "Une vision financière exploitable",
+        "description": "Retards, encaissements, moyens de paiement et flux à venir dans une seule interface.",
+        "alt": "Tableau d’analyse financière de la plateforme Raqeem"
+      },
+      "login": {
+        "title": "Un accès aux couleurs de l’établissement",
+        "description": "Un portail clair et sécurisé qui porte l’identité de l’école.",
+        "alt": "Page de connexion à l’espace scolaire Raqeem"
+      },
+      "search": {
+        "title": "Retrouver un élève en quelques instants",
+        "description": "Une recherche rapide vers le dossier, les paiements ou la communication selon les droits.",
+        "alt": "Recherche de démonstration sécurisée d’élèves dans Raqeem"
+      }
+    }
   },
   "timetableSection": {
     "title": "Un emploi du temps organisé et vérifiable avant publication",
