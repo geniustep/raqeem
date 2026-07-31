@@ -22,6 +22,20 @@ const PATHS = [
   "/faq",
   "/privacy",
   "/terms",
+  "/support",
+  "/data-deletion",
+  "/compliance",
+  "/privacy-center",
+  "/legal-notice",
+  "/cookies",
+  "/accessibility",
+  "/child-parent-data-notice",
+  "/data-processing-agreement",
+  "/subprocessors",
+  "/data-retention",
+  "/backup-recovery",
+  "/service-status",
+  "/service-level-agreement",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
