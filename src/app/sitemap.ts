@@ -26,6 +26,7 @@ const PATHS = [
   "/data-deletion",
   "/compliance",
   "/privacy-center",
+  "/trust-center",
   "/legal-notice",
   "/cookies",
   "/accessibility",
@@ -36,22 +37,26 @@ const PATHS = [
   "/backup-recovery",
   "/service-status",
   "/service-level-agreement",
+  "/business-continuity",
+  "/disaster-recovery",
+  "/incident-response",
+  "/vulnerability-disclosure",
+  "/security-contact",
+  "/support-policy",
+  "/maintenance-policy",
+  "/security-whitepaper",
+  "/responsible-ai",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
-
   return PATHS.flatMap((path) =>
     locales.map((locale) => ({
       url: `${SITE_URL}/${locale}${path}`,
       lastModified,
       changeFrequency: path === "" ? ("weekly" as const) : ("monthly" as const),
-      priority: path === "" ? 1 : 0.7,
-      alternates: {
-        languages: Object.fromEntries(
-          locales.map((alternate) => [alternate, `${SITE_URL}/${alternate}${path}`]),
-        ),
-      },
+      priority: path === "" ? 1 : path === "/trust-center" ? 0.8 : 0.7,
+      alternates: { languages: Object.fromEntries(locales.map((alternate) => [alternate, `${SITE_URL}/${alternate}${path}`])) },
     })),
   );
 }
