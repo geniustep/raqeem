@@ -1,12 +1,18 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Mail, MessageCircle, Phone } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { LanguageSwitcher } from "@/components/navigation/LanguageSwitcher";
 import { INSTITUTION_LINKS } from "@/components/navigation/links";
+import { backupRecoveryPages } from "@/content/backup-recovery-page";
+import { privacyCenterPages } from "@/content/privacy-center-page";
+import { serviceLevelAgreementPages } from "@/content/service-level-agreement-page";
+import { serviceStatusPages } from "@/content/service-status-page";
 import { Link } from "@/i18n/navigation";
+import type { Locale } from "@/i18n/routing";
 import { APP_URL, SOCIAL_LINKS } from "@/lib/constants";
 
 export async function Footer() {
+  const locale = (await getLocale()) as Locale;
   const t = await getTranslations("footer");
   const tNav = await getTranslations("navigation");
   const tCommon = await getTranslations("common");
@@ -24,6 +30,13 @@ export async function Footer() {
     { label: tNav("faq"), href: "/faq" },
     { label: tNav("demo"), href: "/demo" },
     { label: tNav("contact"), href: "/contact" },
+  ];
+
+  const trustLinks = [
+    { label: privacyCenterPages[locale].title, href: "/privacy-center" },
+    { label: backupRecoveryPages[locale].title, href: "/backup-recovery" },
+    { label: serviceStatusPages[locale].title, href: "/service-status" },
+    { label: serviceLevelAgreementPages[locale].title, href: "/service-level-agreement" },
   ];
 
   const companyLinks = [
@@ -80,7 +93,6 @@ export async function Footer() {
               <ul className="mt-3 grid gap-2 sm:grid-cols-3 lg:grid-cols-1">
                 {contactLinks.map((contact) => {
                   const Icon = contact.icon;
-
                   return (
                     <li key={contact.label}>
                       <a
@@ -94,15 +106,8 @@ export async function Footer() {
                           <Icon className="size-4" aria-hidden="true" />
                         </span>
                         <span className="min-w-0">
-                          <span className="block text-xs text-brand-navy-700/65">
-                            {contact.label}
-                          </span>
-                          <span
-                            className="block truncate text-sm font-semibold text-brand-navy"
-                            dir="ltr"
-                          >
-                            {contact.value}
-                          </span>
+                          <span className="block text-xs text-brand-navy-700/65">{contact.label}</span>
+                          <span className="block truncate text-sm font-semibold text-brand-navy" dir="ltr">{contact.value}</span>
                         </span>
                       </a>
                     </li>
@@ -116,14 +121,7 @@ export async function Footer() {
             <p className="text-sm font-bold text-brand-navy">{t("solutions")}</p>
             <ul className="mt-4 space-y-3">
               {solutionLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
+                <li key={link.href}><Link href={link.href} className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700">{link.label}</Link></li>
               ))}
             </ul>
           </nav>
@@ -132,14 +130,7 @@ export async function Footer() {
             <p className="text-sm font-bold text-brand-navy">{t("institutions")}</p>
             <ul className="mt-4 space-y-3">
               {INSTITUTION_LINKS.map((link) => (
-                <li key={link.key}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700"
-                  >
-                    {tInstitutions(`${link.key}.title`)}
-                  </Link>
-                </li>
+                <li key={link.key}><Link href={link.href} className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700">{tInstitutions(`${link.key}.title`)}</Link></li>
               ))}
             </ul>
           </nav>
@@ -149,25 +140,18 @@ export async function Footer() {
               <p className="text-sm font-bold text-brand-navy">{t("resources")}</p>
               <ul className="mt-4 space-y-3">
                 {resourceLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
+                  <li key={link.href}><Link href={link.href} className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700">{link.label}</Link></li>
                 ))}
-                <li>
-                  <a
-                    href={APP_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700"
-                  >
-                    {t("login")}
-                  </a>
-                </li>
+                <li><a href={APP_URL} target="_blank" rel="noopener noreferrer" className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700">{t("login")}</a></li>
+              </ul>
+            </nav>
+
+            <nav aria-label={privacyCenterPages[locale].title}>
+              <p className="text-sm font-bold text-brand-navy">{privacyCenterPages[locale].title}</p>
+              <ul className="mt-4 space-y-3">
+                {trustLinks.map((link) => (
+                  <li key={link.href}><Link href={link.href} className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700">{link.label}</Link></li>
+                ))}
               </ul>
             </nav>
 
@@ -175,14 +159,7 @@ export async function Footer() {
               <p className="text-sm font-bold text-brand-navy">{t("company")}</p>
               <ul className="mt-4 space-y-3">
                 {companyLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
+                  <li key={link.href}><Link href={link.href} className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700">{link.label}</Link></li>
                 ))}
               </ul>
             </nav>
@@ -197,16 +174,7 @@ export async function Footer() {
           {socials.length > 0 ? (
             <ul className="flex items-center gap-4">
               {socials.map((social) => (
-                <li key={social.label}>
-                  <a
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-medium text-brand-navy-700/80 transition hover:text-brand-teal-700"
-                  >
-                    {social.label}
-                  </a>
-                </li>
+                <li key={social.label}><a href={social.href} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-brand-navy-700/80 transition hover:text-brand-teal-700">{social.label}</a></li>
               ))}
             </ul>
           ) : null}
