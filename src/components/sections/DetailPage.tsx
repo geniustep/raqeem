@@ -1,9 +1,11 @@
 import { CheckCircle2 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { GuideLinksSection } from "@/components/guides/GuideLinksSection";
+import { CorePageSummary } from "@/components/sections/CorePageSummary";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
+import type { CorePageKey } from "@/content/core-pages";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/constants";
@@ -16,6 +18,7 @@ interface DetailPageProps {
   /** Path without the locale prefix, e.g. "/institutions/schools". */
   path: string;
   pointsCount?: number;
+  intentKey?: CorePageKey;
   relatedGuideSlugs?: readonly string[];
 }
 
@@ -24,6 +27,7 @@ export async function DetailPage({
   namespace,
   path,
   pointsCount = 6,
+  intentKey,
   relatedGuideSlugs = [],
 }: DetailPageProps) {
   const t = await getTranslations(namespace);
@@ -60,6 +64,8 @@ export async function DetailPage({
           <p className="mt-5 max-w-2xl text-lg leading-8 text-brand-navy-700/85">{t("intro")}</p>
         </Container>
       </section>
+
+      {intentKey ? <CorePageSummary locale={locale} page={intentKey} /> : null}
 
       <section className="py-16 lg:py-20">
         <Container>

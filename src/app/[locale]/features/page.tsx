@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { GuideLinksSection } from "@/components/guides/GuideLinksSection";
+import { CorePageSummary } from "@/components/sections/CorePageSummary";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { Container } from "@/components/ui/Container";
@@ -14,6 +15,8 @@ interface PageProps {
 const featuredGuideSlugs = [
   "school-fees-collections-receipts",
   "governed-school-communication",
+  "admission-to-student-record",
+  "school-data-isolation",
 ] as const;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -37,6 +40,7 @@ export default async function FeaturesPage({ params }: PageProps) {
           <p className="mt-5 max-w-2xl text-lg leading-8 text-brand-navy-700/85">{t("intro")}</p>
         </Container>
       </section>
+      <CorePageSummary locale={locale} page="features" />
       <FeaturesSection detailed />
       <GuideLinksSection locale={locale} slugs={featuredGuideSlugs} />
       <CtaSection />

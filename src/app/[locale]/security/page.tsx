@@ -12,11 +12,13 @@ import {
   UsersRound,
 } from "lucide-react";
 import { setRequestLocale } from "next-intl/server";
+import { GuideLinksSection } from "@/components/guides/GuideLinksSection";
+import { CorePageSummary } from "@/components/sections/CorePageSummary";
 import { Container } from "@/components/ui/Container";
+import { getCorePageContent } from "@/content/core-pages";
 import { securityPages } from "@/content/security-page";
-import { locales, type Locale } from "@/i18n/routing";
-import { SITE_URL } from "@/lib/constants";
-import { OG_IMAGE } from "@/lib/metadata";
+import type { Locale } from "@/i18n/routing";
+import { buildLocalizedMetadata } from "@/lib/metadata";
 
 interface PageProps {
   params: Promise<{ locale: Locale }>;
@@ -35,43 +37,21 @@ const icons = [
   UserRoundCheck,
 ] as const;
 
+const relatedGuideSlugs = [
+  "school-data-isolation",
+  "choosing-school-management-system",
+] as const;
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
-  const content = securityPages[locale];
-  const path = "/security";
-  const url = `${SITE_URL}/${locale}${path}`;
+  const content = getCorePageContent(locale, "security") ?? securityPages[locale];
 
-  const languages: Record<string, string> = {};
-  for (const supportedLocale of locales) {
-    languages[supportedLocale] = `${SITE_URL}/${supportedLocale}${path}`;
-  }
-  languages["x-default"] = `${SITE_URL}/ar${path}`;
-
-  return {
+  return buildLocalizedMetadata({
+    locale,
+    path: "/security",
     title: content.title,
     description: content.description,
-    alternates: { canonical: url, languages },
-    openGraph: {
-      title: content.title,
-      description: content.description,
-      url,
-      type: "website",
-      images: [
-        {
-          url: `${SITE_URL}${OG_IMAGE.url}`,
-          width: OG_IMAGE.width,
-          height: OG_IMAGE.height,
-          alt: "Raqeem",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: content.title,
-      description: content.description,
-      images: [`${SITE_URL}${OG_IMAGE.url}`],
-    },
-  };
+  });
 }
 
 export default async function SecurityPage({ params }: PageProps) {
@@ -100,6 +80,8 @@ export default async function SecurityPage({ params }: PageProps) {
         </Container>
       </section>
 
+      <CorePageSummary locale={locale} page="security" />
+
       <section className="py-16 lg:py-20">
         <Container className="max-w-5xl">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -121,6 +103,8 @@ export default async function SecurityPage({ params }: PageProps) {
           </div>
         </Container>
       </section>
+
+      <GuideLinksSection locale={locale} slugs={relatedGuideSlugs} />
 
       <section className="pb-16 lg:pb-20">
         <Container className="max-w-4xl">

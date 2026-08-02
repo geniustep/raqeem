@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ROLE_LINKS } from "@/components/navigation/links";
 import { GuideLinksSection } from "@/components/guides/GuideLinksSection";
+import { ROLE_LINKS } from "@/components/navigation/links";
+import { CorePageSummary } from "@/components/sections/CorePageSummary";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { InstitutionsSection } from "@/components/sections/InstitutionsSection";
@@ -18,6 +19,8 @@ interface PageProps {
 const featuredGuideSlugs = [
   "school-fees-collections-receipts",
   "governed-school-communication",
+  "admission-to-student-record",
+  "school-data-isolation",
 ] as const;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -44,6 +47,7 @@ export default async function SolutionsPage({ params }: PageProps) {
         </Container>
       </section>
 
+      <CorePageSummary locale={locale} page="solutions" />
       <FeaturesSection />
       <GuideLinksSection locale={locale} slugs={featuredGuideSlugs} tone="white" />
 

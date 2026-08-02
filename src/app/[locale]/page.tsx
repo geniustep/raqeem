@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { GuideLinksSection } from "@/components/guides/GuideLinksSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { Hero } from "@/components/sections/Hero";
 import { InstitutionsSection } from "@/components/sections/InstitutionsSection";
-import { SchoolJourneySection } from "@/components/sections/SchoolJourneySection";
 import { LanguagesSection } from "@/components/sections/LanguagesSection";
 import { MultiTenantSection } from "@/components/sections/MultiTenantSection";
 import { ProblemSolution } from "@/components/sections/ProblemSolution";
 import { ProductSection } from "@/components/sections/ProductSection";
 import { RolesSection } from "@/components/sections/RolesSection";
+import { SchoolJourneySection } from "@/components/sections/SchoolJourneySection";
 import { SecuritySection } from "@/components/sections/SecuritySection";
 import { SocialProofSection } from "@/components/sections/SocialProofSection";
 import { TimetableSection } from "@/components/sections/TimetableSection";
@@ -28,6 +29,14 @@ import { buildPageMetadata } from "@/lib/metadata";
 interface PageProps {
   params: Promise<{ locale: Locale }>;
 }
+
+const featuredGuideSlugs = [
+  "choosing-school-management-system",
+  "admission-to-student-record",
+  "school-data-isolation",
+  "school-fees-collections-receipts",
+  "governed-school-communication",
+] as const;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
@@ -63,6 +72,7 @@ export default async function HomePage({ params }: PageProps) {
       <Hero />
       {locale === "ar" ? <SchoolJourneySection /> : <InstitutionsSection />}
       <ProblemSolution />
+      <GuideLinksSection locale={locale} slugs={featuredGuideSlugs} tone="white" />
       <FeaturesSection />
       <RolesSection />
       <ProductSection />

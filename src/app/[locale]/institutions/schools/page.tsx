@@ -8,6 +8,13 @@ interface PageProps {
   params: Promise<{ locale: Locale }>;
 }
 
+const relatedGuideSlugs = [
+  "admission-to-student-record",
+  "school-fees-collections-receipts",
+  "governed-school-communication",
+  "school-data-isolation",
+] as const;
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   return buildPageMetadata({ locale, page: "schools", path: "/institutions/schools" });
@@ -21,6 +28,8 @@ export default async function SchoolsPage({ params }: PageProps) {
       locale={locale}
       namespace="pages.institutions.schools"
       path="/institutions/schools"
+      intentKey="schools"
+      relatedGuideSlugs={relatedGuideSlugs}
     />
   );
 }

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Eye, Gem, Target } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Logo } from "@/components/brand/Logo";
+import { GuideLinksSection } from "@/components/guides/GuideLinksSection";
+import { CorePageSummary } from "@/components/sections/CorePageSummary";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { Container } from "@/components/ui/Container";
 import type { Locale } from "@/i18n/routing";
@@ -10,6 +12,12 @@ import { buildPageMetadata } from "@/lib/metadata";
 interface PageProps {
   params: Promise<{ locale: Locale }>;
 }
+
+const relatedGuideSlugs = [
+  "choosing-school-management-system",
+  "school-data-isolation",
+  "school-operations-platform",
+] as const;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
@@ -41,6 +49,8 @@ export default async function AboutPage({ params }: PageProps) {
           </div>
         </Container>
       </section>
+
+      <CorePageSummary locale={locale} page="about" />
 
       <section className="py-16 lg:py-20">
         <Container>
@@ -85,6 +95,7 @@ export default async function AboutPage({ params }: PageProps) {
         </Container>
       </section>
 
+      <GuideLinksSection locale={locale} slugs={relatedGuideSlugs} />
       <CtaSection />
     </>
   );

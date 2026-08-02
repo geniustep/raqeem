@@ -11,6 +11,7 @@ interface PageProps {
 const relatedGuideSlugs = [
   "school-fees-collections-receipts",
   "governed-school-communication",
+  "school-data-isolation",
 ] as const;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -26,6 +27,7 @@ export default async function AdministrationPage({ params }: PageProps) {
       locale={locale}
       namespace="pages.rolesPages.administration"
       path="/roles/administration"
+      intentKey="administration"
       relatedGuideSlugs={relatedGuideSlugs}
     />
   );
