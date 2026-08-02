@@ -64,7 +64,7 @@ export function softwareApplicationJsonLd({
     description,
     url: SITE_URL,
     applicationCategory: "EducationalApplication",
-    operatingSystem: "Web",
+    operatingSystem: "Web, Android, iOS, Windows",
     inLanguage: locale,
     publisher: { "@id": ORGANIZATION_ID },
     isPartOf: { "@id": WEBSITE_ID },
