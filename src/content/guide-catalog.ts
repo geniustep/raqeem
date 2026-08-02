@@ -1,10 +1,10 @@
+import type { CatalogGuideContent } from "@/content/guide-types";
 import { governedSchoolCommunicationGuide } from "@/content/guides/governed-school-communication";
 import { schoolFeesCollectionsReceiptsGuide } from "@/content/guides/school-fees-collections-receipts";
 import {
   getGuide as getBaseGuide,
   guideIndexPages,
   guideSlugs as baseGuideSlugs,
-  type GuideContent,
 } from "@/content/guides";
 import type { Locale } from "@/i18n/routing";
 
@@ -17,7 +17,7 @@ type StageFourGuideSlug = (typeof stageFourGuideSlugs)[number];
 
 export const guideSlugs = [...baseGuideSlugs, ...stageFourGuideSlugs] as const;
 
-const stageFourGuides: Record<StageFourGuideSlug, Record<Locale, GuideContent>> = {
+const stageFourGuides: Record<StageFourGuideSlug, Record<Locale, CatalogGuideContent>> = {
   "school-fees-collections-receipts": schoolFeesCollectionsReceiptsGuide,
   "governed-school-communication": governedSchoolCommunicationGuide,
 };
@@ -26,7 +26,7 @@ function isStageFourGuideSlug(value: string): value is StageFourGuideSlug {
   return stageFourGuideSlugs.includes(value as StageFourGuideSlug);
 }
 
-export function getGuide(locale: Locale, slug: string): GuideContent | undefined {
+export function getGuide(locale: Locale, slug: string): CatalogGuideContent | undefined {
   const baseGuide = getBaseGuide(locale, slug);
   if (baseGuide) {
     return baseGuide;
@@ -36,4 +36,4 @@ export function getGuide(locale: Locale, slug: string): GuideContent | undefined
 }
 
 export { guideIndexPages };
-export type { GuideContent };
+export type { CatalogGuideContent };
