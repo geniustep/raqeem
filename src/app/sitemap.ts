@@ -48,15 +48,22 @@ const PATHS = [
   "/responsible-ai",
 ];
 
+function languageAlternates(path: string): Record<string, string> {
+  return {
+    ...Object.fromEntries(
+      locales.map((locale) => [locale, `${SITE_URL}/${locale}${path}`]),
+    ),
+    "x-default": `${SITE_URL}/ar${path}`,
+  };
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
   return PATHS.flatMap((path) =>
     locales.map((locale) => ({
       url: `${SITE_URL}/${locale}${path}`,
-      lastModified,
       changeFrequency: path === "" ? ("weekly" as const) : ("monthly" as const),
       priority: path === "" ? 1 : path === "/trust-center" ? 0.8 : 0.7,
-      alternates: { languages: Object.fromEntries(locales.map((alternate) => [alternate, `${SITE_URL}/${alternate}${path}`])) },
+      alternates: { languages: languageAlternates(path) },
     })),
   );
 }

@@ -1,10 +1,19 @@
-import { ChartNoAxesCombined, CircleDollarSign, GraduationCap, UserRoundPlus } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import {
+  ChartNoAxesCombined,
+  CircleDollarSign,
+  GraduationCap,
+  UserRoundPlus,
+} from "lucide-react";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
+import { getEntityProfile } from "@/content/entity-profile";
 import { Link } from "@/i18n/navigation";
+import type { Locale } from "@/i18n/routing";
 
 export async function Hero() {
   const t = await getTranslations("hero");
+  const locale = (await getLocale()) as Locale;
+  const entity = getEntityProfile(locale);
 
   const mockupCards = [
     { icon: UserRoundPlus, label: t("mockupAttendance") },
@@ -22,6 +31,9 @@ export async function Hero() {
       />
       <Container className="relative grid grid-cols-1 items-center gap-12 py-16 lg:grid-cols-2 lg:py-24">
         <div className="max-w-xl">
+          <p className="mb-4 text-sm font-semibold leading-6 text-brand-teal-700">
+            {entity.descriptor}
+          </p>
           <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-brand-navy sm:text-5xl">
             {t("title")}
           </h1>

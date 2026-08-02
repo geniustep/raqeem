@@ -2,11 +2,13 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Noto_Kufi_Arabic, Noto_Sans_Arabic } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import type { ReactNode } from "react";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { SkipLink } from "@/components/layout/SkipLink";
+import { RouteBreadcrumbJsonLd } from "@/components/seo/RouteBreadcrumbJsonLd";
+import { getEntityProfile } from "@/content/entity-profile";
 import { localeDirections, routing, type Locale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/constants";
 import "@/styles/globals.css";
@@ -42,16 +44,17 @@ export async function generateMetadata({
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
-  const t = await getTranslations({ locale, namespace: "metadata" });
+
+  const entity = getEntityProfile(locale as Locale);
 
   return {
     metadataBase: new URL(SITE_URL),
     title: {
-      default: t("home.title"),
-      template: `%s | ${t("siteName")}`,
+      default: entity.descriptor,
+      template: `%s | ${entity.name}`,
     },
-    description: t("home.description"),
-    applicationName: t("siteName"),
+    description: entity.description,
+    applicationName: entity.name,
     icons: {
       icon: [
         { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
@@ -81,7 +84,8 @@ export default async function LocaleLayout({
   }
   setRequestLocale(locale);
 
-  const direction = localeDirections[locale as Locale];
+  const typedLocale = locale as Locale;
+  const direction = localeDirections[typedLocale];
 
   return (
     <html
@@ -91,6 +95,7 @@ export default async function LocaleLayout({
     >
       <body className="flex min-h-screen flex-col">
         <NextIntlClientProvider>
+          <RouteBreadcrumbJsonLd locale={typedLocale} />
           <SkipLink />
           <Header />
           <main id="main" className="flex-1">

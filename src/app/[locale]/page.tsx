@@ -15,6 +15,7 @@ import { RolesSection } from "@/components/sections/RolesSection";
 import { SecuritySection } from "@/components/sections/SecuritySection";
 import { SocialProofSection } from "@/components/sections/SocialProofSection";
 import { TimetableSection } from "@/components/sections/TimetableSection";
+import { getEntityProfile } from "@/content/entity-profile";
 import type { Locale } from "@/i18n/routing";
 import {
   faqPageJsonLd,
@@ -37,22 +38,27 @@ export default async function HomePage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const tMeta = await getTranslations("metadata");
   const tFaq = await getTranslations("faq");
+  const entity = getEntityProfile(locale);
 
   const faqItems = (["q1", "q2", "q3", "q4"] as const).map((key) => ({
     question: tFaq(`items.${key}.question`),
     answer: tFaq(`items.${key}.answer`),
   }));
 
-  const siteName = tMeta("siteName");
-  const description = tMeta("home.description");
-
   return (
     <>
-      <JsonLd data={organizationJsonLd({ name: siteName, description })} />
-      <JsonLd data={websiteJsonLd({ name: siteName, description })} />
-      <JsonLd data={softwareApplicationJsonLd({ name: "Raqeem", description })} />
+      <JsonLd data={organizationJsonLd({ name: entity.name, description: entity.description })} />
+      <JsonLd data={websiteJsonLd({ name: entity.name, description: entity.description })} />
+      <JsonLd
+        data={
+          softwareApplicationJsonLd({
+            name: entity.name,
+            description: entity.description,
+            locale,
+          })
+        }
+      />
       <JsonLd data={faqPageJsonLd(faqItems)} />
       <Hero />
       {locale === "ar" ? <SchoolJourneySection /> : <InstitutionsSection />}

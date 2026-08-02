@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { getEntityProfile } from "@/content/entity-profile";
 import { locales, type Locale } from "@/i18n/routing";
 import { SITE_URL } from "./constants";
 
@@ -43,8 +44,9 @@ export async function buildPageMetadata({
   path,
 }: BuildPageMetadataOptions): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "metadata" });
-  const title = t(`${page}.title`);
-  const description = t(`${page}.description`);
+  const entity = getEntityProfile(locale);
+  const title = page === "home" ? entity.descriptor : t(`${page}.title`);
+  const description = page === "home" ? entity.description : t(`${page}.description`);
   const siteName = t("siteName");
   const url = `${SITE_URL}/${locale}${path}`;
 
@@ -73,7 +75,7 @@ export async function buildPageMetadata({
           url: `${SITE_URL}${OG_IMAGE.url}`,
           width: OG_IMAGE.width,
           height: OG_IMAGE.height,
-          alt: siteName,
+          alt: entity.descriptor,
         },
       ],
     },

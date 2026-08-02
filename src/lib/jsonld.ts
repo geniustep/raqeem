@@ -1,14 +1,35 @@
-import { SITE_URL } from "./constants";
+import type { Locale } from "@/i18n/routing";
+import { BRAND, SITE_URL, SOCIAL_LINKS } from "./constants";
+
+const ORGANIZATION_ID = `${SITE_URL}/#organization`;
+const WEBSITE_ID = `${SITE_URL}/#website`;
+const SOFTWARE_ID = `${SITE_URL}/#software`;
+
+function verifiedSocialProfiles(): string[] | undefined {
+  const profiles = Object.values(SOCIAL_LINKS).filter((url): url is string => Boolean(url));
+  return profiles.length > 0 ? profiles : undefined;
+}
 
 export function organizationJsonLd({ name, description }: { name: string; description: string }) {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": ORGANIZATION_ID,
     name,
     alternateName: ["رقيم", "Raqeem"],
     description,
     url: SITE_URL,
-    logo: `${SITE_URL}/brand/raqeem-logo.png`,
+    logo: {
+      "@type": "ImageObject",
+      url: `${SITE_URL}${BRAND.logo}`,
+      width: BRAND.logoWidth,
+      height: BRAND.logoHeight,
+    },
+    areaServed: {
+      "@type": "Country",
+      name: "Morocco",
+    },
+    sameAs: verifiedSocialProfiles(),
   };
 }
 
@@ -16,28 +37,37 @@ export function websiteJsonLd({ name, description }: { name: string; description
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": WEBSITE_ID,
     name,
     description,
     url: SITE_URL,
     inLanguage: ["ar", "fr", "en", "es"],
+    publisher: { "@id": ORGANIZATION_ID },
   };
 }
 
 export function softwareApplicationJsonLd({
   name,
   description,
+  locale,
 }: {
   name: string;
   description: string;
+  locale: Locale;
 }) {
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
+    "@id": SOFTWARE_ID,
     name,
+    alternateName: ["رقيم", "Raqeem"],
     description,
     url: SITE_URL,
     applicationCategory: "EducationalApplication",
-    operatingSystem: "Web, Android, iOS",
+    operatingSystem: "Web",
+    inLanguage: locale,
+    publisher: { "@id": ORGANIZATION_ID },
+    isPartOf: { "@id": WEBSITE_ID },
   };
 }
 
