@@ -71,6 +71,38 @@ export function softwareApplicationJsonLd({
   };
 }
 
+export function articleJsonLd({
+  headline,
+  description,
+  url,
+  inLanguage,
+  datePublished,
+  dateModified,
+}: {
+  headline: string;
+  description: string;
+  url: string;
+  inLanguage: Locale;
+  datePublished: string;
+  dateModified: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline,
+    description,
+    url,
+    mainEntityOfPage: url,
+    inLanguage,
+    datePublished,
+    dateModified,
+    image: `${SITE_URL}/social/og-image.png`,
+    author: { "@id": ORGANIZATION_ID },
+    publisher: { "@id": ORGANIZATION_ID },
+    isPartOf: { "@id": WEBSITE_ID },
+  };
+}
+
 export function faqPageJsonLd(items: Array<{ question: string; answer: string }>) {
   return {
     "@context": "https://schema.org",

@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
+import { guideSlugs } from "@/content/guides";
 import { locales } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/constants";
 
-const PATHS = [
+const STATIC_PATHS = [
   "",
   "/solutions",
   "/features",
@@ -20,6 +21,7 @@ const PATHS = [
   "/demo",
   "/contact",
   "/faq",
+  "/guides",
   "/privacy",
   "/terms",
   "/support",
@@ -48,6 +50,8 @@ const PATHS = [
   "/responsible-ai",
 ];
 
+const PATHS = [...STATIC_PATHS, ...guideSlugs.map((slug) => `/guides/${slug}`)];
+
 function languageAlternates(path: string): Record<string, string> {
   return {
     ...Object.fromEntries(
@@ -62,7 +66,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     locales.map((locale) => ({
       url: `${SITE_URL}/${locale}${path}`,
       changeFrequency: path === "" ? ("weekly" as const) : ("monthly" as const),
-      priority: path === "" ? 1 : path === "/trust-center" ? 0.8 : 0.7,
+      priority:
+        path === ""
+          ? 1
+          : path === "/guides"
+            ? 0.85
+            : path.startsWith("/guides/") || path === "/trust-center"
+              ? 0.8
+              : 0.7,
       alternates: { languages: languageAlternates(path) },
     })),
   );

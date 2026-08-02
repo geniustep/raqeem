@@ -32,50 +32,59 @@ interface BuildPageMetadataOptions {
   path: string;
 }
 
+interface BuildLocalizedMetadataOptions {
+  locale: Locale;
+  path: string;
+  title: string;
+  description: string;
+  type?: "website" | "article";
+}
+
 export const OG_IMAGE = {
   url: "/social/og-image.png",
   width: 1200,
   height: 630,
 } as const;
 
-export async function buildPageMetadata({
-  locale,
-  page,
-  path,
-}: BuildPageMetadataOptions): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: "metadata" });
-  const entity = getEntityProfile(locale);
-  const title = page === "home" ? entity.descriptor : t(`${page}.title`);
-  const description = page === "home" ? entity.description : t(`${page}.description`);
-  const siteName = t("siteName");
-  const url = `${SITE_URL}/${locale}${path}`;
-
+function localizedAlternates(path: string): Record<string, string> {
   const languages: Record<string, string> = {};
   for (const supportedLocale of locales) {
     languages[supportedLocale] = `${SITE_URL}/${supportedLocale}${path}`;
   }
   languages["x-default"] = `${SITE_URL}/ar${path}`;
+  return languages;
+}
+
+export function buildLocalizedMetadata({
+  locale,
+  path,
+  title,
+  description,
+  type = "website",
+}: BuildLocalizedMetadataOptions): Metadata {
+  const entity = getEntityProfile(locale);
+  const url = `${SITE_URL}/${locale}${path}`;
 
   return {
-    title: page === "home" ? { absolute: title } : title,
+    title,
     description,
     alternates: {
       canonical: url,
-      languages,
+      languages: localizedAlternates(path),
     },
     openGraph: {
       title,
       description,
       url,
-      siteName,
+      siteName: entity.name,
       locale,
-      type: "website",
+      type,
       images: [
         {
           url: `${SITE_URL}${OG_IMAGE.url}`,
           width: OG_IMAGE.width,
           height: OG_IMAGE.height,
-          alt: entity.descriptor,
+          alt: title,
         },
       ],
     },
@@ -86,4 +95,22 @@ export async function buildPageMetadata({
       images: [`${SITE_URL}${OG_IMAGE.url}`],
     },
   };
+}
+
+export async function buildPageMetadata({
+  locale,
+  page,
+  path,
+}: BuildPageMetadataOptions): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  const entity = getEntityProfile(locale);
+  const title = page === "home" ? entity.descriptor : t(`${page}.title`);
+  const description = page === "home" ? entity.description : t(`${page}.description`);
+  const metadata = buildLocalizedMetadata({ locale, path, title, description });
+
+  if (page === "home") {
+    metadata.title = { absolute: title };
+  }
+
+  return metadata;
 }
