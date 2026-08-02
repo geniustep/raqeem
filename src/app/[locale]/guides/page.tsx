@@ -3,7 +3,7 @@ import { ArrowUpRight, BookOpen, CheckCircle2 } from "lucide-react";
 import { setRequestLocale } from "next-intl/server";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
-import { getGuide, guideIndexPages, guideSlugs } from "@/content/guides";
+import { getGuide, guideIndexPages, guideSlugs } from "@/content/guide-catalog";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/constants";

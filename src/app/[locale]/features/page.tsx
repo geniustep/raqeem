@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { GuideLinksSection } from "@/components/guides/GuideLinksSection";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { Container } from "@/components/ui/Container";
@@ -9,6 +10,11 @@ import { buildPageMetadata } from "@/lib/metadata";
 interface PageProps {
   params: Promise<{ locale: Locale }>;
 }
+
+const featuredGuideSlugs = [
+  "school-fees-collections-receipts",
+  "governed-school-communication",
+] as const;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
@@ -32,6 +38,7 @@ export default async function FeaturesPage({ params }: PageProps) {
         </Container>
       </section>
       <FeaturesSection detailed />
+      <GuideLinksSection locale={locale} slugs={featuredGuideSlugs} />
       <CtaSection />
     </>
   );

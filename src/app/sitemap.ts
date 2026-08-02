@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { guideSlugs } from "@/content/guides";
+import { guideSlugs } from "@/content/guide-catalog";
 import { locales } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/constants";
 

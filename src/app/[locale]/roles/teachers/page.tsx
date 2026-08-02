@@ -8,6 +8,8 @@ interface PageProps {
   params: Promise<{ locale: Locale }>;
 }
 
+const relatedGuideSlugs = ["governed-school-communication"] as const;
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   return buildPageMetadata({ locale, page: "teachers", path: "/roles/teachers" });
@@ -17,6 +19,11 @@ export default async function TeachersPage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
   return (
-    <DetailPage locale={locale} namespace="pages.rolesPages.teachers" path="/roles/teachers" />
+    <DetailPage
+      locale={locale}
+      namespace="pages.rolesPages.teachers"
+      path="/roles/teachers"
+      relatedGuideSlugs={relatedGuideSlugs}
+    />
   );
 }

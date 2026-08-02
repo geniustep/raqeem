@@ -6,7 +6,7 @@ import { GuideAnalytics } from "@/components/guides/GuideAnalytics";
 import { GuideDemoLink } from "@/components/guides/GuideDemoLink";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
-import { getGuide, guideIndexPages, guideSlugs } from "@/content/guides";
+import { getGuide, guideIndexPages, guideSlugs } from "@/content/guide-catalog";
 import { Link } from "@/i18n/navigation";
 import { locales, type Locale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/constants";

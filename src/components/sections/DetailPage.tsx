@@ -1,5 +1,6 @@
 import { CheckCircle2 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
+import { GuideLinksSection } from "@/components/guides/GuideLinksSection";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
@@ -15,9 +16,16 @@ interface DetailPageProps {
   /** Path without the locale prefix, e.g. "/institutions/schools". */
   path: string;
   pointsCount?: number;
+  relatedGuideSlugs?: readonly string[];
 }
 
-export async function DetailPage({ locale, namespace, path, pointsCount = 6 }: DetailPageProps) {
+export async function DetailPage({
+  locale,
+  namespace,
+  path,
+  pointsCount = 6,
+  relatedGuideSlugs = [],
+}: DetailPageProps) {
   const t = await getTranslations(namespace);
   const tCommon = await getTranslations("common");
 
@@ -74,6 +82,10 @@ export async function DetailPage({ locale, namespace, path, pointsCount = 6 }: D
           </ul>
         </Container>
       </section>
+
+      {relatedGuideSlugs.length > 0 ? (
+        <GuideLinksSection locale={locale} slugs={relatedGuideSlugs} />
+      ) : null}
 
       <CtaSection />
     </>
