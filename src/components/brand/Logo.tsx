@@ -16,7 +16,7 @@ export function Logo({ variant = "full", priority = false, className = "", alt }
       alt={alt}
       width={isFull ? BRAND.logoWidth : BRAND.logoSmallWidth}
       height={isFull ? BRAND.logoHeight : BRAND.logoSmallHeight}
-      priority={priority}
+      preload={priority}
       sizes={isFull ? "(max-width: 768px) 140px, 180px" : "48px"}
       className={`object-contain ${className}`}
     />
