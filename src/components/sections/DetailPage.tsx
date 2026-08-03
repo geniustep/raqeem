@@ -3,13 +3,10 @@ import { getTranslations } from "next-intl/server";
 import { GuideLinksSection } from "@/components/guides/GuideLinksSection";
 import { CorePageSummary } from "@/components/sections/CorePageSummary";
 import { CtaSection } from "@/components/sections/CtaSection";
-import { JsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
 import type { CorePageKey } from "@/content/core-pages";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
-import { SITE_URL } from "@/lib/constants";
-import { breadcrumbJsonLd } from "@/lib/jsonld";
 
 interface DetailPageProps {
   locale: Locale;
@@ -25,7 +22,6 @@ interface DetailPageProps {
 export async function DetailPage({
   locale,
   namespace,
-  path,
   pointsCount = 6,
   intentKey,
   relatedGuideSlugs = [],
@@ -35,14 +31,8 @@ export async function DetailPage({
 
   const points = Array.from({ length: pointsCount }, (_, index) => t(`points.${index + 1}`));
 
-  const breadcrumb = breadcrumbJsonLd([
-    { name: tCommon("breadcrumbHome"), url: `${SITE_URL}/${locale}` },
-    { name: t("title"), url: `${SITE_URL}/${locale}${path}` },
-  ]);
-
   return (
     <>
-      <JsonLd data={breadcrumb} />
       <section className="bg-brand-ivory py-16 lg:py-20">
         <Container>
           <nav aria-label="Breadcrumb" className="text-sm text-brand-navy-700/70">
