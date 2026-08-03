@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ArrowUpRight, BookOpen, CheckCircle2 } from "lucide-react";
+import { ArrowUpRight, BookOpen, CheckCircle2, ExternalLink, ShieldCheck } from "lucide-react";
 import { setRequestLocale } from "next-intl/server";
 import { GuideAnalytics } from "@/components/guides/GuideAnalytics";
 import { GuideDemoLink } from "@/components/guides/GuideDemoLink";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
 import { getGuide, guideIndexPages, guideSlugs } from "@/content/guide-catalog";
+import { getGuideTrust } from "@/content/guide-trust";
 import { Link } from "@/i18n/navigation";
 import { locales, type Locale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/constants";
@@ -57,6 +58,7 @@ export default async function GuidePage({ params }: PageProps) {
 
   setRequestLocale(locale);
   const index = guideIndexPages[locale];
+  const trust = getGuideTrust(locale, slug);
   const url = `${SITE_URL}/${locale}/guides/${slug}`;
 
   return (
@@ -71,6 +73,7 @@ export default async function GuidePage({ params }: PageProps) {
             inLanguage: locale,
             datePublished: guide.publishedAt,
             dateModified: guide.updatedAt,
+            citations: trust.sources.map((source) => source.href),
           })
         }
       />
@@ -100,10 +103,20 @@ export default async function GuidePage({ params }: PageProps) {
               {guide.title}
             </h1>
             <p className="mt-5 text-lg leading-8 text-brand-navy-700/85">{guide.description}</p>
-            <div className="mt-6 flex flex-wrap gap-4 text-sm text-brand-navy-700/65">
+            <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-sm text-brand-navy-700/65">
               <span>{guide.readingTime}</span>
-              <span>{guide.updatedLabel}</span>
+              <time dateTime={guide.updatedAt}>{guide.updatedLabel}</time>
             </div>
+            <dl className="mt-6 grid gap-3 rounded-2xl border border-brand-navy-100 bg-white/70 p-5 text-sm sm:grid-cols-2">
+              <div>
+                <dt className="font-semibold text-brand-navy-700/65">{trust.authorLabel}</dt>
+                <dd className="mt-1 font-bold text-brand-navy">{trust.authorName}</dd>
+              </div>
+              <div>
+                <dt className="font-semibold text-brand-navy-700/65">{trust.reviewerLabel}</dt>
+                <dd className="mt-1 font-bold text-brand-navy">{trust.reviewerName}</dd>
+              </div>
+            </dl>
           </Container>
         </header>
 
@@ -111,6 +124,26 @@ export default async function GuidePage({ params }: PageProps) {
           <section className="rounded-3xl border border-brand-teal-200 bg-brand-teal-50/60 p-6 sm:p-8">
             <h2 className="text-2xl font-bold text-brand-navy">{guide.directAnswerTitle}</h2>
             <p className="mt-4 text-lg leading-9 text-brand-navy-700/90">{guide.directAnswer}</p>
+          </section>
+
+          <section className="mt-8 rounded-3xl border border-brand-navy-100 bg-white p-6 sm:p-8">
+            <div className="flex items-start gap-4">
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-brand-teal-50 text-brand-teal-700">
+                <ShieldCheck className="size-6" aria-hidden="true" />
+              </span>
+              <div>
+                <h2 className="text-2xl font-bold text-brand-navy">{trust.transparencyTitle}</h2>
+                <p className="mt-3 leading-8 text-brand-navy-700/85">{trust.transparencyText}</p>
+                <div className="mt-5 flex flex-wrap gap-4 text-sm font-semibold">
+                  <Link href="/trust-center" className="text-brand-teal-700 hover:text-brand-teal-600">
+                    {trust.methodologyLinkLabel}
+                  </Link>
+                  <Link href="/about" className="text-brand-teal-700 hover:text-brand-teal-600">
+                    {trust.aboutLinkLabel}
+                  </Link>
+                </div>
+              </div>
+            </div>
           </section>
 
           <div className="mt-14 space-y-14">
@@ -151,6 +184,34 @@ export default async function GuidePage({ params }: PageProps) {
               ))}
             </ul>
           </section>
+
+          {trust.sources.length > 0 ? (
+            <section className="mt-14" aria-labelledby="guide-official-sources">
+              <h2 id="guide-official-sources" className="text-3xl font-bold text-brand-navy">
+                {trust.sourcesTitle}
+              </h2>
+              <p className="mt-4 leading-8 text-brand-navy-700/80">{trust.sourcesNote}</p>
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                {trust.sources.map((source) => (
+                  <a
+                    key={source.href}
+                    href={source.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group rounded-2xl border border-brand-navy-100 p-5 transition hover:border-brand-teal-300 hover:shadow-md"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="font-bold text-brand-navy">{source.title}</h3>
+                      <ExternalLink className="size-4 shrink-0 text-brand-teal-700" aria-hidden="true" />
+                    </div>
+                    <p className="mt-3 text-sm leading-7 text-brand-navy-700/75">
+                      {source.description}
+                    </p>
+                  </a>
+                ))}
+              </div>
+            </section>
+          ) : null}
 
           <section className="mt-14">
             <h2 className="text-3xl font-bold text-brand-navy">{guide.faqTitle}</h2>
