@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CalendarCog, ClipboardCheck, FilePen, Send } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { GuideLinksSection } from "@/components/guides/GuideLinksSection";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { TimetableSection } from "@/components/sections/TimetableSection";
 import { Container } from "@/components/ui/Container";
@@ -10,6 +11,11 @@ import { buildPageMetadata } from "@/lib/metadata";
 interface PageProps {
   params: Promise<{ locale: Locale }>;
 }
+
+const relatedGuideSlugs = [
+  "timetable-conflict-management",
+  "roles-permissions-sensitive-actions",
+] as const;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
@@ -63,6 +69,7 @@ export default async function TimetablePage({ params }: PageProps) {
       </section>
 
       <TimetableSection />
+      <GuideLinksSection locale={locale} slugs={relatedGuideSlugs} />
       <CtaSection />
     </>
   );
