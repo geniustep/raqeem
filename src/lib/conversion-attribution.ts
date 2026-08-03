@@ -52,7 +52,7 @@ export function readConversionAttribution(search: string): ConversionAttribution
     return {
       source: "solution",
       solutionSlug,
-      guideSlug: isGuideSlug(guideSlug) ? guideSlug : undefined,
+      ...(isGuideSlug(guideSlug) ? { guideSlug } : {}),
     };
   }
 
@@ -60,7 +60,7 @@ export function readConversionAttribution(search: string): ConversionAttribution
     return {
       source: "guide",
       guideSlug,
-      solutionSlug: isSolutionSlug(solutionSlug) ? solutionSlug : undefined,
+      ...(isSolutionSlug(solutionSlug) ? { solutionSlug } : {}),
     };
   }
 
