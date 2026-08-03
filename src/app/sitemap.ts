@@ -1,5 +1,9 @@
 import type { MetadataRoute } from "next";
 import { getGuide, guideSlugs } from "@/content/guide-catalog";
+import {
+  getSolutionLanding,
+  solutionLandingSlugs,
+} from "@/content/solution-landing-pages";
 import { locales, type Locale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/constants";
 
@@ -84,7 +88,11 @@ const TRUST_PATHS = new Set<string>([
   "/responsible-ai",
 ]);
 
-const PATHS = [...STATIC_PATHS, ...guideSlugs.map((slug) => `/guides/${slug}`)];
+const PATHS = [
+  ...STATIC_PATHS,
+  ...solutionLandingSlugs.map((slug) => `/solutions/${slug}`),
+  ...guideSlugs.map((slug) => `/guides/${slug}`),
+];
 
 function languageAlternates(path: string): Record<string, string> {
   return {
@@ -96,6 +104,11 @@ function languageAlternates(path: string): Record<string, string> {
 }
 
 function lastModifiedFor(path: string, locale: Locale): string {
+  if (path.startsWith("/solutions/")) {
+    const slug = path.slice("/solutions/".length);
+    return getSolutionLanding(locale, slug)?.updatedAt ?? SEO_RELEASE_DATE;
+  }
+
   if (path.startsWith("/guides/")) {
     const slug = path.slice("/guides/".length);
     return getGuide(locale, slug)?.updatedAt ?? SEO_RELEASE_DATE;
@@ -117,11 +130,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority:
         path === ""
           ? 1
-          : path === "/guides"
+          : path === "/solutions" || path === "/guides"
             ? 0.85
-            : path.startsWith("/guides/") || path === "/trust-center"
-              ? 0.8
-              : 0.7,
+            : path.startsWith("/solutions/")
+              ? 0.85
+              : path.startsWith("/guides/") || path === "/trust-center"
+                ? 0.8
+                : 0.7,
       alternates: { languages: languageAlternates(path) },
     })),
   );
