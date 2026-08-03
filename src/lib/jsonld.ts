@@ -133,7 +133,7 @@ export function organizationWebPageJsonLd({
   url,
   inLanguage,
 }: {
-  type: "AboutPage" | "ContactPage";
+  type: "AboutPage" | "ContactPage" | "WebPage";
   name: string;
   description: string;
   url: string;
