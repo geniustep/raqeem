@@ -8,6 +8,13 @@ interface PageProps {
   params: Promise<{ locale: Locale }>;
 }
 
+const relatedSolutionSlugs = [
+  "admissions-enrollment",
+  "school-fees-collections",
+  "school-communication",
+  "attendance-absence",
+] as const;
+
 const relatedGuideSlugs = [
   "school-fees-collections-receipts",
   "governed-school-communication",
@@ -31,6 +38,7 @@ export default async function AdministrationPage({ params }: PageProps) {
       namespace="pages.rolesPages.administration"
       path="/roles/administration"
       intentKey="administration"
+      relatedSolutionSlugs={relatedSolutionSlugs}
       relatedGuideSlugs={relatedGuideSlugs}
     />
   );
