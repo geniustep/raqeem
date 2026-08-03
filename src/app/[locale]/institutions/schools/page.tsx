@@ -11,7 +11,9 @@ interface PageProps {
 const relatedGuideSlugs = [
   "admission-to-student-record",
   "school-fees-collections-receipts",
-  "governed-school-communication",
+  "attendance-absence-parent-updates",
+  "migrating-from-excel",
+  "multi-branch-school-management",
   "school-data-isolation",
 ] as const;
 
