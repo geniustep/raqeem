@@ -2,10 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Building2, FileText } from "lucide-react";
 import { setRequestLocale } from "next-intl/server";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
 import { legalNoticePages } from "@/content/legal-notice-page";
+import {
+  formatOrganizationAddress,
+  organizationIdentity,
+} from "@/content/organization-identity";
 import { locales, type Locale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/constants";
+import { organizationWebPageJsonLd } from "@/lib/jsonld";
 import { OG_IMAGE } from "@/lib/metadata";
 
 interface PageProps {
@@ -55,9 +61,22 @@ export default async function LegalNoticePage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
   const content = legalNoticePages[locale];
+  const url = `${SITE_URL}/${locale}/legal-notice`;
 
   return (
     <>
+      <JsonLd
+        data={
+          organizationWebPageJsonLd({
+            type: "WebPage",
+            name: content.title,
+            description: content.description,
+            url,
+            inLanguage: locale,
+          })
+        }
+      />
+
       <section className="bg-brand-ivory py-16 lg:py-20">
         <Container className="max-w-4xl">
           <span className="inline-flex size-12 items-center justify-center rounded-2xl bg-brand-navy text-white">
@@ -102,11 +121,19 @@ export default async function LegalNoticePage({ params }: PageProps) {
       <section className="pb-16 lg:pb-20">
         <Container className="max-w-4xl">
           <div className="rounded-3xl bg-brand-navy p-7 text-white sm:p-10">
-            <h2 className="text-2xl font-bold">Genius Step SARL</h2>
-            <p className="mt-4 leading-8 text-white/85">
-              37 Rue 40 Aouama Zemmouri Lot 271, 90080 Tanger, Maroc
+            <h2 className="text-2xl font-bold">{organizationIdentity.legalName}</h2>
+            <p className="mt-2 text-sm font-semibold text-white/70">
+              RC {organizationIdentity.registrationNumber}
             </p>
-            <p className="mt-2 text-white/85">contact@raqeem.ma</p>
+            <address className="mt-4 not-italic leading-8 text-white/85">
+              {formatOrganizationAddress(locale)}
+            </address>
+            <p className="mt-2 text-white/85" dir="ltr">
+              {organizationIdentity.email}
+            </p>
+            <p className="mt-1 text-white/85" dir="ltr">
+              {organizationIdentity.telephoneDisplay}
+            </p>
             <Link
               href={`/${locale}/contact`}
               className="mt-7 inline-flex rounded-xl bg-white px-5 py-3 font-semibold text-brand-navy transition hover:bg-brand-ivory"
