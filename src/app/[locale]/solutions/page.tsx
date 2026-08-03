@@ -78,7 +78,10 @@ export default async function SolutionsPage({ params }: PageProps) {
   const tRoles = await getTranslations("roles");
   const tCommon = await getTranslations("common");
   const directoryCopy = solutionDirectoryCopy[locale];
-  const landingPages = solutionLandingSlugs.map((slug) => getSolutionLanding(locale, slug));
+  const landingPages = solutionLandingSlugs.flatMap((slug) => {
+    const solution = getSolutionLanding(locale, slug);
+    return solution ? [solution] : [];
+  });
 
   return (
     <>
