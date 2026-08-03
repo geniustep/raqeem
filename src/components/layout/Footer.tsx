@@ -4,6 +4,8 @@ import { Logo } from "@/components/brand/Logo";
 import { LanguageSwitcher } from "@/components/navigation/LanguageSwitcher";
 import { INSTITUTION_LINKS } from "@/components/navigation/links";
 import { backupRecoveryPages } from "@/content/backup-recovery-page";
+import { legalNoticePages } from "@/content/legal-notice-page";
+import { organizationIdentity } from "@/content/organization-identity";
 import { privacyCenterPages } from "@/content/privacy-center-page";
 import { serviceLevelAgreementPages } from "@/content/service-level-agreement-page";
 import { serviceStatusPages } from "@/content/service-status-page";
@@ -41,6 +43,7 @@ export async function Footer() {
 
   const companyLinks = [
     { label: tNav("about"), href: "/about" },
+    { label: legalNoticePages[locale].title, href: "/legal-notice" },
     { label: t("privacy"), href: "/privacy" },
     { label: t("terms"), href: "/terms" },
   ];
@@ -54,20 +57,20 @@ export async function Footer() {
   const contactLinks = [
     {
       label: t("email"),
-      value: "contact@raqeem.ma",
-      href: "mailto:contact@raqeem.ma",
+      value: organizationIdentity.email,
+      href: `mailto:${organizationIdentity.email}`,
       icon: Mail,
     },
     {
       label: t("phone"),
-      value: "06 61 33 98 92",
-      href: "tel:+212661339892",
+      value: organizationIdentity.telephoneDisplay,
+      href: `tel:${organizationIdentity.telephone}`,
       icon: Phone,
     },
     {
       label: t("whatsapp"),
-      value: "+212 6 64 06 18 63",
-      href: `https://wa.me/212664061863?text=${encodeURIComponent(t("whatsappMessage"))}`,
+      value: organizationIdentity.whatsappDisplay,
+      href: `https://wa.me/${organizationIdentity.whatsapp.replace("+", "")}?text=${encodeURIComponent(t("whatsappMessage"))}`,
       icon: MessageCircle,
       external: true,
     },
@@ -83,6 +86,9 @@ export async function Footer() {
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-6 text-brand-navy-700/80">
               {t("description")}
+            </p>
+            <p className="mt-2 text-xs font-semibold text-brand-navy-700/65">
+              {organizationIdentity.legalName} · RC {organizationIdentity.registrationNumber}
             </p>
             <div className="mt-6">
               <p className="mb-2 text-sm font-semibold text-brand-navy">{t("language")}</p>
