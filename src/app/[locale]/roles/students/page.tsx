@@ -8,6 +8,8 @@ interface PageProps {
   params: Promise<{ locale: Locale }>;
 }
 
+const relatedSolutionSlugs = ["school-communication", "attendance-absence"] as const;
+
 const relatedGuideSlugs = ["school-operations-platform", "school-data-isolation"] as const;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -24,6 +26,7 @@ export default async function StudentsPage({ params }: PageProps) {
       namespace="pages.rolesPages.students"
       path="/roles/students"
       intentKey="students"
+      relatedSolutionSlugs={relatedSolutionSlugs}
       relatedGuideSlugs={relatedGuideSlugs}
     />
   );
