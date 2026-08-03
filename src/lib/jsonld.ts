@@ -78,6 +78,7 @@ export function articleJsonLd({
   inLanguage,
   datePublished,
   dateModified,
+  citations = [],
 }: {
   headline: string;
   description: string;
@@ -85,6 +86,7 @@ export function articleJsonLd({
   inLanguage: Locale;
   datePublished: string;
   dateModified: string;
+  citations?: string[];
 }) {
   return {
     "@context": "https://schema.org",
@@ -100,6 +102,8 @@ export function articleJsonLd({
     author: { "@id": ORGANIZATION_ID },
     publisher: { "@id": ORGANIZATION_ID },
     isPartOf: { "@id": WEBSITE_ID },
+    isAccessibleForFree: true,
+    citation: citations.length > 0 ? citations : undefined,
   };
 }
 
