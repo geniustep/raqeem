@@ -8,6 +8,13 @@ interface PageProps {
   params: Promise<{ locale: Locale }>;
 }
 
+const relatedSolutionSlugs = [
+  "admissions-enrollment",
+  "school-fees-collections",
+  "school-communication",
+  "attendance-absence",
+] as const;
+
 const relatedGuideSlugs = [
   "integrated-student-journey",
   "raqeem-and-massar",
@@ -35,6 +42,7 @@ export default async function SchoolsPage({ params }: PageProps) {
       namespace="pages.institutions.schools"
       path="/institutions/schools"
       intentKey="schools"
+      relatedSolutionSlugs={relatedSolutionSlugs}
       relatedGuideSlugs={relatedGuideSlugs}
     />
   );
