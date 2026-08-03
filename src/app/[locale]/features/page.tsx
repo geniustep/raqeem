@@ -4,6 +4,7 @@ import { GuideLinksSection } from "@/components/guides/GuideLinksSection";
 import { CorePageSummary } from "@/components/sections/CorePageSummary";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
+import { SolutionLinksSection } from "@/components/solutions/SolutionLinksSection";
 import { Container } from "@/components/ui/Container";
 import type { Locale } from "@/i18n/routing";
 import { buildPageMetadata } from "@/lib/metadata";
@@ -11,6 +12,13 @@ import { buildPageMetadata } from "@/lib/metadata";
 interface PageProps {
   params: Promise<{ locale: Locale }>;
 }
+
+const featuredSolutionSlugs = [
+  "admissions-enrollment",
+  "school-fees-collections",
+  "school-communication",
+  "attendance-absence",
+] as const;
 
 const featuredGuideSlugs = [
   "integrated-student-journey",
@@ -46,7 +54,8 @@ export default async function FeaturesPage({ params }: PageProps) {
       </section>
       <CorePageSummary locale={locale} page="features" />
       <FeaturesSection detailed />
-      <GuideLinksSection locale={locale} slugs={featuredGuideSlugs} />
+      <SolutionLinksSection locale={locale} slugs={featuredSolutionSlugs} tone="ivory" />
+      <GuideLinksSection locale={locale} slugs={featuredGuideSlugs} tone="white" />
       <CtaSection />
     </>
   );
