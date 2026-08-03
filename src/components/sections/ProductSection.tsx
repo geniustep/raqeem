@@ -20,7 +20,7 @@ export async function ProductSection() {
   }));
 
   return (
-    <section className="overflow-hidden bg-brand-ivory/60 py-20 lg:py-24">
+    <section className="defer-render overflow-hidden bg-brand-ivory/60 py-20 lg:py-24">
       <Container>
         <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
         <ProductGallery screenshots={screenshots} />
