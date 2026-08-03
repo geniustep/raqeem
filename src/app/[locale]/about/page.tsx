@@ -3,10 +3,14 @@ import { Eye, Gem, Target } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Logo } from "@/components/brand/Logo";
 import { GuideLinksSection } from "@/components/guides/GuideLinksSection";
+import { OrganizationIdentityCard } from "@/components/organization/OrganizationIdentityCard";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { CorePageSummary } from "@/components/sections/CorePageSummary";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { Container } from "@/components/ui/Container";
 import type { Locale } from "@/i18n/routing";
+import { SITE_URL } from "@/lib/constants";
+import { organizationWebPageJsonLd } from "@/lib/jsonld";
 import { buildPageMetadata } from "@/lib/metadata";
 
 interface PageProps {
@@ -33,6 +37,18 @@ export default async function AboutPage({ params }: PageProps) {
 
   return (
     <>
+      <JsonLd
+        data={
+          organizationWebPageJsonLd({
+            type: "AboutPage",
+            name: t("title"),
+            description: t("intro"),
+            url: `${SITE_URL}/${locale}/about`,
+            inLanguage: locale,
+          })
+        }
+      />
+
       <section className="bg-brand-ivory py-16 lg:py-20">
         <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
           <div>
@@ -51,6 +67,7 @@ export default async function AboutPage({ params }: PageProps) {
       </section>
 
       <CorePageSummary locale={locale} page="about" />
+      <OrganizationIdentityCard locale={locale} />
 
       <section className="py-16 lg:py-20">
         <Container>
