@@ -126,6 +126,39 @@ export function softwareApplicationJsonLd({
   };
 }
 
+export function serviceJsonLd({
+  name,
+  description,
+  url,
+  inLanguage,
+  serviceType,
+}: {
+  name: string;
+  description: string;
+  url: string;
+  inLanguage: Locale;
+  serviceType: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${url}#service`,
+    name,
+    description,
+    url,
+    serviceType,
+    inLanguage,
+    areaServed: {
+      "@type": "Country",
+      name: "Morocco",
+    },
+    provider: { "@id": ORGANIZATION_ID },
+    brand: { "@id": BRAND_ID },
+    isRelatedTo: { "@id": SOFTWARE_ID },
+    mainEntityOfPage: `${url}#webpage`,
+  };
+}
+
 export function organizationWebPageJsonLd({
   type,
   name,
