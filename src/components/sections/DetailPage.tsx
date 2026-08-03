@@ -3,8 +3,10 @@ import { getTranslations } from "next-intl/server";
 import { GuideLinksSection } from "@/components/guides/GuideLinksSection";
 import { CorePageSummary } from "@/components/sections/CorePageSummary";
 import { CtaSection } from "@/components/sections/CtaSection";
+import { SolutionLinksSection } from "@/components/solutions/SolutionLinksSection";
 import { Container } from "@/components/ui/Container";
 import type { CorePageKey } from "@/content/core-pages";
+import type { SolutionLandingSlug } from "@/content/solution-landing-pages";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 
@@ -16,6 +18,7 @@ interface DetailPageProps {
   path: string;
   pointsCount?: number;
   intentKey?: CorePageKey;
+  relatedSolutionSlugs?: readonly SolutionLandingSlug[];
   relatedGuideSlugs?: readonly string[];
 }
 
@@ -24,6 +27,7 @@ export async function DetailPage({
   namespace,
   pointsCount = 6,
   intentKey,
+  relatedSolutionSlugs = [],
   relatedGuideSlugs = [],
 }: DetailPageProps) {
   const t = await getTranslations(namespace);
@@ -79,8 +83,12 @@ export async function DetailPage({
         </Container>
       </section>
 
+      {relatedSolutionSlugs.length > 0 ? (
+        <SolutionLinksSection locale={locale} slugs={relatedSolutionSlugs} tone="ivory" />
+      ) : null}
+
       {relatedGuideSlugs.length > 0 ? (
-        <GuideLinksSection locale={locale} slugs={relatedGuideSlugs} />
+        <GuideLinksSection locale={locale} slugs={relatedGuideSlugs} tone="white" />
       ) : null}
 
       <CtaSection />
