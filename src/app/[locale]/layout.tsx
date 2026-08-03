@@ -7,6 +7,7 @@ import type { ReactNode } from "react";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { SkipLink } from "@/components/layout/SkipLink";
+import { WebVitalsReporter } from "@/components/performance/WebVitalsReporter";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { RouteBreadcrumbJsonLd } from "@/components/seo/RouteBreadcrumbJsonLd";
 import { getEntityProfile } from "@/content/entity-profile";
@@ -25,6 +26,7 @@ const notoKufiArabic = Noto_Kufi_Arabic({
   subsets: ["arabic"],
   variable: "--font-noto-kufi-arabic",
   display: "swap",
+  preload: false,
 });
 
 const notoSansArabic = Noto_Sans_Arabic({
@@ -100,6 +102,7 @@ export default async function LocaleLayout({
         <JsonLd data={organizationJsonLd({ name: entity.name, description: entity.description })} />
         <JsonLd data={brandJsonLd({ name: entity.name, description: entity.description })} />
         <JsonLd data={websiteJsonLd({ name: entity.name, description: entity.description })} />
+        <WebVitalsReporter />
         <NextIntlClientProvider>
           <RouteBreadcrumbJsonLd locale={typedLocale} />
           <SkipLink />
