@@ -5,8 +5,10 @@ import { setRequestLocale } from "next-intl/server";
 import { GuideAnalytics } from "@/components/guides/GuideAnalytics";
 import { GuideDemoLink } from "@/components/guides/GuideDemoLink";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { SolutionLinksSection } from "@/components/solutions/SolutionLinksSection";
 import { Container } from "@/components/ui/Container";
 import { getGuide, guideIndexPages, guideSlugs } from "@/content/guide-catalog";
+import { getGuideSolutionSlugs } from "@/content/guide-solution-links";
 import { getGuideTopic } from "@/content/guide-topics";
 import { getGuideTrust } from "@/content/guide-trust";
 import { Link } from "@/i18n/navigation";
@@ -70,6 +72,10 @@ export default async function GuidePage({ params }: PageProps) {
       const topicGuide = getGuide(locale, topicSlug);
       return topicGuide ? [{ slug: topicSlug, guide: topicGuide }] : [];
     }) ?? [];
+  const solutionSlugs = getGuideSolutionSlugs(slug);
+  const solutionUrls = solutionSlugs.map(
+    (solutionSlug) => `${SITE_URL}/${locale}/solutions/${solutionSlug}`,
+  );
   const url = `${SITE_URL}/${locale}/guides/${slug}`;
 
   return (
@@ -85,6 +91,7 @@ export default async function GuidePage({ params }: PageProps) {
             datePublished: guide.publishedAt,
             dateModified: guide.updatedAt,
             citations: trust.sources.map((source) => source.href),
+            relatedServices: solutionUrls,
           })
         }
       />
@@ -286,6 +293,8 @@ export default async function GuidePage({ params }: PageProps) {
           </section>
         </Container>
       </article>
+
+      <SolutionLinksSection locale={locale} slugs={solutionSlugs} tone="ivory" />
 
       <section className="pb-20 lg:pb-24">
         <Container className="max-w-4xl">
