@@ -7,10 +7,12 @@ import type { ReactNode } from "react";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { SkipLink } from "@/components/layout/SkipLink";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { RouteBreadcrumbJsonLd } from "@/components/seo/RouteBreadcrumbJsonLd";
 import { getEntityProfile } from "@/content/entity-profile";
 import { localeDirections, routing, type Locale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/constants";
+import { brandJsonLd, organizationJsonLd, websiteJsonLd } from "@/lib/jsonld";
 import "@/styles/globals.css";
 
 const inter = Inter({
@@ -86,6 +88,7 @@ export default async function LocaleLayout({
 
   const typedLocale = locale as Locale;
   const direction = localeDirections[typedLocale];
+  const entity = getEntityProfile(typedLocale);
 
   return (
     <html
@@ -94,6 +97,9 @@ export default async function LocaleLayout({
       className={`${inter.variable} ${notoKufiArabic.variable} ${notoSansArabic.variable}`}
     >
       <body className="flex min-h-screen flex-col">
+        <JsonLd data={organizationJsonLd({ name: entity.name, description: entity.description })} />
+        <JsonLd data={brandJsonLd({ name: entity.name, description: entity.description })} />
+        <JsonLd data={websiteJsonLd({ name: entity.name, description: entity.description })} />
         <NextIntlClientProvider>
           <RouteBreadcrumbJsonLd locale={typedLocale} />
           <SkipLink />
