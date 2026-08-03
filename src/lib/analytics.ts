@@ -17,7 +17,8 @@ export type AnalyticsEvent =
   | "language_change"
   | "login_open"
   | "guide_view"
-  | "guide_demo_cta_click";
+  | "guide_demo_cta_click"
+  | "web_vital";
 
 type AnalyticsValue = string | number | boolean;
 export type AnalyticsProperties = Record<string, AnalyticsValue | undefined>;
