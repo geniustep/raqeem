@@ -81,7 +81,12 @@ export async function Footer() {
       <div className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <Link href="/" className="inline-flex" aria-label={tCommon("brandName")}>
+            <Link
+              href="/"
+              prefetch={false}
+              className="inline-flex"
+              aria-label={tCommon("brandName")}
+            >
               <Logo alt={tCommon("logoAlt")} className="h-12 w-auto" />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-6 text-brand-navy-700/80">
@@ -127,7 +132,15 @@ export async function Footer() {
             <p className="text-sm font-bold text-brand-navy">{t("solutions")}</p>
             <ul className="mt-4 space-y-3">
               {solutionLinks.map((link) => (
-                <li key={link.href}><Link href={link.href} className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700">{link.label}</Link></li>
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    prefetch={false}
+                    className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
               ))}
             </ul>
           </nav>
@@ -136,7 +149,15 @@ export async function Footer() {
             <p className="text-sm font-bold text-brand-navy">{t("institutions")}</p>
             <ul className="mt-4 space-y-3">
               {INSTITUTION_LINKS.map((link) => (
-                <li key={link.key}><Link href={link.href} className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700">{tInstitutions(`${link.key}.title`)}</Link></li>
+                <li key={link.key}>
+                  <Link
+                    href={link.href}
+                    prefetch={false}
+                    className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700"
+                  >
+                    {tInstitutions(`${link.key}.title`)}
+                  </Link>
+                </li>
               ))}
             </ul>
           </nav>
@@ -146,9 +167,26 @@ export async function Footer() {
               <p className="text-sm font-bold text-brand-navy">{t("resources")}</p>
               <ul className="mt-4 space-y-3">
                 {resourceLinks.map((link) => (
-                  <li key={link.href}><Link href={link.href} className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700">{link.label}</Link></li>
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      prefetch={false}
+                      className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
                 ))}
-                <li><a href={APP_URL} target="_blank" rel="noopener noreferrer" className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700">{t("login")}</a></li>
+                <li>
+                  <a
+                    href={APP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700"
+                  >
+                    {t("login")}
+                  </a>
+                </li>
               </ul>
             </nav>
 
@@ -156,7 +194,15 @@ export async function Footer() {
               <p className="text-sm font-bold text-brand-navy">{privacyCenterPages[locale].title}</p>
               <ul className="mt-4 space-y-3">
                 {trustLinks.map((link) => (
-                  <li key={link.href}><Link href={link.href} className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700">{link.label}</Link></li>
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      prefetch={false}
+                      className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
                 ))}
               </ul>
             </nav>
@@ -165,7 +211,15 @@ export async function Footer() {
               <p className="text-sm font-bold text-brand-navy">{t("company")}</p>
               <ul className="mt-4 space-y-3">
                 {companyLinks.map((link) => (
-                  <li key={link.href}><Link href={link.href} className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700">{link.label}</Link></li>
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      prefetch={false}
+                      className="text-sm text-brand-navy-700/80 transition hover:text-brand-teal-700"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
                 ))}
               </ul>
             </nav>
@@ -180,7 +234,16 @@ export async function Footer() {
           {socials.length > 0 ? (
             <ul className="flex items-center gap-4">
               {socials.map((social) => (
-                <li key={social.label}><a href={social.href} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-brand-navy-700/80 transition hover:text-brand-teal-700">{social.label}</a></li>
+                <li key={social.label}>
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-medium text-brand-navy-700/80 transition hover:text-brand-teal-700"
+                  >
+                    {social.label}
+                  </a>
+                </li>
               ))}
             </ul>
           ) : null}
