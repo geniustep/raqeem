@@ -8,6 +8,13 @@ interface PageProps {
   params: Promise<{ locale: Locale }>;
 }
 
+const relatedSolutionSlugs = [
+  "admissions-enrollment",
+  "school-fees-collections",
+  "school-communication",
+  "attendance-absence",
+] as const;
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   return buildPageMetadata({
@@ -25,6 +32,7 @@ export default async function LanguageCentersPage({ params }: PageProps) {
       locale={locale}
       namespace="pages.institutions.languageCenters"
       path="/institutions/language-centers"
+      relatedSolutionSlugs={relatedSolutionSlugs}
     />
   );
 }
