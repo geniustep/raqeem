@@ -1,16 +1,17 @@
 import { ArrowUpRight, Layers3 } from "lucide-react";
+import { TrackedSolutionLink } from "@/components/solutions/TrackedSolutionLink";
 import { Container } from "@/components/ui/Container";
 import {
   getSolutionLanding,
   type SolutionLandingSlug,
 } from "@/content/solution-landing-pages";
-import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 
 interface SolutionLinksSectionProps {
   locale: Locale;
   slugs: readonly SolutionLandingSlug[];
   tone?: "white" | "ivory";
+  sourceGuideSlug?: string;
 }
 
 const copy: Record<
@@ -51,6 +52,7 @@ export function SolutionLinksSection({
   locale,
   slugs,
   tone = "white",
+  sourceGuideSlug,
 }: SolutionLinksSectionProps) {
   const items = slugs.flatMap((slug) => {
     const solution = getSolutionLanding(locale, slug);
@@ -77,9 +79,11 @@ export function SolutionLinksSection({
 
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           {items.map((solution) => (
-            <Link
+            <TrackedSolutionLink
               key={solution.slug}
-              href={`/solutions/${solution.slug}`}
+              locale={locale}
+              solutionSlug={solution.slug}
+              sourceGuideSlug={sourceGuideSlug}
               className="group rounded-3xl border border-brand-navy-100 bg-white p-6 transition hover:-translate-y-0.5 hover:border-brand-teal-300 hover:shadow-lg"
             >
               <div className="flex items-start justify-between gap-5">
@@ -98,7 +102,7 @@ export function SolutionLinksSection({
               <span className="mt-5 inline-flex text-sm font-semibold text-brand-teal-700">
                 {labels.action}
               </span>
-            </Link>
+            </TrackedSolutionLink>
           ))}
         </div>
       </Container>
