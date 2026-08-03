@@ -1,7 +1,9 @@
 import type { Locale } from "@/i18n/routing";
-import { BRAND, SITE_URL, SOCIAL_LINKS } from "./constants";
+import { organizationIdentity } from "@/content/organization-identity";
+import { APP_URL, BRAND, SITE_URL, SOCIAL_LINKS } from "./constants";
 
 const ORGANIZATION_ID = `${SITE_URL}/#organization`;
+const BRAND_ID = `${SITE_URL}/#brand`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
 const SOFTWARE_ID = `${SITE_URL}/#software`;
 
@@ -16,20 +18,68 @@ export function organizationJsonLd({ name, description }: { name: string; descri
     "@type": "Organization",
     "@id": ORGANIZATION_ID,
     name,
-    alternateName: ["رقيم", "Raqeem"],
+    legalName: organizationIdentity.legalName,
+    alternateName: [organizationIdentity.brandNameAr, organizationIdentity.brandName],
     description,
     url: SITE_URL,
+    email: organizationIdentity.email,
+    telephone: organizationIdentity.telephone,
     logo: {
       "@type": "ImageObject",
       url: `${SITE_URL}${BRAND.logo}`,
       width: BRAND.logoWidth,
       height: BRAND.logoHeight,
     },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: organizationIdentity.address.streetAddress,
+      addressLocality: organizationIdentity.address.addressLocality,
+      postalCode: organizationIdentity.address.postalCode,
+      addressCountry: organizationIdentity.address.addressCountry,
+    },
+    identifier: {
+      "@type": "PropertyValue",
+      name: "Morocco commercial register",
+      propertyID: "RC",
+      value: organizationIdentity.registrationNumber,
+    },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        email: organizationIdentity.email,
+        telephone: organizationIdentity.telephone,
+        areaServed: organizationIdentity.serviceCountry,
+        availableLanguage: organizationIdentity.availableLanguages,
+      },
+      {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        email: organizationIdentity.email,
+        telephone: organizationIdentity.whatsapp,
+        areaServed: organizationIdentity.serviceCountry,
+        availableLanguage: organizationIdentity.availableLanguages,
+      },
+    ],
     areaServed: {
       "@type": "Country",
       name: "Morocco",
     },
+    brand: { "@id": BRAND_ID },
     sameAs: verifiedSocialProfiles(),
+  };
+}
+
+export function brandJsonLd({ name, description }: { name: string; description: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Brand",
+    "@id": BRAND_ID,
+    name,
+    alternateName: [organizationIdentity.brandNameAr, organizationIdentity.brandName],
+    description,
+    url: SITE_URL,
+    logo: `${SITE_URL}${BRAND.logo}`,
   };
 }
 
@@ -39,9 +89,11 @@ export function websiteJsonLd({ name, description }: { name: string; description
     "@type": "WebSite",
     "@id": WEBSITE_ID,
     name,
+    alternateName: [organizationIdentity.brandNameAr, organizationIdentity.brandName],
     description,
     url: SITE_URL,
-    inLanguage: ["ar", "fr", "en", "es"],
+    inLanguage: organizationIdentity.availableLanguages,
+    about: { "@id": BRAND_ID },
     publisher: { "@id": ORGANIZATION_ID },
   };
 }
@@ -60,14 +112,45 @@ export function softwareApplicationJsonLd({
     "@type": "SoftwareApplication",
     "@id": SOFTWARE_ID,
     name,
-    alternateName: ["رقيم", "Raqeem"],
+    alternateName: [organizationIdentity.brandNameAr, organizationIdentity.brandName],
     description,
-    url: SITE_URL,
+    url: APP_URL,
+    mainEntityOfPage: SITE_URL,
     applicationCategory: "EducationalApplication",
     operatingSystem: "Web, Android, iOS, Windows",
     inLanguage: locale,
+    brand: { "@id": BRAND_ID },
+    provider: { "@id": ORGANIZATION_ID },
     publisher: { "@id": ORGANIZATION_ID },
     isPartOf: { "@id": WEBSITE_ID },
+  };
+}
+
+export function organizationWebPageJsonLd({
+  type,
+  name,
+  description,
+  url,
+  inLanguage,
+}: {
+  type: "AboutPage" | "ContactPage";
+  name: string;
+  description: string;
+  url: string;
+  inLanguage: Locale;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": type,
+    "@id": `${url}#webpage`,
+    name,
+    description,
+    url,
+    inLanguage,
+    isPartOf: { "@id": WEBSITE_ID },
+    about: [{ "@id": ORGANIZATION_ID }, { "@id": BRAND_ID }],
+    mainEntity: { "@id": ORGANIZATION_ID },
+    publisher: { "@id": ORGANIZATION_ID },
   };
 }
 
