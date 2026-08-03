@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowUpRight, CheckCircle2, ClipboardCheck, ShieldCheck } from "lucide-react";
 import { setRequestLocale } from "next-intl/server";
-import { GuideLinksSection } from "@/components/guides/GuideLinksSection";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { GuideLinksSection } from "@/components/guides/GuideLinksSection";
+import { SolutionAnalytics } from "@/components/solutions/SolutionAnalytics";
+import { SolutionDemoLink } from "@/components/solutions/SolutionDemoLink";
 import { Container } from "@/components/ui/Container";
 import {
   getSolutionLanding,
@@ -91,6 +93,7 @@ export default async function SolutionLandingPage({ params }: PageProps) {
 
   return (
     <>
+      <SolutionAnalytics locale={locale} slug={content.slug} />
       <JsonLd
         data={
           serviceJsonLd({
@@ -222,12 +225,12 @@ export default async function SolutionLandingPage({ params }: PageProps) {
             <p className="mx-auto mt-4 max-w-2xl leading-8 text-white/80">
               {content.ctaDescription}
             </p>
-            <Link
-              href="/demo"
+            <SolutionDemoLink
+              locale={locale}
+              solutionSlug={content.slug}
+              label={content.ctaButton}
               className="mt-7 inline-flex rounded-xl bg-white px-6 py-3 font-semibold text-brand-navy transition hover:bg-brand-ivory"
-            >
-              {content.ctaButton}
-            </Link>
+            />
           </div>
         </Container>
       </section>
