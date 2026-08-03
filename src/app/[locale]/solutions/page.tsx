@@ -17,6 +17,10 @@ interface PageProps {
 }
 
 const featuredGuideSlugs = [
+  "integrated-student-journey",
+  "raqeem-and-massar",
+  "mobile-and-desktop-school-management",
+  "cloud-school-management",
   "school-fees-collections-receipts",
   "governed-school-communication",
   "admission-to-student-record",

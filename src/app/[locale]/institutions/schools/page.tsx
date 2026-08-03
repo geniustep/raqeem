@@ -9,9 +9,13 @@ interface PageProps {
 }
 
 const relatedGuideSlugs = [
+  "integrated-student-journey",
+  "raqeem-and-massar",
   "admission-to-student-record",
   "school-fees-collections-receipts",
   "attendance-absence-parent-updates",
+  "mobile-and-desktop-school-management",
+  "cloud-school-management",
   "migrating-from-excel",
   "multi-branch-school-management",
   "school-data-isolation",

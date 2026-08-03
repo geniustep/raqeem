@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { BookOpen } from "lucide-react";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
-import { guideIndexPages } from "@/content/guides";
+import { faqItemsByLocale } from "@/content/faq-content";
+import { guideIndexPages } from "@/content/guide-catalog";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { faqPageJsonLd } from "@/lib/jsonld";
@@ -24,14 +25,8 @@ export default async function FaqPage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const tFaq = await getTranslations("faq");
   const guides = guideIndexPages[locale];
-  const faqItems = (["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8"] as const).map(
-    (key) => ({
-      question: tFaq(`items.${key}.question`),
-      answer: tFaq(`items.${key}.answer`),
-    }),
-  );
+  const faqItems = faqItemsByLocale[locale];
 
   return (
     <>

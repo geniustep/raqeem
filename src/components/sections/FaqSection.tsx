@@ -1,14 +1,16 @@
 import { ChevronDown } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { faqItemsByLocale } from "@/content/faq-content";
 import { Link } from "@/i18n/navigation";
-
-const ALL_ITEMS = ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8"] as const;
+import type { Locale } from "@/i18n/routing";
 
 export async function FaqSection({ compact = false }: { compact?: boolean }) {
   const t = await getTranslations("faq");
-  const items = compact ? ALL_ITEMS.slice(0, 4) : ALL_ITEMS;
+  const locale = (await getLocale()) as Locale;
+  const allItems = faqItemsByLocale[locale];
+  const items = compact ? allItems.slice(0, 4) : allItems;
 
   return (
     <section className="py-20 lg:py-24">
@@ -17,11 +19,11 @@ export async function FaqSection({ compact = false }: { compact?: boolean }) {
         <div className="mx-auto mt-12 max-w-3xl space-y-3">
           {items.map((item) => (
             <details
-              key={item}
+              key={item.question}
               className="group rounded-xl border border-brand-navy-100 bg-white open:border-brand-teal"
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-start font-semibold text-brand-navy [&::-webkit-details-marker]:hidden">
-                {t(`items.${item}.question`)}
+                {item.question}
                 <ChevronDown
                   aria-hidden="true"
                   className="size-5 shrink-0 text-brand-teal-700 transition-transform group-open:rotate-180"
@@ -29,7 +31,7 @@ export async function FaqSection({ compact = false }: { compact?: boolean }) {
                 />
               </summary>
               <p className="px-5 pb-5 text-sm leading-7 text-brand-navy-700/85 sm:text-base">
-                {t(`items.${item}.answer`)}
+                {item.answer}
               </p>
             </details>
           ))}

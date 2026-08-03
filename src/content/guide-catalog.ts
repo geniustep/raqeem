@@ -10,6 +10,12 @@ import {
   timetableConflictManagementGuide,
 } from "@/content/guides/data-timetable-migration-branches";
 import { governedSchoolCommunicationGuide } from "@/content/guides/governed-school-communication";
+import {
+  cloudSchoolManagementGuide,
+  integratedStudentJourneyGuide,
+  mobileAndDesktopSchoolManagementGuide,
+  raqeemAndMassarGuide,
+} from "@/content/guides/local-context-and-platforms";
 import { schoolFeesCollectionsReceiptsGuide } from "@/content/guides/school-fees-collections-receipts";
 import {
   getGuide as getBaseGuide,
@@ -32,13 +38,22 @@ export const stageSixGuideSlugs = [
   "multi-branch-school-management",
 ] as const;
 
+export const stageSevenGuideSlugs = [
+  "raqeem-and-massar",
+  "mobile-and-desktop-school-management",
+  "cloud-school-management",
+  "integrated-student-journey",
+] as const;
+
 type StageFourGuideSlug = (typeof stageFourGuideSlugs)[number];
 type StageSixGuideSlug = (typeof stageSixGuideSlugs)[number];
+type StageSevenGuideSlug = (typeof stageSevenGuideSlugs)[number];
 
 export const guideSlugs = [
   ...baseGuideSlugs,
   ...stageFourGuideSlugs,
   ...stageSixGuideSlugs,
+  ...stageSevenGuideSlugs,
 ] as const;
 
 const stageFourGuides: Record<StageFourGuideSlug, Record<Locale, CatalogGuideContent>> = {
@@ -55,12 +70,23 @@ const stageSixGuides: Record<StageSixGuideSlug, Record<Locale, CatalogGuideConte
   "multi-branch-school-management": multiBranchSchoolManagementGuide,
 };
 
+const stageSevenGuides: Record<StageSevenGuideSlug, Record<Locale, CatalogGuideContent>> = {
+  "raqeem-and-massar": raqeemAndMassarGuide,
+  "mobile-and-desktop-school-management": mobileAndDesktopSchoolManagementGuide,
+  "cloud-school-management": cloudSchoolManagementGuide,
+  "integrated-student-journey": integratedStudentJourneyGuide,
+};
+
 function isStageFourGuideSlug(value: string): value is StageFourGuideSlug {
   return stageFourGuideSlugs.includes(value as StageFourGuideSlug);
 }
 
 function isStageSixGuideSlug(value: string): value is StageSixGuideSlug {
   return stageSixGuideSlugs.includes(value as StageSixGuideSlug);
+}
+
+function isStageSevenGuideSlug(value: string): value is StageSevenGuideSlug {
+  return stageSevenGuideSlugs.includes(value as StageSevenGuideSlug);
 }
 
 export function getGuide(locale: Locale, slug: string): CatalogGuideContent | undefined {
@@ -73,7 +99,11 @@ export function getGuide(locale: Locale, slug: string): CatalogGuideContent | un
     return stageFourGuides[slug][locale];
   }
 
-  return isStageSixGuideSlug(slug) ? stageSixGuides[slug][locale] : undefined;
+  if (isStageSixGuideSlug(slug)) {
+    return stageSixGuides[slug][locale];
+  }
+
+  return isStageSevenGuideSlug(slug) ? stageSevenGuides[slug][locale] : undefined;
 }
 
 export { guideIndexPages };

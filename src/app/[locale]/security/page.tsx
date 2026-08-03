@@ -38,7 +38,10 @@ const icons = [
 ] as const;
 
 const relatedGuideSlugs = [
+  "protecting-school-data",
   "school-data-isolation",
+  "roles-permissions-sensitive-actions",
+  "cloud-school-management",
   "choosing-school-management-system",
 ] as const;
 

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { GuideLinksSection } from "@/components/guides/GuideLinksSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CtaSection } from "@/components/sections/CtaSection";
@@ -17,6 +17,7 @@ import { SecuritySection } from "@/components/sections/SecuritySection";
 import { SocialProofSection } from "@/components/sections/SocialProofSection";
 import { TimetableSection } from "@/components/sections/TimetableSection";
 import { getEntityProfile } from "@/content/entity-profile";
+import { faqItemsByLocale } from "@/content/faq-content";
 import type { Locale } from "@/i18n/routing";
 import {
   faqPageJsonLd,
@@ -33,6 +34,8 @@ interface PageProps {
 const featuredGuideSlugs = [
   "choosing-school-management-system",
   "admission-to-student-record",
+  "integrated-student-journey",
+  "raqeem-and-massar",
   "school-data-isolation",
   "school-fees-collections-receipts",
   "governed-school-communication",
@@ -47,13 +50,8 @@ export default async function HomePage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const tFaq = await getTranslations("faq");
   const entity = getEntityProfile(locale);
-
-  const faqItems = (["q1", "q2", "q3", "q4"] as const).map((key) => ({
-    question: tFaq(`items.${key}.question`),
-    answer: tFaq(`items.${key}.answer`),
-  }));
+  const faqItems = faqItemsByLocale[locale].slice(0, 4);
 
   return (
     <>
