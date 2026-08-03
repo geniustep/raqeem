@@ -1,4 +1,14 @@
 import type { CatalogGuideContent } from "@/content/guide-types";
+import {
+  attendanceAbsenceParentUpdatesGuide,
+  rolesPermissionsSensitiveActionsGuide,
+} from "@/content/guides/attendance-and-permissions";
+import {
+  migratingFromExcelGuide,
+  multiBranchSchoolManagementGuide,
+  protectingSchoolDataGuide,
+  timetableConflictManagementGuide,
+} from "@/content/guides/data-timetable-migration-branches";
 import { governedSchoolCommunicationGuide } from "@/content/guides/governed-school-communication";
 import { schoolFeesCollectionsReceiptsGuide } from "@/content/guides/school-fees-collections-receipts";
 import {
@@ -13,17 +23,44 @@ export const stageFourGuideSlugs = [
   "governed-school-communication",
 ] as const;
 
-type StageFourGuideSlug = (typeof stageFourGuideSlugs)[number];
+export const stageSixGuideSlugs = [
+  "attendance-absence-parent-updates",
+  "roles-permissions-sensitive-actions",
+  "protecting-school-data",
+  "timetable-conflict-management",
+  "migrating-from-excel",
+  "multi-branch-school-management",
+] as const;
 
-export const guideSlugs = [...baseGuideSlugs, ...stageFourGuideSlugs] as const;
+type StageFourGuideSlug = (typeof stageFourGuideSlugs)[number];
+type StageSixGuideSlug = (typeof stageSixGuideSlugs)[number];
+
+export const guideSlugs = [
+  ...baseGuideSlugs,
+  ...stageFourGuideSlugs,
+  ...stageSixGuideSlugs,
+] as const;
 
 const stageFourGuides: Record<StageFourGuideSlug, Record<Locale, CatalogGuideContent>> = {
   "school-fees-collections-receipts": schoolFeesCollectionsReceiptsGuide,
   "governed-school-communication": governedSchoolCommunicationGuide,
 };
 
+const stageSixGuides: Record<StageSixGuideSlug, Record<Locale, CatalogGuideContent>> = {
+  "attendance-absence-parent-updates": attendanceAbsenceParentUpdatesGuide,
+  "roles-permissions-sensitive-actions": rolesPermissionsSensitiveActionsGuide,
+  "protecting-school-data": protectingSchoolDataGuide,
+  "timetable-conflict-management": timetableConflictManagementGuide,
+  "migrating-from-excel": migratingFromExcelGuide,
+  "multi-branch-school-management": multiBranchSchoolManagementGuide,
+};
+
 function isStageFourGuideSlug(value: string): value is StageFourGuideSlug {
   return stageFourGuideSlugs.includes(value as StageFourGuideSlug);
+}
+
+function isStageSixGuideSlug(value: string): value is StageSixGuideSlug {
+  return stageSixGuideSlugs.includes(value as StageSixGuideSlug);
 }
 
 export function getGuide(locale: Locale, slug: string): CatalogGuideContent | undefined {
@@ -32,7 +69,11 @@ export function getGuide(locale: Locale, slug: string): CatalogGuideContent | un
     return baseGuide;
   }
 
-  return isStageFourGuideSlug(slug) ? stageFourGuides[slug][locale] : undefined;
+  if (isStageFourGuideSlug(slug)) {
+    return stageFourGuides[slug][locale];
+  }
+
+  return isStageSixGuideSlug(slug) ? stageSixGuides[slug][locale] : undefined;
 }
 
 export { guideIndexPages };
