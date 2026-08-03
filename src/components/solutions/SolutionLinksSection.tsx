@@ -83,7 +83,7 @@ export function SolutionLinksSection({
               key={solution.slug}
               locale={locale}
               solutionSlug={solution.slug}
-              sourceGuideSlug={sourceGuideSlug}
+              {...(sourceGuideSlug ? { sourceGuideSlug } : {})}
               className="group rounded-3xl border border-brand-navy-100 bg-white p-6 transition hover:-translate-y-0.5 hover:border-brand-teal-300 hover:shadow-lg"
             >
               <div className="flex items-start justify-between gap-5">
