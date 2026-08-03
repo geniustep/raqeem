@@ -1,7 +1,10 @@
 import type { MetadataRoute } from "next";
-import { guideSlugs } from "@/content/guide-catalog";
-import { locales } from "@/i18n/routing";
+import { getGuide, guideSlugs } from "@/content/guide-catalog";
+import { locales, type Locale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/constants";
+
+const SEO_RELEASE_DATE = "2026-08-03";
+const TRUST_RELEASE_DATE = "2026-07-31";
 
 const STATIC_PATHS = [
   "",
@@ -48,7 +51,36 @@ const STATIC_PATHS = [
   "/maintenance-policy",
   "/security-whitepaper",
   "/responsible-ai",
-];
+] as const;
+
+const TRUST_PATHS = new Set<string>([
+  "/privacy",
+  "/terms",
+  "/support",
+  "/data-deletion",
+  "/compliance",
+  "/privacy-center",
+  "/trust-center",
+  "/legal-notice",
+  "/cookies",
+  "/accessibility",
+  "/child-parent-data-notice",
+  "/data-processing-agreement",
+  "/subprocessors",
+  "/data-retention",
+  "/backup-recovery",
+  "/service-status",
+  "/service-level-agreement",
+  "/business-continuity",
+  "/disaster-recovery",
+  "/incident-response",
+  "/vulnerability-disclosure",
+  "/security-contact",
+  "/support-policy",
+  "/maintenance-policy",
+  "/security-whitepaper",
+  "/responsible-ai",
+]);
 
 const PATHS = [...STATIC_PATHS, ...guideSlugs.map((slug) => `/guides/${slug}`)];
 
@@ -61,10 +93,20 @@ function languageAlternates(path: string): Record<string, string> {
   };
 }
 
+function lastModifiedFor(path: string, locale: Locale): string {
+  if (path.startsWith("/guides/")) {
+    const slug = path.slice("/guides/".length);
+    return getGuide(locale, slug)?.updatedAt ?? SEO_RELEASE_DATE;
+  }
+
+  return TRUST_PATHS.has(path) ? TRUST_RELEASE_DATE : SEO_RELEASE_DATE;
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   return PATHS.flatMap((path) =>
     locales.map((locale) => ({
       url: `${SITE_URL}/${locale}${path}`,
+      lastModified: lastModifiedFor(path, locale),
       changeFrequency: path === "" ? ("weekly" as const) : ("monthly" as const),
       priority:
         path === ""
