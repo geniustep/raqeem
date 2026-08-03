@@ -35,8 +35,9 @@ export function ProductGallery({ screenshots }: ProductGalleryProps) {
             height={activeScreenshot.height}
             alt={activeScreenshot.alt}
             sizes="(min-width: 1280px) 1200px, 100vw"
+            loading="lazy"
+            fetchPriority="low"
             className="h-auto w-full"
-            priority={activeScreenshot.key === screenshots[0]?.key}
           />
         </div>
         <div className="px-5 py-5 sm:px-7">
