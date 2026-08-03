@@ -102,6 +102,12 @@ h6 {
   border-radius: 2px;
 }
 
+/* Skip layout and paint work for heavy below-the-fold sections until they approach the viewport. */
+.defer-render {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
 /* ===== Subtle geometric grid background (brand-inspired) ===== */
 .bg-grid-soft {
   background-image:
