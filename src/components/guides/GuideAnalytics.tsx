@@ -18,15 +18,10 @@ function referrerDomain(): string {
 
 export function GuideAnalytics({ locale, slug }: { locale: Locale; slug: string }) {
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-
     track("guide_view", {
       guide_slug: slug,
       locale,
       referrer_domain: referrerDomain(),
-      utm_source: params.get("utm_source") ?? undefined,
-      utm_medium: params.get("utm_medium") ?? undefined,
-      utm_campaign: params.get("utm_campaign") ?? undefined,
     });
   }, [locale, slug]);
 
