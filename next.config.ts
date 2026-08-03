@@ -32,12 +32,23 @@ const securityHeaders = [
   },
 ];
 
+const staticAssetCacheHeaders = [
+  {
+    key: "Cache-Control",
+    value: "public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000",
+  },
+];
+
 const nextConfig: NextConfig = {
   // Standalone output is used for self-hosted (Docker) deployments.
   // `next start` (used locally and by Playwright) needs the default output.
   // Never set BUILD_STANDALONE=1 on Vercel — it breaks the default Next.js output layout.
   ...(process.env.BUILD_STANDALONE === "1" ? { output: "standalone" as const } : {}),
   poweredByHeader: false,
+  images: {
+    formats: ["image/webp"],
+    minimumCacheTTL: 604800,
+  },
   async redirects() {
     return [
       {
@@ -59,6 +70,10 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      { source: "/brand/:path*", headers: staticAssetCacheHeaders },
+      { source: "/icons/:path*", headers: staticAssetCacheHeaders },
+      { source: "/screenshots/:path*", headers: staticAssetCacheHeaders },
+      { source: "/social/:path*", headers: staticAssetCacheHeaders },
       {
         source: "/(.*)",
         headers: securityHeaders,
