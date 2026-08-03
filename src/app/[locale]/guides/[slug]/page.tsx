@@ -7,6 +7,7 @@ import { GuideDemoLink } from "@/components/guides/GuideDemoLink";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
 import { getGuide, guideIndexPages, guideSlugs } from "@/content/guide-catalog";
+import { getGuideTopic } from "@/content/guide-topics";
 import { getGuideTrust } from "@/content/guide-trust";
 import { Link } from "@/i18n/navigation";
 import { locales, type Locale } from "@/i18n/routing";
@@ -59,6 +60,16 @@ export default async function GuidePage({ params }: PageProps) {
   setRequestLocale(locale);
   const index = guideIndexPages[locale];
   const trust = getGuideTrust(locale, slug);
+  const topic = getGuideTopic(locale, slug);
+  const topicGuides =
+    topic?.slugs.flatMap((topicSlug) => {
+      if (topicSlug === slug) {
+        return [];
+      }
+
+      const topicGuide = getGuide(locale, topicSlug);
+      return topicGuide ? [{ slug: topicSlug, guide: topicGuide }] : [];
+    }) ?? [];
   const url = `${SITE_URL}/${locale}/guides/${slug}`;
 
   return (
@@ -224,6 +235,36 @@ export default async function GuidePage({ params }: PageProps) {
               ))}
             </div>
           </section>
+
+          {topic && topicGuides.length > 0 ? (
+            <section className="mt-14 rounded-3xl border border-brand-teal-200 bg-brand-teal-50/40 p-6 sm:p-8">
+              <h2 className="text-2xl font-bold text-brand-navy">{topic.relatedTitle}</h2>
+              <p className="mt-3 leading-8 text-brand-navy-700/80">{topic.description}</p>
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                {topicGuides.map(({ slug: topicSlug, guide: topicGuide }) => (
+                  <Link
+                    key={topicSlug}
+                    href={`/guides/${topicSlug}`}
+                    className="group rounded-2xl border border-brand-navy-100 bg-white p-5 transition hover:border-brand-teal-300 hover:shadow-md"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="font-bold text-brand-navy">{topicGuide.title}</h3>
+                      <ArrowUpRight className="size-4 shrink-0 text-brand-teal-700" aria-hidden="true" />
+                    </div>
+                    <p className="mt-3 text-sm leading-7 text-brand-navy-700/75">
+                      {topicGuide.description}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+              <Link
+                href={`/guides#topic-${topic.id}`}
+                className="mt-6 inline-flex font-semibold text-brand-teal-700 hover:text-brand-teal-600"
+              >
+                {index.directoryLinkLabel}
+              </Link>
+            </section>
+          ) : null}
 
           <section className="mt-14">
             <h2 className="text-2xl font-bold text-brand-navy">{guide.relatedTitle}</h2>
