@@ -19,12 +19,7 @@ import { TimetableSection } from "@/components/sections/TimetableSection";
 import { getEntityProfile } from "@/content/entity-profile";
 import { faqItemsByLocale } from "@/content/faq-content";
 import type { Locale } from "@/i18n/routing";
-import {
-  faqPageJsonLd,
-  organizationJsonLd,
-  softwareApplicationJsonLd,
-  websiteJsonLd,
-} from "@/lib/jsonld";
+import { faqPageJsonLd, softwareApplicationJsonLd } from "@/lib/jsonld";
 import { buildPageMetadata } from "@/lib/metadata";
 
 interface PageProps {
@@ -55,8 +50,6 @@ export default async function HomePage({ params }: PageProps) {
 
   return (
     <>
-      <JsonLd data={organizationJsonLd({ name: entity.name, description: entity.description })} />
-      <JsonLd data={websiteJsonLd({ name: entity.name, description: entity.description })} />
       <JsonLd
         data={
           softwareApplicationJsonLd({
