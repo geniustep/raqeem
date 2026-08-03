@@ -12,12 +12,16 @@ import { ANALYTICS_ID } from "./constants";
 export type AnalyticsEvent =
   | "page_view"
   | "demo_cta_click"
+  | "demo_view"
   | "demo_submit_success"
   | "contact_submit_success"
   | "language_change"
   | "login_open"
   | "guide_view"
+  | "guide_solution_click"
   | "guide_demo_cta_click"
+  | "solution_view"
+  | "solution_demo_cta_click"
   | "web_vital";
 
 type AnalyticsValue = string | number | boolean;
