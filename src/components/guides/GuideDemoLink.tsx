@@ -3,6 +3,7 @@
 import Link from "next/link";
 import type { Locale } from "@/i18n/routing";
 import { track } from "@/lib/analytics";
+import { buildGuideDemoHref } from "@/lib/conversion-attribution";
 
 interface GuideDemoLinkProps {
   locale: Locale;
@@ -12,7 +13,7 @@ interface GuideDemoLinkProps {
 }
 
 export function GuideDemoLink({ locale, slug, label, className }: GuideDemoLinkProps) {
-  const href = `/${locale}/demo?utm_source=raqeem_guides&utm_medium=internal&utm_campaign=${encodeURIComponent(slug)}`;
+  const href = buildGuideDemoHref(locale, slug);
 
   return (
     <Link
