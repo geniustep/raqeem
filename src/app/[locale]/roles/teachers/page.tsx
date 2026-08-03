@@ -8,7 +8,13 @@ interface PageProps {
   params: Promise<{ locale: Locale }>;
 }
 
-const relatedGuideSlugs = ["governed-school-communication", "school-data-isolation"] as const;
+const relatedGuideSlugs = [
+  "governed-school-communication",
+  "attendance-absence-parent-updates",
+  "timetable-conflict-management",
+  "roles-permissions-sensitive-actions",
+  "school-data-isolation",
+] as const;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
