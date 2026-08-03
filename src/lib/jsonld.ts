@@ -195,6 +195,7 @@ export function articleJsonLd({
   datePublished,
   dateModified,
   citations = [],
+  relatedServices = [],
 }: {
   headline: string;
   description: string;
@@ -203,6 +204,7 @@ export function articleJsonLd({
   datePublished: string;
   dateModified: string;
   citations?: string[];
+  relatedServices?: string[];
 }) {
   return {
     "@context": "https://schema.org",
@@ -220,6 +222,10 @@ export function articleJsonLd({
     isPartOf: { "@id": WEBSITE_ID },
     isAccessibleForFree: true,
     citation: citations.length > 0 ? citations : undefined,
+    about:
+      relatedServices.length > 0
+        ? relatedServices.map((serviceUrl) => ({ "@id": `${serviceUrl}#service` }))
+        : undefined,
   };
 }
 
