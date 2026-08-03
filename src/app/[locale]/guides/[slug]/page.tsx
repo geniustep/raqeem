@@ -294,7 +294,12 @@ export default async function GuidePage({ params }: PageProps) {
         </Container>
       </article>
 
-      <SolutionLinksSection locale={locale} slugs={solutionSlugs} tone="ivory" />
+      <SolutionLinksSection
+        locale={locale}
+        slugs={solutionSlugs}
+        tone="ivory"
+        sourceGuideSlug={slug}
+      />
 
       <section className="pb-20 lg:pb-24">
         <Container className="max-w-4xl">
