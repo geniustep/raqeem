@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { GuideLinksSection } from "@/components/guides/GuideLinksSection";
+import { OrganizationIdentityCard } from "@/components/organization/OrganizationIdentityCard";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { CorePageSummary } from "@/components/sections/CorePageSummary";
 import { Container } from "@/components/ui/Container";
 import { ContactForm } from "@/features/contact/ContactForm";
 import type { Locale } from "@/i18n/routing";
+import { SITE_URL } from "@/lib/constants";
+import { organizationWebPageJsonLd } from "@/lib/jsonld";
 import { buildPageMetadata } from "@/lib/metadata";
 
 interface PageProps {
@@ -30,6 +34,18 @@ export default async function ContactPage({ params }: PageProps) {
 
   return (
     <>
+      <JsonLd
+        data={
+          organizationWebPageJsonLd({
+            type: "ContactPage",
+            name: t("title"),
+            description: t("description"),
+            url: `${SITE_URL}/${locale}/contact`,
+            inLanguage: locale,
+          })
+        }
+      />
+
       <section className="bg-brand-ivory py-16 lg:py-20">
         <Container className="max-w-3xl">
           <h1 className="text-4xl font-extrabold tracking-tight text-brand-navy">{t("title")}</h1>
@@ -38,6 +54,7 @@ export default async function ContactPage({ params }: PageProps) {
       </section>
 
       <CorePageSummary locale={locale} page="contact" />
+      <OrganizationIdentityCard locale={locale} />
 
       <section className="pb-16 lg:pb-20">
         <Container className="max-w-3xl">
