@@ -4,6 +4,7 @@ import { locales, type Locale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/constants";
 
 const SEO_RELEASE_DATE = "2026-08-03";
+const ENTITY_RELEASE_DATE = "2026-08-03";
 const TRUST_RELEASE_DATE = "2026-07-31";
 
 const STATIC_PATHS = [
@@ -53,6 +54,8 @@ const STATIC_PATHS = [
   "/responsible-ai",
 ] as const;
 
+const ENTITY_PATHS = new Set<string>(["/about", "/contact", "/legal-notice"]);
+
 const TRUST_PATHS = new Set<string>([
   "/privacy",
   "/terms",
@@ -61,7 +64,6 @@ const TRUST_PATHS = new Set<string>([
   "/compliance",
   "/privacy-center",
   "/trust-center",
-  "/legal-notice",
   "/cookies",
   "/accessibility",
   "/child-parent-data-notice",
@@ -97,6 +99,10 @@ function lastModifiedFor(path: string, locale: Locale): string {
   if (path.startsWith("/guides/")) {
     const slug = path.slice("/guides/".length);
     return getGuide(locale, slug)?.updatedAt ?? SEO_RELEASE_DATE;
+  }
+
+  if (ENTITY_PATHS.has(path)) {
+    return ENTITY_RELEASE_DATE;
   }
 
   return TRUST_PATHS.has(path) ? TRUST_RELEASE_DATE : SEO_RELEASE_DATE;
