@@ -8,6 +8,8 @@ interface PageProps {
   params: Promise<{ locale: Locale }>;
 }
 
+const relatedSolutionSlugs = ["school-communication", "attendance-absence"] as const;
+
 const relatedGuideSlugs = [
   "governed-school-communication",
   "attendance-absence-parent-updates",
@@ -30,6 +32,7 @@ export default async function TeachersPage({ params }: PageProps) {
       namespace="pages.rolesPages.teachers"
       path="/roles/teachers"
       intentKey="teachers"
+      relatedSolutionSlugs={relatedSolutionSlugs}
       relatedGuideSlugs={relatedGuideSlugs}
     />
   );
