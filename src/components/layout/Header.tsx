@@ -1,15 +1,27 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { ChevronDown, Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/brand/Logo";
 import { LanguageSwitcher } from "@/components/navigation/LanguageSwitcher";
-import { MobileMenu } from "@/components/navigation/MobileMenu";
 import { INSTITUTION_LINKS, NAV_LINKS } from "@/components/navigation/links";
-import { PlatformLoginModal } from "@/features/platform-login/PlatformLoginModal";
 import { Link } from "@/i18n/navigation";
 import { track } from "@/lib/analytics";
+
+const MobileMenu = dynamic(
+  () => import("@/components/navigation/MobileMenu").then((module) => module.MobileMenu),
+  { ssr: false },
+);
+
+const PlatformLoginModal = dynamic(
+  () =>
+    import("@/features/platform-login/PlatformLoginModal").then(
+      (module) => module.PlatformLoginModal,
+    ),
+  { ssr: false },
+);
 
 export function Header() {
   const t = useTranslations("navigation");
@@ -22,12 +34,28 @@ export function Header() {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    function onScroll() {
-      setScrolled(window.scrollY > 8);
+    let frame = 0;
+
+    function updateScrolledState() {
+      frame = 0;
+      const nextScrolled = window.scrollY > 8;
+      setScrolled((current) => (current === nextScrolled ? current : nextScrolled));
     }
-    onScroll();
+
+    function onScroll() {
+      if (frame === 0) {
+        frame = window.requestAnimationFrame(updateScrolledState);
+      }
+    }
+
+    updateScrolledState();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frame !== 0) {
+        window.cancelAnimationFrame(frame);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -60,7 +88,7 @@ export function Header() {
     >
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:h-20 lg:px-8">
         <Link href="/" className="flex shrink-0 items-center" aria-label={tCommon("brandName")}>
-          <Logo alt={tCommon("logoAlt")} priority className="h-10 w-auto lg:h-12" />
+          <Logo alt={tCommon("logoAlt")} className="h-10 w-auto lg:h-12" />
         </Link>
 
         <nav aria-label={t("mainMenu")} className="hidden items-center gap-1 lg:flex">
@@ -150,12 +178,14 @@ export function Header() {
         </button>
       </div>
 
-      <MobileMenu
-        open={menuOpen}
-        onClose={() => setMenuOpen(false)}
-        onOpenLogin={() => setLoginOpen(true)}
-      />
-      <PlatformLoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
+      {menuOpen ? (
+        <MobileMenu
+          open
+          onClose={() => setMenuOpen(false)}
+          onOpenLogin={() => setLoginOpen(true)}
+        />
+      ) : null}
+      {loginOpen ? <PlatformLoginModal open onClose={() => setLoginOpen(false)} /> : null}
     </header>
   );
 }
