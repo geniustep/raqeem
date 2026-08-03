@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircle2, CircleAlert } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   CheckboxField,
@@ -14,6 +14,10 @@ import {
 } from "@/components/forms/fields";
 import { localeNames, locales, type Locale } from "@/i18n/routing";
 import { track } from "@/lib/analytics";
+import {
+  readConversionAttribution,
+  type ConversionAttribution,
+} from "@/lib/conversion-attribution";
 import {
   demoRequestSchema,
   organizationTypes,
@@ -29,6 +33,7 @@ export function DemoForm() {
   const tCommon = useTranslations("forms.common");
   const locale = useLocale() as Locale;
   const [status, setStatus] = useState<Status>("idle");
+  const [attribution, setAttribution] = useState<ConversionAttribution>({ source: "site" });
 
   const {
     register,
@@ -52,6 +57,18 @@ export function DemoForm() {
     },
   });
 
+  useEffect(() => {
+    const nextAttribution = readConversionAttribution(window.location.search);
+    setAttribution(nextAttribution);
+
+    track("demo_view", {
+      locale,
+      entry_source: nextAttribution.source,
+      guide_slug: nextAttribution.guideSlug,
+      solution_slug: nextAttribution.solutionSlug,
+    });
+  }, [locale]);
+
   const fieldError = (key: keyof DemoRequestInput): string | undefined => {
     const message = errors[key]?.message;
     return typeof message === "string" ? tCommon(message) : undefined;
@@ -68,7 +85,12 @@ export function DemoForm() {
       const result = (await response.json()) as { ok?: boolean };
       if (response.ok && result.ok) {
         setStatus("success");
-        track("demo_submit_success");
+        track("demo_submit_success", {
+          locale,
+          entry_source: attribution.source,
+          guide_slug: attribution.guideSlug,
+          solution_slug: attribution.solutionSlug,
+        });
       } else {
         setStatus("error");
       }
