@@ -17,6 +17,7 @@ import { SITE_URL } from "@/lib/constants";
 import {
   breadcrumbJsonLd,
   faqPageJsonLd,
+  organizationWebPageJsonLd,
   serviceJsonLd,
 } from "@/lib/jsonld";
 import { buildLocalizedMetadata } from "@/lib/metadata";
@@ -94,6 +95,17 @@ export default async function SolutionLandingPage({ params }: PageProps) {
   return (
     <>
       <SolutionAnalytics locale={locale} slug={content.slug} />
+      <JsonLd
+        data={
+          organizationWebPageJsonLd({
+            type: "WebPage",
+            name: content.title,
+            description: content.description,
+            url,
+            inLanguage: locale,
+          })
+        }
+      />
       <JsonLd
         data={
           serviceJsonLd({
