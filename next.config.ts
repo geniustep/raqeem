@@ -52,12 +52,6 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.raqeem.ma" }],
-        destination: "https://raqeem.ma/:path*",
-        permanent: true,
-      },
-      {
         source: "/",
         destination: "/ar",
         permanent: false,
