@@ -82,28 +82,24 @@ export default async function GuidePage({ params }: PageProps) {
     <>
       <GuideAnalytics locale={locale} slug={slug} />
       <JsonLd
-        data={
-          articleJsonLd({
-            headline: guide.title,
-            description: guide.description,
-            url,
-            inLanguage: locale,
-            datePublished: guide.publishedAt,
-            dateModified: guide.updatedAt,
-            citations: trust.sources.map((source) => source.href),
-            relatedServices: solutionUrls,
-          })
-        }
+        data={articleJsonLd({
+          headline: guide.title,
+          description: guide.description,
+          url,
+          inLanguage: locale,
+          datePublished: guide.publishedAt,
+          dateModified: guide.updatedAt,
+          citations: trust.sources.map((source) => source.href),
+          relatedServices: solutionUrls,
+        })}
       />
-      <JsonLd data={faqPageJsonLd(guide.faq)} />
+      <JsonLd data={faqPageJsonLd(guide.faq, { url, inLanguage: locale })} />
       <JsonLd
-        data={
-          breadcrumbJsonLd([
-            { name: homeLabels[locale], url: `${SITE_URL}/${locale}` },
-            { name: index.eyebrow, url: `${SITE_URL}/${locale}/guides` },
-            { name: guide.title, url },
-          ])
-        }
+        data={breadcrumbJsonLd([
+          { name: homeLabels[locale], url: `${SITE_URL}/${locale}` },
+          { name: index.eyebrow, url: `${SITE_URL}/${locale}/guides` },
+          { name: guide.title, url },
+        ])}
       />
 
       <article>
@@ -153,7 +149,10 @@ export default async function GuidePage({ params }: PageProps) {
                 <h2 className="text-2xl font-bold text-brand-navy">{trust.transparencyTitle}</h2>
                 <p className="mt-3 leading-8 text-brand-navy-700/85">{trust.transparencyText}</p>
                 <div className="mt-5 flex flex-wrap gap-4 text-sm font-semibold">
-                  <Link href="/trust-center" className="text-brand-teal-700 hover:text-brand-teal-600">
+                  <Link
+                    href="/trust-center"
+                    className="text-brand-teal-700 hover:text-brand-teal-600"
+                  >
                     {trust.methodologyLinkLabel}
                   </Link>
                   <Link href="/about" className="text-brand-teal-700 hover:text-brand-teal-600">
@@ -180,8 +179,14 @@ export default async function GuidePage({ params }: PageProps) {
                 {section.points ? (
                   <ul className="mt-6 space-y-3">
                     {section.points.map((point) => (
-                      <li key={point} className="flex items-start gap-3 leading-8 text-brand-navy-700/85">
-                        <CheckCircle2 className="mt-1 size-5 shrink-0 text-brand-teal-700" aria-hidden="true" />
+                      <li
+                        key={point}
+                        className="flex items-start gap-3 leading-8 text-brand-navy-700/85"
+                      >
+                        <CheckCircle2
+                          className="mt-1 size-5 shrink-0 text-brand-teal-700"
+                          aria-hidden="true"
+                        />
                         <span>{point}</span>
                       </li>
                     ))}
@@ -196,7 +201,10 @@ export default async function GuidePage({ params }: PageProps) {
             <ul className="mt-6 space-y-4">
               {guide.checklist.map((item) => (
                 <li key={item} className="flex items-start gap-3 leading-8 text-brand-navy-700/85">
-                  <CheckCircle2 className="mt-1 size-5 shrink-0 text-brand-teal-700" aria-hidden="true" />
+                  <CheckCircle2
+                    className="mt-1 size-5 shrink-0 text-brand-teal-700"
+                    aria-hidden="true"
+                  />
                   <span>{item}</span>
                 </li>
               ))}
@@ -220,7 +228,10 @@ export default async function GuidePage({ params }: PageProps) {
                   >
                     <div className="flex items-start justify-between gap-3">
                       <h3 className="font-bold text-brand-navy">{source.title}</h3>
-                      <ExternalLink className="size-4 shrink-0 text-brand-teal-700" aria-hidden="true" />
+                      <ExternalLink
+                        className="size-4 shrink-0 text-brand-teal-700"
+                        aria-hidden="true"
+                      />
                     </div>
                     <p className="mt-3 text-sm leading-7 text-brand-navy-700/75">
                       {source.description}
@@ -256,7 +267,10 @@ export default async function GuidePage({ params }: PageProps) {
                   >
                     <div className="flex items-start justify-between gap-3">
                       <h3 className="font-bold text-brand-navy">{topicGuide.title}</h3>
-                      <ArrowUpRight className="size-4 shrink-0 text-brand-teal-700" aria-hidden="true" />
+                      <ArrowUpRight
+                        className="size-4 shrink-0 text-brand-teal-700"
+                        aria-hidden="true"
+                      />
                     </div>
                     <p className="mt-3 text-sm leading-7 text-brand-navy-700/75">
                       {topicGuide.description}
@@ -284,9 +298,14 @@ export default async function GuidePage({ params }: PageProps) {
                 >
                   <div className="flex items-start justify-between gap-3">
                     <h3 className="font-bold text-brand-navy">{item.title}</h3>
-                    <ArrowUpRight className="size-4 shrink-0 text-brand-teal-700" aria-hidden="true" />
+                    <ArrowUpRight
+                      className="size-4 shrink-0 text-brand-teal-700"
+                      aria-hidden="true"
+                    />
                   </div>
-                  <p className="mt-3 text-sm leading-7 text-brand-navy-700/75">{item.description}</p>
+                  <p className="mt-3 text-sm leading-7 text-brand-navy-700/75">
+                    {item.description}
+                  </p>
                 </Link>
               ))}
             </div>
@@ -305,9 +324,7 @@ export default async function GuidePage({ params }: PageProps) {
         <Container className="max-w-4xl">
           <div className="rounded-3xl bg-brand-navy px-6 py-12 text-center text-white sm:px-10">
             <h2 className="text-3xl font-bold">{guide.ctaTitle}</h2>
-            <p className="mx-auto mt-4 max-w-2xl leading-8 text-white/80">
-              {guide.ctaDescription}
-            </p>
+            <p className="mx-auto mt-4 max-w-2xl leading-8 text-white/80">{guide.ctaDescription}</p>
             <GuideDemoLink
               locale={locale}
               slug={slug}
