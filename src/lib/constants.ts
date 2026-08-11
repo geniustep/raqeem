@@ -3,7 +3,9 @@
  * so this module can be imported from both Server and Client Components.
  */
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://raqeem.ma";
+// Canonical URLs must match the public host that serves content without a redirect.
+// The apex domain permanently redirects to www in production.
+export const SITE_URL = "https://www.raqeem.ma";
 
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.raqeem.ma";
 
