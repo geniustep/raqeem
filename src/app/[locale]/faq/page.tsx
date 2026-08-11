@@ -9,6 +9,7 @@ import { faqItemsByLocale } from "@/content/faq-content";
 import { guideIndexPages } from "@/content/guide-catalog";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
+import { SITE_URL } from "@/lib/constants";
 import { faqPageJsonLd } from "@/lib/jsonld";
 import { buildPageMetadata } from "@/lib/metadata";
 
@@ -27,10 +28,11 @@ export default async function FaqPage({ params }: PageProps) {
 
   const guides = guideIndexPages[locale];
   const faqItems = faqItemsByLocale[locale];
+  const url = `${SITE_URL}/${locale}/faq`;
 
   return (
     <>
-      <JsonLd data={faqPageJsonLd(faqItems)} />
+      <JsonLd data={faqPageJsonLd(faqItems, { url, inLanguage: locale })} />
       <FaqSection />
       <section className="pb-16">
         <Container className="max-w-4xl">
@@ -40,9 +42,7 @@ export default async function FaqPage({ params }: PageProps) {
           >
             <div>
               <p className="text-sm font-semibold text-brand-teal-700">{guides.eyebrow}</p>
-              <p className="mt-2 text-xl font-bold text-brand-navy">
-                {guides.directoryLinkLabel}
-              </p>
+              <p className="mt-2 text-xl font-bold text-brand-navy">{guides.directoryLinkLabel}</p>
               <p className="mt-2 leading-7 text-brand-navy-700/75">{guides.description}</p>
             </div>
             <BookOpen
