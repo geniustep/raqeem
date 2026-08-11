@@ -8,7 +8,7 @@ test("Arabic home page has the required metadata", async ({ page }) => {
   await expect(description).toHaveAttribute("content", /رقيم/);
 
   const canonical = page.locator("link[rel='canonical']");
-  await expect(canonical).toHaveAttribute("href", /\/ar$/);
+  await expect(canonical).toHaveAttribute("href", "https://www.raqeem.ma/ar");
 });
 
 test("hreflang alternates cover the four locales plus x-default", async ({ page }) => {
@@ -53,14 +53,30 @@ test("structured data includes Organization and FAQPage", async ({ page }) => {
   expect(types).toContain("FAQPage");
 });
 
+test("FAQ structured data identifies its canonical page and language", async ({ page }) => {
+  await page.goto("/ar/faq");
+  const faq = page.locator("script[type='application/ld+json']").filter({ hasText: '"FAQPage"' });
+  const data = JSON.parse((await faq.textContent()) ?? "{}") as {
+    "@id"?: string;
+    url?: string;
+    inLanguage?: string;
+    mainEntityOfPage?: string;
+  };
+
+  expect(data["@id"]).toMatch(/\/ar\/faq#faq$/);
+  expect(data.url).toMatch(/\/ar\/faq$/);
+  expect(data.inLanguage).toBe("ar");
+  expect(data.mainEntityOfPage).toBe(data.url);
+});
+
 test("sitemap and robots respond", async ({ request }) => {
   const sitemap = await request.get("/sitemap.xml");
   expect(sitemap.status()).toBe(200);
-  expect(await sitemap.text()).toContain("/ar");
+  expect(await sitemap.text()).toContain("https://www.raqeem.ma/ar");
 
   const robots = await request.get("/robots.txt");
   expect(robots.status()).toBe(200);
-  expect(await robots.text()).toContain("sitemap");
+  expect(await robots.text()).toContain("https://www.raqeem.ma/sitemap.xml");
 });
 
 test("health endpoint returns ok", async ({ request }) => {
