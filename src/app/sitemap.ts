@@ -1,13 +1,11 @@
 import type { MetadataRoute } from "next";
 import { getGuide, guideSlugs } from "@/content/guide-catalog";
-import {
-  getSolutionLanding,
-  solutionLandingSlugs,
-} from "@/content/solution-landing-pages";
+import { getSolutionLanding, solutionLandingSlugs } from "@/content/solution-landing-pages";
 import { locales, type Locale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/constants";
 
 const SEO_RELEASE_DATE = "2026-08-03";
+const FAQ_RELEASE_DATE = "2026-08-11";
 const ENTITY_RELEASE_DATE = "2026-08-03";
 const TRUST_RELEASE_DATE = "2026-07-31";
 
@@ -96,14 +94,16 @@ const PATHS = [
 
 function languageAlternates(path: string): Record<string, string> {
   return {
-    ...Object.fromEntries(
-      locales.map((locale) => [locale, `${SITE_URL}/${locale}${path}`]),
-    ),
+    ...Object.fromEntries(locales.map((locale) => [locale, `${SITE_URL}/${locale}${path}`])),
     "x-default": `${SITE_URL}/ar${path}`,
   };
 }
 
 function lastModifiedFor(path: string, locale: Locale): string {
+  if (path === "/faq") {
+    return FAQ_RELEASE_DATE;
+  }
+
   if (path.startsWith("/solutions/")) {
     const slug = path.slice("/solutions/".length);
     return getSolutionLanding(locale, slug)?.updatedAt ?? SEO_RELEASE_DATE;
