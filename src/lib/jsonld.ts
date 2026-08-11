@@ -257,10 +257,18 @@ export function itemListJsonLd({
   };
 }
 
-export function faqPageJsonLd(items: Array<{ question: string; answer: string }>) {
+export function faqPageJsonLd(
+  items: Array<{ question: string; answer: string }>,
+  page?: { url: string; inLanguage: Locale },
+) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    "@id": page ? `${page.url}#faq` : undefined,
+    url: page?.url,
+    inLanguage: page?.inLanguage,
+    isPartOf: page ? { "@id": WEBSITE_ID } : undefined,
+    mainEntityOfPage: page?.url,
     mainEntity: items.map((item) => ({
       "@type": "Question",
       name: item.question,
