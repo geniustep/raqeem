@@ -19,6 +19,7 @@ import { TimetableSection } from "@/components/sections/TimetableSection";
 import { getEntityProfile } from "@/content/entity-profile";
 import { faqItemsByLocale } from "@/content/faq-content";
 import type { Locale } from "@/i18n/routing";
+import { SITE_URL } from "@/lib/constants";
 import { faqPageJsonLd, softwareApplicationJsonLd } from "@/lib/jsonld";
 import { buildPageMetadata } from "@/lib/metadata";
 
@@ -47,19 +48,18 @@ export default async function HomePage({ params }: PageProps) {
 
   const entity = getEntityProfile(locale);
   const faqItems = faqItemsByLocale[locale].slice(0, 4);
+  const url = `${SITE_URL}/${locale}`;
 
   return (
     <>
       <JsonLd
-        data={
-          softwareApplicationJsonLd({
-            name: entity.name,
-            description: entity.description,
-            locale,
-          })
-        }
+        data={softwareApplicationJsonLd({
+          name: entity.name,
+          description: entity.description,
+          locale,
+        })}
       />
-      <JsonLd data={faqPageJsonLd(faqItems)} />
+      <JsonLd data={faqPageJsonLd(faqItems, { url, inLanguage: locale })} />
       <Hero />
       {locale === "ar" ? <SchoolJourneySection /> : <InstitutionsSection />}
       <ProblemSolution />
