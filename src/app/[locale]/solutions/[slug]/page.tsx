@@ -7,10 +7,7 @@ import { GuideLinksSection } from "@/components/guides/GuideLinksSection";
 import { SolutionAnalytics } from "@/components/solutions/SolutionAnalytics";
 import { SolutionDemoLink } from "@/components/solutions/SolutionDemoLink";
 import { Container } from "@/components/ui/Container";
-import {
-  getSolutionLanding,
-  solutionLandingSlugs,
-} from "@/content/solution-landing-pages";
+import { getSolutionLanding, solutionLandingSlugs } from "@/content/solution-landing-pages";
 import { Link } from "@/i18n/navigation";
 import { locales, type Locale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/constants";
@@ -59,9 +56,7 @@ const labels: Record<
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return locales.flatMap((locale) =>
-    solutionLandingSlugs.map((slug) => ({ locale, slug })),
-  );
+  return locales.flatMap((locale) => solutionLandingSlugs.map((slug) => ({ locale, slug })));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -96,36 +91,30 @@ export default async function SolutionLandingPage({ params }: PageProps) {
     <>
       <SolutionAnalytics locale={locale} slug={content.slug} />
       <JsonLd
-        data={
-          organizationWebPageJsonLd({
-            type: "WebPage",
-            name: content.title,
-            description: content.description,
-            url,
-            inLanguage: locale,
-          })
-        }
+        data={organizationWebPageJsonLd({
+          type: "WebPage",
+          name: content.title,
+          description: content.description,
+          url,
+          inLanguage: locale,
+        })}
       />
       <JsonLd
-        data={
-          serviceJsonLd({
-            name: content.title,
-            description: content.description,
-            url,
-            inLanguage: locale,
-            serviceType: content.eyebrow,
-          })
-        }
+        data={serviceJsonLd({
+          name: content.title,
+          description: content.description,
+          url,
+          inLanguage: locale,
+          serviceType: content.eyebrow,
+        })}
       />
-      <JsonLd data={faqPageJsonLd(content.faq)} />
+      <JsonLd data={faqPageJsonLd(content.faq, { url, inLanguage: locale })} />
       <JsonLd
-        data={
-          breadcrumbJsonLd([
-            { name: copy.home, url: `${SITE_URL}/${locale}` },
-            { name: copy.solutions, url: `${SITE_URL}/${locale}/solutions` },
-            { name: content.title, url },
-          ])
-        }
+        data={breadcrumbJsonLd([
+          { name: copy.home, url: `${SITE_URL}/${locale}` },
+          { name: copy.solutions, url: `${SITE_URL}/${locale}/solutions` },
+          { name: content.title, url },
+        ])}
       />
 
       <article>
@@ -151,9 +140,7 @@ export default async function SolutionLandingPage({ params }: PageProps) {
         <Container className="max-w-5xl py-14 lg:py-20">
           <section className="rounded-3xl border border-brand-teal-200 bg-brand-teal-50/60 p-6 sm:p-8">
             <h2 className="text-2xl font-bold text-brand-navy">{content.directAnswerTitle}</h2>
-            <p className="mt-4 text-lg leading-9 text-brand-navy-700/90">
-              {content.directAnswer}
-            </p>
+            <p className="mt-4 text-lg leading-9 text-brand-navy-700/90">{content.directAnswer}</p>
           </section>
 
           <section className="mt-14">
