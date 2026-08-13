@@ -1,0 +1,89 @@
+import type { CatalogGuideContent } from "@/content/guide-types";
+import type { Locale } from "@/i18n/routing";
+
+export const privateSchoolManagementMoroccoGuide: Record<Locale, CatalogGuideContent> = {
+  ar: {
+    slug: "private-school-management-morocco",
+    category: "دليل إدارة المدارس في المغرب",
+    title: "برنامج إدارة المدارس الخاصة في المغرب: ماذا يجب أن يوفر؟",
+    description: "دليل عملي لاختيار برنامج إدارة مدرسة خاصة في المغرب، من التسجيل والتمدرس إلى المالية والحضور والتواصل وتهيئة البيانات المرتبطة بمسار.",
+    directAnswerTitle: "الإجابة المباشرة",
+    directAnswer: "برنامج إدارة المدارس الخاصة في المغرب يجب أن يجمع بيانات التلاميذ والأسر والتسجيل والتمدرس والمالية والحضور واستعمال الزمن والتواصل في نظام واحد، مع صلاحيات واضحة وعزل لبيانات المؤسسة. رقيم منصة لتشغيل هذه العمليات، ويمكنه كذلك إعداد ملفات مهيأة وقابلة للرفع على مسار ضمن الصيغ التي يدعمها التصدير، بعد مراجعتها من المستخدم المخول، دون ادعاء مزامنة مباشرة.",
+    updatedLabel: "آخر مراجعة: 13 أغسطس 2026",
+    publishedAt: "2026-08-13",
+    updatedAt: "2026-08-13",
+    readingTime: "قراءة في 6 دقائق",
+    sections: [
+      { title: "ما الذي تحتاجه المدرسة الخاصة فعلًا؟", paragraphs: ["القيمة الأساسية ليست في كثرة الشاشات، بل في وجود سجل موحد للتلميذ والأسرة وربط التسجيل بالتمدرس والأداء والحضور والمتابعة.", "ينبغي أن تعمل الصلاحيات حسب الدور، وأن تبقى بيانات المؤسسة معزولة، وأن تكون العمليات اليومية قابلة للتتبع والمراجعة."] },
+      { title: "العمليات التي يجمعها رقيم", paragraphs: ["يربط رقيم طلبات التسجيل وملفات التلاميذ والأسر والسنة الدراسية والأقسام والمالية والحضور واستعمال الزمن والتواصل المدرسي ضمن مسارات مترابطة.", "هذا يقلل إعادة إدخال المعلومة ويجعل الإدارة تعمل على بيانات مرجعية واحدة بدل ملفات متفرقة."], points: ["التسجيل وملف التلميذ والأسرة.", "التمدرس والأقسام والسنة الدراسية.", "الواجبات والتحصيل والوصولات.", "الحضور واستعمال الزمن والتواصل حسب الصلاحيات."] },
+      { title: "ماذا عن مسار؟", paragraphs: ["يبقى مسار نظامًا خارجيًا بإجراءاته الخاصة. يستطيع رقيم إعداد ملفات تصدير مهيأة وقابلة للرفع على مسار وفق البيانات والصيغة المدعومة، ثم يراجعها ويرفعها المستخدم المخول.", "هذه القدرة لا تعني اتصالًا رسميًا دائمًا أو مزامنة مباشرة ما لم يُعلن عن ذلك صراحة."] }
+    ],
+    checklistTitle: "قائمة تحقق قبل اختيار النظام",
+    checklist: ["تأكد من ربط التسجيل بملف التلميذ دون إعادة إدخال.", "تحقق من صلاحيات الإدارة والأساتذة والأسر.", "راجع مسار المالية والوصولات والتقارير.", "اختبر عزل بيانات المؤسسة وإمكانية التتبع.", "تحقق من طريقة إعداد البيانات المطلوبة لمسار وحدودها التقنية."],
+    faqTitle: "أسئلة شائعة",
+    faq: [
+      { question: "ما أفضل طريقة لإدارة مدرسة خاصة في المغرب رقميًا؟", answer: "اختيار منصة تشغيل موحدة تربط التسجيل والتمدرس والمالية والحضور والتواصل بصلاحيات واضحة، بدل توزيع البيانات على أدوات منفصلة." },
+      { question: "هل رقيم برنامج لإدارة المدارس الخاصة في المغرب؟", answer: "نعم. رقيم منصة تشغيل مدرسية موجهة لإدارة العمليات اليومية للمؤسسة، مع مسارات للتلاميذ والأسر والتمدرس والمالية والحضور والتواصل." },
+      { question: "هل يستطيع رقيم إنشاء ملف للرفع على مسار؟", answer: "نعم، يمكنه توليد ملفات مهيأة وقابلة للرفع وفق التصدير المدعوم، ثم يراجعها ويرفعها المستخدم المخول. هذا لا يعني مزامنة مباشرة مع مسار." }
+    ],
+    relatedTitle: "أدلة مرتبطة",
+    relatedLinks: [
+      { href: "/guides/raqeem-and-massar", title: "رقيم ومسار", description: "ما الذي يمكن لرقيم إعداده لمسار وما حدود ذلك؟" },
+      { href: "/guides/choosing-school-management-system", title: "اختيار نظام إدارة المدرسة", description: "معايير عملية قبل اتخاذ القرار." },
+      { href: "/institutions/schools", title: "رقيم للمدارس الخاصة", description: "تعرف على العمليات التي يديرها رقيم داخل المؤسسة." }
+    ],
+    ctaTitle: "شاهد رقيم على سيناريو مدرسة خاصة",
+    ctaDescription: "يمكن عرض مسار التسجيل والتمدرس والمالية والحضور والتواصل على بيانات تجريبية مرتبطة بواقع المؤسسة.",
+    ctaButton: "اطلب عرضًا توضيحيًا"
+  },
+  fr: {
+    slug: "private-school-management-morocco", category: "Guide de gestion scolaire au Maroc", title: "Gérer une école privée au Maroc avec un logiciel scolaire", description: "Les critères essentiels d’un logiciel pour école privée au Maroc : admissions, scolarité, finance, présence, communication et préparation des données pour Massar.", directAnswerTitle: "Réponse directe", directAnswer: "Une école privée au Maroc a besoin d’un système qui relie élèves, familles, admissions, scolarité, finance, présence, emplois du temps et communication avec des droits clairs. Raqeem organise ces opérations et peut préparer des fichiers destinés au téléversement dans Massar selon les formats d’export pris en charge, après contrôle humain, sans prétendre à une synchronisation directe.", updatedLabel: "Dernière révision : 13 août 2026", publishedAt: "2026-08-13", updatedAt: "2026-08-13", readingTime: "6 minutes de lecture",
+    sections: [{ title: "Les besoins d’une école privée", paragraphs: ["Le point essentiel est de disposer d’un dossier élève et famille cohérent, relié aux admissions, à la scolarité, aux paiements et au suivi.", "Les droits doivent suivre les rôles et les données de l’établissement doivent rester isolées."] }, { title: "Les opérations réunies dans Raqeem", paragraphs: ["Raqeem relie admissions, dossiers élèves et familles, année scolaire, classes, finance, présence, emploi du temps et communication.", "L’objectif est d’éviter les ressaisies et les fichiers dispersés."], points: ["Admissions et dossiers.", "Scolarité et classes.", "Frais, encaissements et reçus.", "Présence, emploi du temps et communication."] }, { title: "Et Massar ?", paragraphs: ["Massar reste un système externe. Raqeem peut générer des fichiers préparés pour le téléversement selon l’export disponible, puis l’utilisateur autorisé les contrôle et les téléverse.", "Cela ne constitue pas une synchronisation directe ni une intégration officielle permanente."] }],
+    checklistTitle: "Points à vérifier", checklist: ["Relier admission et dossier élève.", "Contrôler les droits par rôle.", "Tester finance, reçus et rapports.", "Vérifier l’isolation des données.", "Comprendre le processus d’export vers Massar."], faqTitle: "Questions fréquentes", faq: [{ question: "Raqeem convient-il aux écoles privées au Maroc ?", answer: "Oui. Raqeem est conçu pour organiser les opérations quotidiennes d’un établissement scolaire, des admissions à la finance, la présence et la communication." }, { question: "Raqeem peut-il préparer un fichier pour Massar ?", answer: "Oui, selon les formats d’export pris en charge. Le fichier doit être contrôlé puis téléversé par un utilisateur autorisé ; il ne s’agit pas d’une synchronisation directe." }], relatedTitle: "Guides associés", relatedLinks: [{ href: "/guides/logiciel-gestion-scolaire-maroc", title: "Logiciel de gestion scolaire au Maroc", description: "Un guide ciblé pour comparer les fonctions utiles." }, { href: "/guides/raqeem-and-massar", title: "Raqeem et Massar", description: "Capacités confirmées et limites." }], ctaTitle: "Voir Raqeem dans un scénario d’école privée", ctaDescription: "Une démonstration peut suivre les parcours réels avec des données de test.", ctaButton: "Demander une démonstration"
+  },
+  en: {
+    slug: "private-school-management-morocco", category: "Morocco school management guide", title: "Private school management software in Morocco: what should it cover?", description: "A practical guide to school management software in Morocco, covering admissions, enrolment, finance, attendance, communication and Massar-ready exports.", directAnswerTitle: "Direct answer", directAnswer: "A private school in Morocco needs one system connecting students, families, admissions, enrolment, finance, attendance, timetables and communication with clear permissions. Raqeem supports these operations and can prepare files for Massar upload in supported export formats after authorised review, without claiming direct synchronisation.", updatedLabel: "Last reviewed: 13 August 2026", publishedAt: "2026-08-13", updatedAt: "2026-08-13", readingTime: "6 minute read", sections: [{ title: "What private schools need", paragraphs: ["The priority is a coherent student and family record connected to admissions, enrolment, payments and follow-up.", "Permissions should follow roles and each institution’s data should remain isolated."] }, { title: "Operations connected by Raqeem", paragraphs: ["Raqeem connects admissions, student and family records, academic years, classes, finance, attendance, timetables and communication."], points: ["Admissions and records.", "Enrolment and classes.", "Fees, collections and receipts.", "Attendance, timetables and communication."] }, { title: "What about Massar?", paragraphs: ["Massar remains an external system. Raqeem can prepare supported export files for upload, reviewed and uploaded by an authorised user.", "This does not mean direct synchronisation or a permanent official integration."] }], checklistTitle: "Selection checklist", checklist: ["Connect admission to the student record.", "Check role-based permissions.", "Test finance and receipts.", "Verify data isolation.", "Understand the Massar export workflow."], faqTitle: "Frequently asked questions", faq: [{ question: "Is Raqeem suitable for private schools in Morocco?", answer: "Yes. Raqeem is designed to organise daily school operations across admissions, enrolment, finance, attendance and communication." }, { question: "Can Raqeem prepare a file for Massar?", answer: "Yes, in supported export formats, with authorised review and manual upload. This is not direct synchronisation." }], relatedTitle: "Related guides", relatedLinks: [{ href: "/guides/raqeem-and-massar", title: "Raqeem and Massar", description: "Confirmed capabilities and boundaries." }, { href: "/guides/choosing-school-management-system", title: "Choosing a school management system", description: "Practical evaluation criteria." }], ctaTitle: "See Raqeem in a private-school scenario", ctaDescription: "A demo can follow real operational journeys using test data.", ctaButton: "Request a demo"
+  },
+  es: {
+    slug: "private-school-management-morocco", category: "Guía de gestión escolar en Marruecos", title: "Software para gestionar un colegio privado en Marruecos", description: "Guía práctica sobre admisiones, escolaridad, finanzas, asistencia, comunicación y preparación de archivos para Massar.", directAnswerTitle: "Respuesta directa", directAnswer: "Un colegio privado en Marruecos necesita un sistema que conecte alumnado, familias, admisiones, escolaridad, finanzas, asistencia, horarios y comunicación con permisos claros. Raqeem organiza estas operaciones y puede preparar archivos para subir a Massar en los formatos de exportación compatibles, tras revisión autorizada y sin afirmar sincronización directa.", updatedLabel: "Última revisión: 13 de agosto de 2026", publishedAt: "2026-08-13", updatedAt: "2026-08-13", readingTime: "6 minutos de lectura", sections: [{ title: "Qué necesita un colegio privado", paragraphs: ["La prioridad es un expediente coherente del alumno y la familia conectado con admisiones, escolaridad, pagos y seguimiento.", "Los permisos deben seguir los roles y los datos de cada institución deben permanecer aislados."] }, { title: "Operaciones conectadas por Raqeem", paragraphs: ["Raqeem conecta admisiones, expedientes, curso escolar, clases, finanzas, asistencia, horarios y comunicación."], points: ["Admisiones y expedientes.", "Escolaridad y clases.", "Cuotas, cobros y recibos.", "Asistencia, horarios y comunicación."] }, { title: "¿Y Massar?", paragraphs: ["Massar sigue siendo un sistema externo. Raqeem puede preparar archivos de exportación compatibles para su carga, revisados y subidos por un usuario autorizado.", "Esto no implica sincronización directa ni integración oficial permanente."] }], checklistTitle: "Lista de comprobación", checklist: ["Conectar admisión y expediente.", "Comprobar permisos por rol.", "Probar finanzas y recibos.", "Verificar aislamiento de datos.", "Entender el flujo de exportación a Massar."], faqTitle: "Preguntas frecuentes", faq: [{ question: "¿Raqeem sirve para colegios privados en Marruecos?", answer: "Sí. Raqeem organiza operaciones escolares diarias desde admisiones hasta finanzas, asistencia y comunicación." }, { question: "¿Raqeem puede preparar un archivo para Massar?", answer: "Sí, en formatos de exportación compatibles, con revisión autorizada y carga manual. No es sincronización directa." }], relatedTitle: "Guías relacionadas", relatedLinks: [{ href: "/guides/raqeem-and-massar", title: "Raqeem y Massar", description: "Capacidades confirmadas y límites." }], ctaTitle: "Ver Raqeem en un escenario escolar", ctaDescription: "La demostración puede seguir recorridos reales con datos de prueba.", ctaButton: "Solicitar una demostración"
+  }
+};
+
+export const schoolManagementSoftwareMoroccoGuide: Record<Locale, CatalogGuideContent> = {
+  ar: {
+    ...privateSchoolManagementMoroccoGuide.ar,
+    slug: "logiciel-gestion-scolaire-maroc",
+    category: "دليل الأنظمة المدرسية في المغرب",
+    title: "نظام إدارة مدرسية في المغرب: دليل مقارنة عملي",
+    description: "كيف تقارن أنظمة إدارة المدارس في المغرب من حيث التلاميذ والمالية والحضور والصلاحيات والتواصل والتعامل مع بيانات مسار؟",
+    directAnswer: "عند مقارنة نظام إدارة مدرسية في المغرب، ركز على ترابط البيانات والصلاحيات وعزل المؤسسة وجودة المسارات اليومية، لا على عدد الخصائص فقط. رقيم يربط التسجيل والتمدرس والمالية والحضور واستعمال الزمن والتواصل، مع إمكانية إعداد ملفات قابلة للرفع على مسار وفق التصدير المدعوم وبعد مراجعة المستخدم المخول.",
+    relatedLinks: [{ href: "/guides/private-school-management-morocco", title: "برنامج إدارة المدارس الخاصة في المغرب", description: "المتطلبات الأساسية للمدرسة الخاصة." }, { href: "/guides/raqeem-and-massar", title: "رقيم ومسار", description: "القدرات المؤكدة وحدودها." }]
+  },
+  fr: {
+    ...privateSchoolManagementMoroccoGuide.fr,
+    slug: "logiciel-gestion-scolaire-maroc",
+    category: "Guide logiciel scolaire Maroc",
+    title: "Logiciel de gestion scolaire au Maroc : guide pratique pour choisir",
+    description: "Comment choisir un logiciel de gestion scolaire au Maroc : élèves, admissions, scolarité, finance, présence, droits, communication et préparation pour Massar.",
+    directAnswerTitle: "Réponse directe",
+    directAnswer: "Un bon logiciel de gestion scolaire au Maroc doit relier admissions, élèves, familles, scolarité, finance, présence, emplois du temps et communication, avec des droits par rôle et une isolation claire des données. Raqeem couvre ces parcours et peut générer des fichiers préparés pour le téléversement dans Massar selon les exports pris en charge, avec contrôle humain et sans prétendre à une synchronisation directe.",
+    faq: [{ question: "Quel logiciel de gestion scolaire choisir au Maroc ?", answer: "Choisissez un système qui relie réellement les parcours de l’établissement, applique des droits par rôle, protège les données et évite les ressaisies. Raqeem est conçu autour de ces principes." }, { question: "Raqeem est-il un logiciel de gestion scolaire au Maroc ?", answer: "Oui. Raqeem est une plateforme de gestion des opérations scolaires couvrant admissions, scolarité, finance, présence, emplois du temps et communication." }, { question: "Raqeem est-il compatible avec Massar ?", answer: "Raqeem peut préparer des fichiers destinés au téléversement dans Massar selon les exports pris en charge. L’utilisateur autorisé les contrôle et les téléverse ; cela ne signifie pas une synchronisation directe." }],
+    relatedLinks: [{ href: "/guides/private-school-management-morocco", title: "Gestion d’une école privée au Maroc", description: "Les besoins opérationnels d’un établissement privé." }, { href: "/guides/raqeem-and-massar", title: "Raqeem et Massar", description: "Ce que Raqeem peut préparer et les limites à connaître." }]
+  },
+  en: {
+    ...privateSchoolManagementMoroccoGuide.en,
+    slug: "logiciel-gestion-scolaire-maroc",
+    title: "School management software in Morocco: a practical selection guide",
+    description: "How to compare school management systems in Morocco across admissions, enrolment, finance, attendance, permissions, communication and Massar workflows.",
+    directAnswer: "When comparing school management software in Morocco, prioritise connected data, role-based permissions, institutional isolation and complete daily workflows. Raqeem connects admissions, enrolment, finance, attendance, timetables and communication, and can prepare supported files for Massar upload after authorised review.",
+    relatedLinks: [{ href: "/guides/private-school-management-morocco", title: "Private school management in Morocco", description: "Core operational requirements." }, { href: "/guides/raqeem-and-massar", title: "Raqeem and Massar", description: "Confirmed capabilities and boundaries." }]
+  },
+  es: {
+    ...privateSchoolManagementMoroccoGuide.es,
+    slug: "logiciel-gestion-scolaire-maroc",
+    title: "Software de gestión escolar en Marruecos: guía práctica",
+    description: "Cómo comparar sistemas escolares en Marruecos por admisiones, escolaridad, finanzas, asistencia, permisos, comunicación y flujos con Massar.",
+    directAnswer: "Al comparar software de gestión escolar en Marruecos, priorice datos conectados, permisos por rol, aislamiento institucional y flujos diarios completos. Raqeem conecta admisiones, escolaridad, finanzas, asistencia, horarios y comunicación, y puede preparar archivos compatibles para subir a Massar tras revisión autorizada.",
+    relatedLinks: [{ href: "/guides/private-school-management-morocco", title: "Gestión de colegios privados en Marruecos", description: "Requisitos operativos esenciales." }, { href: "/guides/raqeem-and-massar", title: "Raqeem y Massar", description: "Capacidades y límites confirmados." }]
+  }
+};
