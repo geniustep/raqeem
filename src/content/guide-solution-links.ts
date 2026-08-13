@@ -59,6 +59,18 @@ const guideSolutionLinks: Record<
     "school-communication",
     "attendance-absence",
   ],
+  "private-school-management-morocco": [
+    "admissions-enrollment",
+    "school-fees-collections",
+    "school-communication",
+    "attendance-absence",
+  ],
+  "logiciel-gestion-scolaire-maroc": [
+    "admissions-enrollment",
+    "school-fees-collections",
+    "school-communication",
+    "attendance-absence",
+  ],
 };
 
 export function getGuideSolutionSlugs(

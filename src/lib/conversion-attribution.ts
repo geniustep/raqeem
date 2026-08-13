@@ -19,6 +19,8 @@ const allowedGuideSlugs = [
   "mobile-and-desktop-school-management",
   "cloud-school-management",
   "integrated-student-journey",
+  "private-school-management-morocco",
+  "logiciel-gestion-scolaire-maroc",
 ] as const satisfies readonly CatalogGuideSlug[];
 
 const allowedSolutionSlugs = [
