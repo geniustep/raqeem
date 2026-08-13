@@ -16,6 +16,10 @@ import {
   mobileAndDesktopSchoolManagementGuide,
   raqeemAndMassarGuide,
 } from "@/content/guides/local-context-and-platforms";
+import {
+  privateSchoolManagementMoroccoGuide,
+  schoolManagementSoftwareMoroccoGuide,
+} from "@/content/guides/morocco-school-management-search";
 import { schoolFeesCollectionsReceiptsGuide } from "@/content/guides/school-fees-collections-receipts";
 import {
   getGuide as getBaseGuide,
@@ -45,15 +49,22 @@ export const stageSevenGuideSlugs = [
   "integrated-student-journey",
 ] as const;
 
+export const searchGuideSlugs = [
+  "private-school-management-morocco",
+  "logiciel-gestion-scolaire-maroc",
+] as const;
+
 type StageFourGuideSlug = (typeof stageFourGuideSlugs)[number];
 type StageSixGuideSlug = (typeof stageSixGuideSlugs)[number];
 type StageSevenGuideSlug = (typeof stageSevenGuideSlugs)[number];
+type SearchGuideSlug = (typeof searchGuideSlugs)[number];
 
 export const guideSlugs = [
   ...baseGuideSlugs,
   ...stageFourGuideSlugs,
   ...stageSixGuideSlugs,
   ...stageSevenGuideSlugs,
+  ...searchGuideSlugs,
 ] as const;
 
 const stageFourGuides: Record<StageFourGuideSlug, Record<Locale, CatalogGuideContent>> = {
@@ -77,6 +88,11 @@ const stageSevenGuides: Record<StageSevenGuideSlug, Record<Locale, CatalogGuideC
   "integrated-student-journey": integratedStudentJourneyGuide,
 };
 
+const searchGuides: Record<SearchGuideSlug, Record<Locale, CatalogGuideContent>> = {
+  "private-school-management-morocco": privateSchoolManagementMoroccoGuide,
+  "logiciel-gestion-scolaire-maroc": schoolManagementSoftwareMoroccoGuide,
+};
+
 function isStageFourGuideSlug(value: string): value is StageFourGuideSlug {
   return stageFourGuideSlugs.includes(value as StageFourGuideSlug);
 }
@@ -87,6 +103,10 @@ function isStageSixGuideSlug(value: string): value is StageSixGuideSlug {
 
 function isStageSevenGuideSlug(value: string): value is StageSevenGuideSlug {
   return stageSevenGuideSlugs.includes(value as StageSevenGuideSlug);
+}
+
+function isSearchGuideSlug(value: string): value is SearchGuideSlug {
+  return searchGuideSlugs.includes(value as SearchGuideSlug);
 }
 
 export function getGuide(locale: Locale, slug: string): CatalogGuideContent | undefined {
@@ -103,7 +123,11 @@ export function getGuide(locale: Locale, slug: string): CatalogGuideContent | un
     return stageSixGuides[slug][locale];
   }
 
-  return isStageSevenGuideSlug(slug) ? stageSevenGuides[slug][locale] : undefined;
+  if (isStageSevenGuideSlug(slug)) {
+    return stageSevenGuides[slug][locale];
+  }
+
+  return isSearchGuideSlug(slug) ? searchGuides[slug][locale] : undefined;
 }
 
 export { guideIndexPages };
