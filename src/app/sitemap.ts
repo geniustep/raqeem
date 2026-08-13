@@ -6,11 +6,13 @@ import { SITE_URL } from "@/lib/constants";
 
 const SEO_RELEASE_DATE = "2026-08-03";
 const FAQ_RELEASE_DATE = "2026-08-11";
+const APP_RELEASE_DATE = "2026-08-13";
 const ENTITY_RELEASE_DATE = "2026-08-03";
 const TRUST_RELEASE_DATE = "2026-07-31";
 
 const STATIC_PATHS = [
   "",
+  "/app",
   "/solutions",
   "/features",
   "/institutions/schools",
@@ -102,6 +104,10 @@ function languageAlternates(path: string): Record<string, string> {
 function lastModifiedFor(path: string, locale: Locale): string {
   if (path === "/faq") {
     return FAQ_RELEASE_DATE;
+  }
+
+  if (path === "/app") {
+    return APP_RELEASE_DATE;
   }
 
   if (path.startsWith("/solutions/")) {
