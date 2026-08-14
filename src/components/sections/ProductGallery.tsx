@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { Link } from "@/i18n/navigation";
 
 interface Screenshot {
   key: string;
@@ -11,13 +12,16 @@ interface Screenshot {
   title: string;
   description: string;
   alt: string;
+  href?: string;
 }
 
 interface ProductGalleryProps {
   screenshots: Screenshot[];
+  ariaLabel: string;
+  actionLabel: string;
 }
 
-export function ProductGallery({ screenshots }: ProductGalleryProps) {
+export function ProductGallery({ screenshots, ariaLabel, actionLabel }: ProductGalleryProps) {
   const [activeKey, setActiveKey] = useState(screenshots[0]?.key);
   const activeScreenshot =
     screenshots.find((screenshot) => screenshot.key === activeKey) ?? screenshots[0];
@@ -45,14 +49,18 @@ export function ProductGallery({ screenshots }: ProductGalleryProps) {
           <p className="mt-1 max-w-3xl text-sm leading-6 text-brand-navy-700/70">
             {activeScreenshot.description}
           </p>
+          {activeScreenshot.href ? (
+            <Link
+              href={activeScreenshot.href}
+              className="mt-4 inline-flex text-sm font-semibold text-brand-teal-700 transition hover:text-brand-teal-600"
+            >
+              {actionLabel}
+            </Link>
+          ) : null}
         </div>
       </div>
 
-      <div
-        className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-4"
-        role="tablist"
-        aria-label="واجهات رقيم"
-      >
+      <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-4" role="tablist" aria-label={ariaLabel}>
         {screenshots.map((screenshot) => {
           const isActive = screenshot.key === activeScreenshot.key;
 
