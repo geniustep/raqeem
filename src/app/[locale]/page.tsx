@@ -4,12 +4,12 @@ import { GuideLinksSection } from "@/components/guides/GuideLinksSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { FaqSection } from "@/components/sections/FaqSection";
-import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { Hero } from "@/components/sections/Hero";
 import { InstitutionsSection } from "@/components/sections/InstitutionsSection";
 import { LanguagesSection } from "@/components/sections/LanguagesSection";
 import { MultiTenantSection } from "@/components/sections/MultiTenantSection";
 import { ProblemSolution } from "@/components/sections/ProblemSolution";
+import { ProductModulesSection } from "@/components/sections/ProductModulesSection";
 import { ProductSection } from "@/components/sections/ProductSection";
 import { RolesSection } from "@/components/sections/RolesSection";
 import { SchoolJourneySection } from "@/components/sections/SchoolJourneySection";
@@ -52,25 +52,19 @@ export default async function HomePage({ params }: PageProps) {
 
   return (
     <>
-      <JsonLd
-        data={softwareApplicationJsonLd({
-          name: entity.name,
-          description: entity.description,
-          locale,
-        })}
-      />
+      <JsonLd data={softwareApplicationJsonLd({ name: entity.name, description: entity.description, locale })} />
       <JsonLd data={faqPageJsonLd(faqItems, { url, inLanguage: locale })} />
       <Hero />
       {locale === "ar" ? <SchoolJourneySection /> : <InstitutionsSection />}
       <ProblemSolution />
-      <GuideLinksSection locale={locale} slugs={featuredGuideSlugs} tone="white" />
-      <FeaturesSection />
-      <RolesSection />
+      <ProductModulesSection />
       <ProductSection />
+      <RolesSection />
       <TimetableSection />
       <SecuritySection />
       <MultiTenantSection />
       <LanguagesSection />
+      <GuideLinksSection locale={locale} slugs={featuredGuideSlugs} tone="white" />
       {locale === "ar" ? null : <SocialProofSection />}
       <FaqSection compact />
       <CtaSection />

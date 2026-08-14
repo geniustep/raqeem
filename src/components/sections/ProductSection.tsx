@@ -4,10 +4,10 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const screenshotSources = [
-  { key: "executive", src: "/screenshots/raqeem-executive-dashboard.png", width: 1884, height: 811 },
   { key: "finance", src: "/screenshots/raqeem-finance-dashboard.png", width: 1894, height: 821 },
-  { key: "login", src: "/screenshots/raqeem-school-login.png", width: 1594, height: 726 },
   { key: "search", src: "/screenshots/raqeem-student-search-demo.png", width: 1862, height: 845 },
+  { key: "login", src: "/screenshots/raqeem-school-login.png", width: 1594, height: 726 },
+  { key: "executive", src: "/screenshots/raqeem-executive-dashboard.png", width: 1884, height: 811 },
 ] as const;
 
 export async function ProductSection() {

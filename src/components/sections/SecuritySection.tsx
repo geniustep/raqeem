@@ -1,40 +1,37 @@
 import { Lock } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { getCommercialTrustCopy } from "@/content/commercial-trust-copy";
 import { Link } from "@/i18n/navigation";
-
-const POINTS = ["1", "2", "3", "4", "5", "6", "7", "8"] as const;
+import type { Locale } from "@/i18n/routing";
 
 export async function SecuritySection() {
-  const t = await getTranslations("security");
+  const locale = (await getLocale()) as Locale;
+  const copy = getCommercialTrustCopy(locale);
 
   return (
     <section className="py-20 lg:py-24">
       <Container>
-        <SectionHeading title={t("title")} description={t("description")} />
-        <ul className="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-2">
-          {POINTS.map((point) => (
-            <li
-              key={point}
-              className="flex items-center gap-3 rounded-xl border border-brand-navy-100 bg-white px-5 py-4"
-            >
-              <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg bg-brand-teal-50 text-brand-teal-700">
-                <Lock aria-hidden="true" className="size-4" strokeWidth={2} />
-              </span>
-              <span className="text-sm font-medium text-brand-navy sm:text-base">
-                {t(`points.${point}`)}
-              </span>
-            </li>
-          ))}
-        </ul>
-        <div className="mt-10 text-center">
-          <Link
-            href="/security"
-            className="inline-flex items-center text-base font-semibold text-brand-teal-700 transition hover:text-brand-teal-600"
-          >
-            {t("cta")}
-          </Link>
+        <SectionHeading title={copy.title} description={copy.description} />
+        <div className="mx-auto mt-10 max-w-5xl rounded-3xl border border-brand-navy-100 bg-brand-ivory/60 p-6 sm:p-8">
+          <p className="text-center text-xl font-bold text-brand-navy sm:text-2xl">{copy.promise}</p>
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {copy.points.map((point) => (
+              <article key={point.title} className="rounded-2xl border border-brand-navy-100 bg-white p-5">
+                <span className="inline-flex size-9 items-center justify-center rounded-lg bg-brand-teal-50 text-brand-teal-700">
+                  <Lock aria-hidden="true" className="size-4" strokeWidth={2} />
+                </span>
+                <h3 className="mt-4 font-bold text-brand-navy">{point.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-brand-navy-700/80">{point.description}</p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Link href="/trust-center" className="inline-flex text-base font-semibold text-brand-teal-700 transition hover:text-brand-teal-600">
+              {copy.cta}
+            </Link>
+          </div>
         </div>
       </Container>
     </section>
