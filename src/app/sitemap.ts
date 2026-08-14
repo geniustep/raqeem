@@ -7,6 +7,7 @@ import { SITE_URL } from "@/lib/constants";
 const SEO_RELEASE_DATE = "2026-08-03";
 const FAQ_RELEASE_DATE = "2026-08-11";
 const APP_RELEASE_DATE = "2026-08-13";
+const COMMERCIAL_RELEASE_DATE = "2026-08-14";
 const ENTITY_RELEASE_DATE = "2026-08-03";
 const TRUST_RELEASE_DATE = "2026-07-31";
 
@@ -19,7 +20,9 @@ const STATIC_PATHS = [
   "/institutions/institutes",
   "/institutions/tutoring-centers",
   "/institutions/language-centers",
+  "/roles/director",
   "/roles/administration",
+  "/roles/finance",
   "/roles/teachers",
   "/roles/parents",
   "/roles/students",
@@ -57,6 +60,15 @@ const STATIC_PATHS = [
   "/security-whitepaper",
   "/responsible-ai",
 ] as const;
+
+const COMMERCIAL_PATHS = new Set<string>([
+  "",
+  "/solutions",
+  "/features",
+  "/demo",
+  "/roles/director",
+  "/roles/finance",
+]);
 
 const ENTITY_PATHS = new Set<string>(["/about", "/contact", "/legal-notice"]);
 
@@ -108,6 +120,10 @@ function lastModifiedFor(path: string, locale: Locale): string {
 
   if (path === "/app") {
     return APP_RELEASE_DATE;
+  }
+
+  if (COMMERCIAL_PATHS.has(path)) {
+    return COMMERCIAL_RELEASE_DATE;
   }
 
   if (path.startsWith("/solutions/")) {

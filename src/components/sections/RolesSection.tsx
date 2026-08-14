@@ -28,6 +28,11 @@ const ROLES = [
 
 type RoleKey = (typeof ROLES)[number]["key"];
 
+const ROLE_HREF_OVERRIDES: Partial<Record<RoleKey, string>> = {
+  director: "/roles/director",
+  finance: "/roles/finance",
+};
+
 export function RolesSection() {
   const locale = useLocale() as Locale;
   const copy = getCommercialRoleCopy(locale);
@@ -56,6 +61,7 @@ export function RolesSection() {
 
   const activeRole = ROLES.find((role) => role.key === active) ?? ROLES[0];
   const activeCopy = copy.roles[activeRole.key as CommercialRoleKey];
+  const activeHref = ROLE_HREF_OVERRIDES[activeRole.key] ?? activeCopy.href;
 
   return (
     <section className="bg-brand-ivory py-20 lg:py-24">
@@ -107,7 +113,7 @@ export function RolesSection() {
                 </li>
               ))}
             </ul>
-            <Link href={activeCopy.href} className="mt-6 inline-flex text-sm font-semibold text-brand-teal-700 transition hover:text-brand-teal-600">
+            <Link href={activeHref} className="mt-6 inline-flex text-sm font-semibold text-brand-teal-700 transition hover:text-brand-teal-600">
               {activeCopy.cta}
             </Link>
           </div>
