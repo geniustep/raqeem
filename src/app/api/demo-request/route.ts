@@ -12,9 +12,7 @@ export async function POST(request: Request): Promise<NextResponse<FormApiRespon
   try {
     const ip = clientIpFrom(request);
     const { allowed } = await formRateLimiter.check(`demo:${ip}`);
-    if (!allowed) {
-      return json({ ok: false, message: "rate_limited" }, 429);
-    }
+    if (!allowed) return json({ ok: false, message: "rate_limited" }, 429);
 
     let body: unknown;
     try {
@@ -24,22 +22,15 @@ export async function POST(request: Request): Promise<NextResponse<FormApiRespon
     }
 
     const parsed = demoRequestSchema.safeParse(body);
-    if (!parsed.success) {
-      return json({ ok: false, message: "invalid_request" }, 400);
-    }
+    if (!parsed.success) return json({ ok: false, message: "invalid_request" }, 400);
 
-    // Honeypot filled — pretend success so bots learn nothing.
-    if (parsed.data.website !== "") {
-      return json({ ok: true, message: "received" });
-    }
+    if (parsed.data.website !== "") return json({ ok: true, message: "received" });
 
     const turnstileToken =
       typeof body === "object" && body !== null && "turnstileToken" in body
         ? String((body as Record<string, unknown>).turnstileToken ?? "")
         : undefined;
-    if (!(await verifyTurnstile(turnstileToken))) {
-      return json({ ok: false, message: "verification_failed" }, 400);
-    }
+    if (!(await verifyTurnstile(turnstileToken))) return json({ ok: false, message: "verification_failed" }, 400);
 
     const env = getEnv();
     const data = parsed.data;
@@ -52,6 +43,7 @@ export async function POST(request: Request): Promise<NextResponse<FormApiRespon
         `Type: ${data.organizationType}`,
         `City: ${data.city}`,
         `Students: ${data.estimatedStudentCount}`,
+        `Demo focus: ${data.demoInterest}`,
         `Name: ${data.fullName}`,
         `Job title: ${data.jobTitle}`,
         `Phone: ${data.phone}`,
@@ -61,13 +53,10 @@ export async function POST(request: Request): Promise<NextResponse<FormApiRespon
         data.message,
       ].join("\n"),
     });
-    if (!delivered) {
-      return json({ ok: false, message: "delivery_failed" }, 503);
-    }
+    if (!delivered) return json({ ok: false, message: "delivery_failed" }, 503);
 
     return json({ ok: true, message: "received" });
   } catch {
-    // Never leak internals or log submitted personal data.
     return json({ ok: false, message: "server_error" }, 500);
   }
 }

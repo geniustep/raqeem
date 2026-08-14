@@ -22,6 +22,17 @@ export const studentCounts = [
   "more_than_1500",
 ] as const;
 
+export const demoInterests = [
+  "full_platform",
+  "admissions_students",
+  "finance_collections",
+  "administration_teachers",
+  "timetable",
+  "security_permissions",
+] as const;
+
+export type DemoInterest = (typeof demoInterests)[number];
+
 export const preferredLanguages = ["ar", "fr", "en", "es"] as const;
 
 const phonePattern = /^\+?[0-9\s().-]{6,20}$/;
@@ -39,6 +50,7 @@ export const demoRequestSchema = z.object({
   organizationType: z.enum(organizationTypes, "required"),
   city: requiredText(2, 100),
   estimatedStudentCount: z.enum(studentCounts, "required"),
+  demoInterest: z.enum(demoInterests).optional().default("full_platform"),
   fullName: requiredText(2, 120),
   jobTitle: requiredText(2, 120),
   phone: z.string().trim().regex(phonePattern, "invalidPhone"),

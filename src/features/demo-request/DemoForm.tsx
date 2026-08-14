@@ -12,6 +12,7 @@ import {
   TextAreaField,
   TextField,
 } from "@/components/forms/fields";
+import { demoInterestCopy } from "@/content/demo-interest-copy";
 import { localeNames, locales, type Locale } from "@/i18n/routing";
 import { track } from "@/lib/analytics";
 import {
@@ -19,6 +20,7 @@ import {
   type ConversionAttribution,
 } from "@/lib/conversion-attribution";
 import {
+  demoInterests,
   demoRequestSchema,
   organizationTypes,
   studentCounts,
@@ -32,6 +34,7 @@ export function DemoForm() {
   const t = useTranslations("forms.demo");
   const tCommon = useTranslations("forms.common");
   const locale = useLocale() as Locale;
+  const interestCopy = demoInterestCopy[locale];
   const [status, setStatus] = useState<Status>("idle");
   const [attribution, setAttribution] = useState<ConversionAttribution>({ source: "site" });
 
@@ -46,6 +49,7 @@ export function DemoForm() {
       organizationType: "" as DemoRequestInput["organizationType"],
       city: "",
       estimatedStudentCount: "" as DemoRequestInput["estimatedStudentCount"],
+      demoInterest: "full_platform",
       fullName: "",
       jobTitle: "",
       phone: "",
@@ -90,6 +94,7 @@ export function DemoForm() {
           entry_source: attribution.source,
           guide_slug: attribution.guideSlug,
           solution_slug: attribution.solutionSlug,
+          demo_interest: data.demoInterest,
         });
       } else {
         setStatus("error");
@@ -101,15 +106,8 @@ export function DemoForm() {
 
   if (status === "success") {
     return (
-      <div
-        role="status"
-        className="rounded-2xl border border-brand-teal-100 bg-brand-teal-50 p-8 text-center"
-      >
-        <CheckCircle2
-          aria-hidden="true"
-          className="mx-auto size-10 text-brand-teal-700"
-          strokeWidth={2}
-        />
+      <div role="status" className="rounded-2xl border border-brand-teal-100 bg-brand-teal-50 p-8 text-center">
+        <CheckCircle2 aria-hidden="true" className="mx-auto size-10 text-brand-teal-700" strokeWidth={2} />
         <h2 className="mt-4 text-2xl font-bold text-brand-navy">{t("successTitle")}</h2>
         <p className="mt-2 leading-7 text-brand-navy-700/85">{t("successMessage")}</p>
       </div>
@@ -121,99 +119,32 @@ export function DemoForm() {
       <HoneypotField {...register("website")} />
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-        <TextField
-          id="organizationName"
-          label={t("fields.organizationName")}
-          autoComplete="organization"
-          error={fieldError("organizationName")}
-          {...register("organizationName")}
-        />
-        <SelectField
-          id="organizationType"
-          label={t("fields.organizationType")}
-          placeholder={tCommon("selectPlaceholder")}
-          error={fieldError("organizationType")}
-          options={organizationTypes.map((value) => ({
-            value,
-            label: t(`organizationTypes.${value}`),
-          }))}
-          {...register("organizationType")}
-        />
-        <TextField
-          id="city"
-          label={t("fields.city")}
-          autoComplete="address-level2"
-          error={fieldError("city")}
-          {...register("city")}
-        />
-        <SelectField
-          id="estimatedStudentCount"
-          label={t("fields.estimatedStudentCount")}
-          placeholder={tCommon("selectPlaceholder")}
-          error={fieldError("estimatedStudentCount")}
-          options={studentCounts.map((value) => ({
-            value,
-            label: t(`studentCounts.${value}`),
-          }))}
-          {...register("estimatedStudentCount")}
-        />
-        <TextField
-          id="fullName"
-          label={t("fields.fullName")}
-          autoComplete="name"
-          error={fieldError("fullName")}
-          {...register("fullName")}
-        />
-        <TextField
-          id="jobTitle"
-          label={t("fields.jobTitle")}
-          autoComplete="organization-title"
-          error={fieldError("jobTitle")}
-          {...register("jobTitle")}
-        />
-        <TextField
-          id="phone"
-          label={t("fields.phone")}
-          type="tel"
-          autoComplete="tel"
-          dir="ltr"
-          error={fieldError("phone")}
-          {...register("phone")}
-        />
-        <TextField
-          id="email"
-          label={t("fields.email")}
-          type="email"
-          autoComplete="email"
-          dir="ltr"
-          error={fieldError("email")}
-          {...register("email")}
-        />
+        <TextField id="organizationName" label={t("fields.organizationName")} autoComplete="organization" error={fieldError("organizationName")} {...register("organizationName")} />
+        <SelectField id="organizationType" label={t("fields.organizationType")} placeholder={tCommon("selectPlaceholder")} error={fieldError("organizationType")} options={organizationTypes.map((value) => ({ value, label: t(`organizationTypes.${value}`) }))} {...register("organizationType")} />
+        <TextField id="city" label={t("fields.city")} autoComplete="address-level2" error={fieldError("city")} {...register("city")} />
+        <SelectField id="estimatedStudentCount" label={t("fields.estimatedStudentCount")} placeholder={tCommon("selectPlaceholder")} error={fieldError("estimatedStudentCount")} options={studentCounts.map((value) => ({ value, label: t(`studentCounts.${value}`) }))} {...register("estimatedStudentCount")} />
       </div>
 
       <SelectField
-        id="preferredLanguage"
-        label={t("fields.preferredLanguage")}
-        placeholder={tCommon("selectPlaceholder")}
-        defaultValue={locale}
-        error={fieldError("preferredLanguage")}
-        options={locales.map((value) => ({ value, label: localeNames[value] }))}
-        {...register("preferredLanguage")}
+        id="demoInterest"
+        label={interestCopy.label}
+        error={fieldError("demoInterest")}
+        options={demoInterests.map((value) => ({ value, label: interestCopy.options[value] }))}
+        {...register("demoInterest")}
       />
 
-      <TextAreaField
-        id="message"
-        label={`${t("fields.message")} (${tCommon("optional")})`}
-        error={fieldError("message")}
-        {...register("message")}
-      />
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <TextField id="fullName" label={t("fields.fullName")} autoComplete="name" error={fieldError("fullName")} {...register("fullName")} />
+        <TextField id="jobTitle" label={t("fields.jobTitle")} autoComplete="organization-title" error={fieldError("jobTitle")} {...register("jobTitle")} />
+        <TextField id="phone" label={t("fields.phone")} type="tel" autoComplete="tel" dir="ltr" error={fieldError("phone")} {...register("phone")} />
+        <TextField id="email" label={t("fields.email")} type="email" autoComplete="email" dir="ltr" error={fieldError("email")} {...register("email")} />
+      </div>
 
-      <CheckboxField
-        id="privacyConsent"
-        label={t("fields.privacyConsent")}
-        error={fieldError("privacyConsent")}
-        {...register("privacyConsent")}
-      />
+      <SelectField id="preferredLanguage" label={t("fields.preferredLanguage")} placeholder={tCommon("selectPlaceholder")} defaultValue={locale} error={fieldError("preferredLanguage")} options={locales.map((value) => ({ value, label: localeNames[value] }))} {...register("preferredLanguage")} />
+
+      <TextAreaField id="message" label={`${t("fields.message")} (${tCommon("optional")})`} error={fieldError("message")} {...register("message")} />
+
+      <CheckboxField id="privacyConsent" label={t("fields.privacyConsent")} error={fieldError("privacyConsent")} {...register("privacyConsent")} />
 
       <div aria-live="polite">
         {status === "error" ? (
@@ -224,11 +155,7 @@ export function DemoForm() {
         ) : null}
       </div>
 
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="inline-flex h-12 w-full items-center justify-center rounded-xl bg-brand-navy px-7 text-base font-semibold text-white transition hover:bg-brand-navy-700 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
-      >
+      <button type="submit" disabled={isSubmitting} className="inline-flex h-12 w-full items-center justify-center rounded-xl bg-brand-navy px-7 text-base font-semibold text-white transition hover:bg-brand-navy-700 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto">
         {isSubmitting ? tCommon("submitting") : t("submit")}
       </button>
     </form>
