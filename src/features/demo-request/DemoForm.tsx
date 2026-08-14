@@ -128,6 +128,7 @@ export function DemoForm() {
       <SelectField
         id="demoInterest"
         label={interestCopy.label}
+        placeholder={tCommon("selectPlaceholder")}
         error={fieldError("demoInterest")}
         options={demoInterests.map((value) => ({ value, label: interestCopy.options[value] }))}
         {...register("demoInterest")}
