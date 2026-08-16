@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/:root(app|solutions|features|institutions|roles|timetable|security|about|demo|contact|faq|guides|privacy|terms|support|data-deletion|compliance|privacy-center|trust-center|legal-notice|cookies|accessibility|child-parent-data-notice|data-processing-agreement|subprocessors|data-retention|backup-recovery|service-status|service-level-agreement|business-continuity|disaster-recovery|incident-response|vulnerability-disclosure|security-contact|support-policy|maintenance-policy|security-whitepaper|responsible-ai)/:path*",
+      "destination": "/ar/:root/:path*",
+      "permanent": true
+    }
+  ]
+}
