@@ -91,6 +91,7 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 604800,
   },
   async redirects() {
+    // Canonicalize legacy public URLs before locale middleware/rendering.
     return [
       {
         source: "/",
