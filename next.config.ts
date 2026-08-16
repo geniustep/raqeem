@@ -7,6 +7,47 @@ const isDev = process.env.NODE_ENV === "development";
 const isVercel = process.env.VERCEL === "1";
 const vercelLive = isVercel ? " https://vercel.live" : "";
 
+const LEGACY_PUBLIC_ROOTS = [
+  "app",
+  "solutions",
+  "features",
+  "institutions",
+  "roles",
+  "timetable",
+  "security",
+  "about",
+  "demo",
+  "contact",
+  "faq",
+  "guides",
+  "privacy",
+  "terms",
+  "support",
+  "data-deletion",
+  "compliance",
+  "privacy-center",
+  "trust-center",
+  "legal-notice",
+  "cookies",
+  "accessibility",
+  "child-parent-data-notice",
+  "data-processing-agreement",
+  "subprocessors",
+  "data-retention",
+  "backup-recovery",
+  "service-status",
+  "service-level-agreement",
+  "business-continuity",
+  "disaster-recovery",
+  "incident-response",
+  "vulnerability-disclosure",
+  "security-contact",
+  "support-policy",
+  "maintenance-policy",
+  "security-whitepaper",
+  "responsible-ai",
+] as const;
+
 const contentSecurityPolicy = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://challenges.cloudflare.com${vercelLive}`,
@@ -56,6 +97,11 @@ const nextConfig: NextConfig = {
         destination: "/ar",
         permanent: false,
       },
+      ...LEGACY_PUBLIC_ROOTS.map((root) => ({
+        source: `/${root}/:path*`,
+        destination: `/ar/${root}/:path*`,
+        permanent: true,
+      })),
     ];
   },
   async headers() {
