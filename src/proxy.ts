@@ -53,10 +53,14 @@ export default function proxy(request: NextRequest) {
   if (!alreadyLocalized && LEGACY_PUBLIC_ROOTS.has(firstSegment)) {
     const destination = request.nextUrl.clone();
     destination.pathname = `/ar${pathname}`;
-    return NextResponse.redirect(destination, 308);
+    const response = NextResponse.redirect(destination, 308);
+    response.headers.set("x-raqeem-proxy", "redirect");
+    return response;
   }
 
-  return handleI18nRouting(request);
+  const response = handleI18nRouting(request);
+  response.headers.set("x-raqeem-proxy", "active");
+  return response;
 }
 
 export const config = {
