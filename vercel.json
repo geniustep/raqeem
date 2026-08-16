@@ -1,10 +1,43 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
-    {
-      "source": "/:root(app|solutions|features|institutions|roles|timetable|security|about|demo|contact|faq|guides|privacy|terms|support|data-deletion|compliance|privacy-center|trust-center|legal-notice|cookies|accessibility|child-parent-data-notice|data-processing-agreement|subprocessors|data-retention|backup-recovery|service-status|service-level-agreement|business-continuity|disaster-recovery|incident-response|vulnerability-disclosure|security-contact|support-policy|maintenance-policy|security-whitepaper|responsible-ai)/:path*",
-      "destination": "/ar/:root/:path*",
-      "permanent": true
-    }
+    { "source": "/guides/:path*", "destination": "/ar/guides/:path*", "permanent": true },
+    { "source": "/faq", "destination": "/ar/faq", "permanent": true },
+    { "source": "/solutions/:path*", "destination": "/ar/solutions/:path*", "permanent": true },
+    { "source": "/institutions/:path*", "destination": "/ar/institutions/:path*", "permanent": true },
+    { "source": "/roles/:path*", "destination": "/ar/roles/:path*", "permanent": true },
+    { "source": "/app/:path*", "destination": "/ar/app/:path*", "permanent": true },
+    { "source": "/features/:path*", "destination": "/ar/features/:path*", "permanent": true },
+    { "source": "/timetable/:path*", "destination": "/ar/timetable/:path*", "permanent": true },
+    { "source": "/security/:path*", "destination": "/ar/security/:path*", "permanent": true },
+    { "source": "/about/:path*", "destination": "/ar/about/:path*", "permanent": true },
+    { "source": "/demo/:path*", "destination": "/ar/demo/:path*", "permanent": true },
+    { "source": "/contact/:path*", "destination": "/ar/contact/:path*", "permanent": true },
+    { "source": "/privacy/:path*", "destination": "/ar/privacy/:path*", "permanent": true },
+    { "source": "/terms/:path*", "destination": "/ar/terms/:path*", "permanent": true },
+    { "source": "/support/:path*", "destination": "/ar/support/:path*", "permanent": true },
+    { "source": "/data-deletion/:path*", "destination": "/ar/data-deletion/:path*", "permanent": true },
+    { "source": "/compliance/:path*", "destination": "/ar/compliance/:path*", "permanent": true },
+    { "source": "/privacy-center/:path*", "destination": "/ar/privacy-center/:path*", "permanent": true },
+    { "source": "/trust-center/:path*", "destination": "/ar/trust-center/:path*", "permanent": true },
+    { "source": "/legal-notice/:path*", "destination": "/ar/legal-notice/:path*", "permanent": true },
+    { "source": "/cookies/:path*", "destination": "/ar/cookies/:path*", "permanent": true },
+    { "source": "/accessibility/:path*", "destination": "/ar/accessibility/:path*", "permanent": true },
+    { "source": "/child-parent-data-notice/:path*", "destination": "/ar/child-parent-data-notice/:path*", "permanent": true },
+    { "source": "/data-processing-agreement/:path*", "destination": "/ar/data-processing-agreement/:path*", "permanent": true },
+    { "source": "/subprocessors/:path*", "destination": "/ar/subprocessors/:path*", "permanent": true },
+    { "source": "/data-retention/:path*", "destination": "/ar/data-retention/:path*", "permanent": true },
+    { "source": "/backup-recovery/:path*", "destination": "/ar/backup-recovery/:path*", "permanent": true },
+    { "source": "/service-status/:path*", "destination": "/ar/service-status/:path*", "permanent": true },
+    { "source": "/service-level-agreement/:path*", "destination": "/ar/service-level-agreement/:path*", "permanent": true },
+    { "source": "/business-continuity/:path*", "destination": "/ar/business-continuity/:path*", "permanent": true },
+    { "source": "/disaster-recovery/:path*", "destination": "/ar/disaster-recovery/:path*", "permanent": true },
+    { "source": "/incident-response/:path*", "destination": "/ar/incident-response/:path*", "permanent": true },
+    { "source": "/vulnerability-disclosure/:path*", "destination": "/ar/vulnerability-disclosure/:path*", "permanent": true },
+    { "source": "/security-contact/:path*", "destination": "/ar/security-contact/:path*", "permanent": true },
+    { "source": "/support-policy/:path*", "destination": "/ar/support-policy/:path*", "permanent": true },
+    { "source": "/maintenance-policy/:path*", "destination": "/ar/maintenance-policy/:path*", "permanent": true },
+    { "source": "/security-whitepaper/:path*", "destination": "/ar/security-whitepaper/:path*", "permanent": true },
+    { "source": "/responsible-ai/:path*", "destination": "/ar/responsible-ai/:path*", "permanent": true }
   ]
 }
