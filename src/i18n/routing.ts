@@ -25,4 +25,7 @@ export const routing = defineRouting({
   // Arabic is the canonical default: "/" always lands on /ar regardless of
   // the browser's Accept-Language header.
   localeDetection: false,
+  // SEO alternates are emitted explicitly by Next.js metadata/sitemap so that
+  // x-default points to the canonical Arabic URL instead of an unlocalized URL.
+  alternateLinks: false,
 });
