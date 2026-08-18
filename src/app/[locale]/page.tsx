@@ -7,6 +7,7 @@ import { FaqSection } from "@/components/sections/FaqSection";
 import { Hero } from "@/components/sections/Hero";
 import { InstitutionsSection } from "@/components/sections/InstitutionsSection";
 import { LanguagesSection } from "@/components/sections/LanguagesSection";
+import { MarketScopeSection } from "@/components/sections/MarketScopeSection";
 import { MultiTenantSection } from "@/components/sections/MultiTenantSection";
 import { ProblemSolution } from "@/components/sections/ProblemSolution";
 import { ProductModulesSection } from "@/components/sections/ProductModulesSection";
@@ -17,25 +18,15 @@ import { SecuritySection } from "@/components/sections/SecuritySection";
 import { SocialProofSection } from "@/components/sections/SocialProofSection";
 import { TimetableSection } from "@/components/sections/TimetableSection";
 import { getEntityProfile } from "@/content/entity-profile";
-import { faqItemsByLocale } from "@/content/faq-content";
+import { getFaqItems } from "@/content/faq-catalog";
 import type { Locale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/constants";
 import { faqPageJsonLd, softwareApplicationJsonLd } from "@/lib/jsonld";
 import { buildPageMetadata } from "@/lib/metadata";
 
-interface PageProps {
-  params: Promise<{ locale: Locale }>;
-}
+interface PageProps { params: Promise<{ locale: Locale }>; }
 
-const featuredGuideSlugs = [
-  "choosing-school-management-system",
-  "admission-to-student-record",
-  "integrated-student-journey",
-  "raqeem-and-massar",
-  "school-data-isolation",
-  "school-fees-collections-receipts",
-  "governed-school-communication",
-] as const;
+const featuredGuideSlugs = ["choosing-school-management-system", "admission-to-student-record", "integrated-student-journey", "raqeem-and-massar", "school-data-isolation", "school-fees-collections-receipts", "governed-school-communication"] as const;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
@@ -45,16 +36,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function HomePage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
-
   const entity = getEntityProfile(locale);
-  const faqItems = faqItemsByLocale[locale].slice(0, 4);
+  const faqItems = getFaqItems(locale).slice(0, 4);
   const url = `${SITE_URL}/${locale}`;
-
   return (
     <>
       <JsonLd data={softwareApplicationJsonLd({ name: entity.name, description: entity.description, locale })} />
       <JsonLd data={faqPageJsonLd(faqItems, { url, inLanguage: locale })} />
       <Hero />
+      <MarketScopeSection />
       {locale === "ar" ? <SchoolJourneySection /> : <InstitutionsSection />}
       <ProblemSolution />
       <ProductModulesSection />
