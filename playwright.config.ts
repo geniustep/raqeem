@@ -25,6 +25,8 @@ export default defineConfig({
     timeout: 120_000,
     env: {
       ...process.env,
+      NEXT_PUBLIC_SITE_URL: "http://localhost:3100",
+      NEXT_PUBLIC_APP_URL: "https://app.raqeem.ma",
       RAQEEM_ACTIVATION_ALLOWED_TENANTS: "school,nibras",
     },
   },
