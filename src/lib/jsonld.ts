@@ -1,11 +1,12 @@
 import type { Locale } from "@/i18n/routing";
 import { organizationIdentity } from "@/content/organization-identity";
-import { APP_URL, BRAND, SITE_URL, SOCIAL_LINKS } from "./constants";
+import { APP_URL, BRAND, GOOGLE_PLAY_URL, SITE_URL, SOCIAL_LINKS } from "./constants";
 
 const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 const BRAND_ID = `${SITE_URL}/#brand`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
 const SOFTWARE_ID = `${SITE_URL}/#software`;
+const BRAND_ALIASES = [organizationIdentity.brandNameAr, organizationIdentity.brandName, "raqeem.ma"];
 
 function verifiedSocialProfiles(): string[] | undefined {
   const profiles = Object.values(SOCIAL_LINKS).filter((url): url is string => Boolean(url));
@@ -19,8 +20,10 @@ export function organizationJsonLd({ name, description }: { name: string; descri
     "@id": ORGANIZATION_ID,
     name,
     legalName: organizationIdentity.legalName,
-    alternateName: [organizationIdentity.brandNameAr, organizationIdentity.brandName],
+    alternateName: BRAND_ALIASES,
     description,
+    disambiguatingDescription:
+      "Genius Step SARL operates Raqeem (رقيم), the Moroccan education and school management software platform at raqeem.ma.",
     url: SITE_URL,
     email: organizationIdentity.email,
     telephone: organizationIdentity.telephone,
@@ -76,10 +79,13 @@ export function brandJsonLd({ name, description }: { name: string; description: 
     "@type": "Brand",
     "@id": BRAND_ID,
     name,
-    alternateName: [organizationIdentity.brandNameAr, organizationIdentity.brandName],
+    alternateName: BRAND_ALIASES,
     description,
+    disambiguatingDescription:
+      "Raqeem (رقيم) is the Moroccan education management software brand published by Genius Step SARL at raqeem.ma.",
     url: SITE_URL,
     logo: `${SITE_URL}${BRAND.logo}`,
+    slogan: "Raqeem | رقيم",
   };
 }
 
@@ -88,12 +94,37 @@ export function websiteJsonLd({ name, description }: { name: string; description
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": WEBSITE_ID,
-    name,
-    alternateName: [organizationIdentity.brandNameAr, organizationIdentity.brandName],
+    name: BRAND.siteName,
+    alternateName: BRAND_ALIASES,
     description,
     url: SITE_URL,
     inLanguage: organizationIdentity.availableLanguages,
-    about: { "@id": BRAND_ID },
+    about: [{ "@id": BRAND_ID }, { "@id": SOFTWARE_ID }],
+    publisher: { "@id": ORGANIZATION_ID },
+  };
+}
+
+export function homePageJsonLd({
+  name,
+  description,
+  locale,
+}: {
+  name: string;
+  description: string;
+  locale: Locale;
+}) {
+  const url = `${SITE_URL}/${locale}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${url}#webpage`,
+    name,
+    description,
+    url,
+    inLanguage: locale,
+    isPartOf: { "@id": WEBSITE_ID },
+    about: [{ "@id": BRAND_ID }, { "@id": SOFTWARE_ID }, { "@id": ORGANIZATION_ID }],
+    mainEntity: { "@id": SOFTWARE_ID },
     publisher: { "@id": ORGANIZATION_ID },
   };
 }
@@ -112,11 +143,17 @@ export function softwareApplicationJsonLd({
     "@type": "SoftwareApplication",
     "@id": SOFTWARE_ID,
     name,
-    alternateName: [organizationIdentity.brandNameAr, organizationIdentity.brandName],
+    alternateName: BRAND_ALIASES,
     description,
-    url: APP_URL,
-    mainEntityOfPage: SITE_URL,
+    disambiguatingDescription:
+      "Raqeem (رقيم) is an education and school operations software platform for private educational institutions in Morocco.",
+    url: SITE_URL,
+    sameAs: [APP_URL, GOOGLE_PLAY_URL],
+    installUrl: GOOGLE_PLAY_URL,
+    mainEntityOfPage: `${SITE_URL}/${locale}`,
     applicationCategory: "EducationalApplication",
+    applicationSubCategory: "SchoolManagementSoftware",
+    applicationSuite: organizationIdentity.brandName,
     operatingSystem: "Web, Android, iOS, Windows",
     inLanguage: locale,
     brand: { "@id": BRAND_ID },
