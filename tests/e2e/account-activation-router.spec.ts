@@ -36,7 +36,7 @@ test.describe("account activation welcome router", () => {
     );
   });
 
-  for (const invalidToken of [
+  for (const [caseIndex, invalidToken] of [
     `${SELECTOR}.${SECRET}`,
     `school.extra.${SELECTOR}.${SECRET}`,
     token("SCHOOL"),
@@ -50,8 +50,8 @@ test.describe("account activation welcome router", () => {
     `school.${SELECTOR}.${SECRET}?next=https://example.com`,
     `school.${SELECTOR}.short`,
     ` school.${SELECTOR}.${SECRET}`,
-  ]) {
-    test(`fails closed for malformed token ${JSON.stringify(invalidToken.slice(0, 24))}`, async ({
+  ].entries()) {
+    test(`fails closed for malformed token #${caseIndex + 1} ${JSON.stringify(invalidToken.slice(0, 24))}`, async ({
       request,
     }) => {
       const response = await request.get(`/welcome/${encodeURIComponent(invalidToken)}`, {
