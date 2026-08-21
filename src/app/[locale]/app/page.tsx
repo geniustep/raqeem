@@ -12,9 +12,11 @@ import {
   Smartphone,
 } from "lucide-react";
 import { setRequestLocale } from "next-intl/server";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
 import type { Locale } from "@/i18n/routing";
-import { APP_URL, SITE_URL } from "@/lib/constants";
+import { APP_URL, GOOGLE_PLAY_URL, SITE_URL } from "@/lib/constants";
+import { softwareApplicationJsonLd } from "@/lib/jsonld";
 
 interface PageProps {
   params: Promise<{ locale: Locale }>;
@@ -39,7 +41,9 @@ type Copy = {
   features: Array<{ title: string; description: string }>;
   downloadTitle: string;
   downloadDescription: string;
-  comingSoon: string;
+  googlePlayCta: string;
+  availableNow: string;
+  iosComingSoon: string;
   storeNote: string;
   needNow: string;
   webFallback: string;
@@ -51,13 +55,13 @@ type Copy = {
 
 const copy: Record<Locale, Copy> = {
   ar: {
-    metaTitle: "تطبيق رقيم للأسر",
-    metaDescription: "الصفحة الرسمية للوصول إلى تطبيق رقيم ونسخة الويب للأسر، مع روابط التحميل الرسمية عند توفرها.",
+    metaTitle: "تطبيق رقيم للأسر | Google Play",
+    metaDescription: "الصفحة الرسمية لتطبيق رقيم للأسر. حمّل تطبيق رقيم الرسمي على Android من Google Play أو استخدم نسخة الويب.",
     eyebrow: "رقيم على هاتفك",
     title: "كل ما يخص أبناءك، أقرب إليك.",
     description: "تابع الجدول والواجبات والرسائل والإيصالات من تجربة واحدة هادئة وآمنة، مرتبطة مباشرة بمدرستك.",
     webCta: "الدخول إلى رقيم عبر المتصفح",
-    downloadCta: "خيارات التحميل",
+    downloadCta: "تحميل التطبيق",
     safeLink: "الرابط الرسمي الذي يمكنك الاحتفاظ به ومشاركته: raqeem.ma/app",
     family: "مساحة الأسرة",
     classLabel: "السادس ابتدائي",
@@ -73,24 +77,26 @@ const copy: Record<Locale, Copy> = {
       { title: "الإيصالات والمستحقات", description: "عرض المعلومات المالية المنشورة للأسرة بطريقة مباشرة." },
     ],
     downloadTitle: "حمّل رقيم على هاتفك",
-    downloadDescription: "ستظهر روابط المتاجر الرسمية هنا فور اعتماد النسخ العامة. وحتى ذلك الحين يمكنك استخدام نسخة الويب الرسمية.",
-    comingSoon: "قريبًا على المتجر الرسمي",
-    storeNote: "لن نعرض زر تنزيل قبل أن يكون الرابط تابعًا لنسخة رقيم الرسمية.",
-    needNow: "تحتاج رقيم الآن؟",
-    webFallback: "لا حاجة إلى انتظار المتجر. افتح نسخة الويب من هاتفك وسجّل الدخول بالطريقة التي وفرتها لك مدرستك.",
-    openNow: "فتح رقيم الآن",
+    downloadDescription: "تطبيق رقيم الرسمي متاح الآن على Google Play لأجهزة Android. استخدم دائمًا رابط المتجر الرسمي الموجود في هذه الصفحة.",
+    googlePlayCta: "تحميل رقيم من Google Play",
+    availableNow: "متاح الآن",
+    iosComingSoon: "قريبًا على App Store",
+    storeNote: "Google Play هو رابط التحميل الرسمي المعتمد لتطبيق رقيم على Android.",
+    needNow: "تفضّل استخدام المتصفح؟",
+    webFallback: "يمكنك أيضًا فتح نسخة الويب من هاتفك وتسجيل الدخول بالطريقة التي وفرتها لك مدرستك.",
+    openNow: "فتح رقيم على الويب",
     securityTitle: "نزّل رقيم من مصدر رسمي فقط",
-    securityDescription: "تجنب ملفات APK أو الروابط من مصادر غير معروفة. صفحة raqeem.ma/app هي المرجع الرسمي لروابط التحميل.",
-    keepLink: "احفظ هذا الرابط — لن تحتاج المدرسة إلى إرسال رابط جديد عند توفر المتاجر.",
+    securityDescription: "تجنب ملفات APK أو الروابط من مصادر غير معروفة. صفحة raqeem.ma/app وGoogle Play هما المرجعان الرسميان لتحميل تطبيق رقيم على Android.",
+    keepLink: "احفظ raqeem.ma/app للوصول دائمًا إلى روابط رقيم الرسمية.",
   },
   fr: {
-    metaTitle: "Application Raqeem pour les familles",
-    metaDescription: "La page officielle Raqeem pour l'application mobile et la version web, avec les liens de téléchargement vérifiés dès leur disponibilité.",
+    metaTitle: "Application Raqeem pour les familles | Google Play",
+    metaDescription: "Page officielle de l'application Raqeem pour les familles. Téléchargez Raqeem sur Android depuis Google Play ou utilisez la version web.",
     eyebrow: "Raqeem sur votre téléphone",
     title: "Tout ce qui concerne vos enfants, à portée de main.",
     description: "Suivez l'emploi du temps, les devoirs, les messages et les reçus dans une expérience simple et sécurisée, directement liée à votre établissement.",
     webCta: "Ouvrir Raqeem sur le web",
-    downloadCta: "Options de téléchargement",
+    downloadCta: "Télécharger l'application",
     safeLink: "Lien officiel à conserver et à partager : raqeem.ma/app",
     family: "Espace famille",
     classLabel: "6e primaire",
@@ -106,24 +112,26 @@ const copy: Record<Locale, Copy> = {
       { title: "Reçus et échéances", description: "Les informations financières publiées pour la famille, simplement." },
     ],
     downloadTitle: "Installez Raqeem sur votre téléphone",
-    downloadDescription: "Les liens officiels des stores apparaîtront ici dès validation des versions publiques. En attendant, utilisez la version web officielle.",
-    comingSoon: "Bientôt sur le store officiel",
-    storeNote: "Aucun bouton de téléchargement ne sera affiché avant la disponibilité d'un lien officiel Raqeem.",
-    needNow: "Besoin de Raqeem maintenant ?",
-    webFallback: "N'attendez pas le store : ouvrez la version web sur votre téléphone et connectez-vous avec les accès fournis par votre établissement.",
-    openNow: "Ouvrir Raqeem maintenant",
+    downloadDescription: "L'application officielle Raqeem est maintenant disponible sur Google Play pour Android. Utilisez toujours le lien officiel affiché sur cette page.",
+    googlePlayCta: "Télécharger sur Google Play",
+    availableNow: "Disponible maintenant",
+    iosComingSoon: "Bientôt sur l’App Store",
+    storeNote: "Google Play est le lien de téléchargement officiel de Raqeem sur Android.",
+    needNow: "Vous préférez le navigateur ?",
+    webFallback: "Vous pouvez aussi ouvrir la version web sur votre téléphone et vous connecter avec les accès fournis par votre établissement.",
+    openNow: "Ouvrir Raqeem sur le web",
     securityTitle: "Téléchargez Raqeem depuis une source officielle uniquement",
-    securityDescription: "Évitez les APK ou liens provenant de sources inconnues. raqeem.ma/app est la référence officielle pour les téléchargements.",
-    keepLink: "Conservez ce lien : votre établissement n'aura pas besoin d'en envoyer un nouveau lorsque les stores seront disponibles.",
+    securityDescription: "Évitez les APK ou les liens de sources inconnues. raqeem.ma/app et Google Play sont les références officielles pour Raqeem sur Android.",
+    keepLink: "Conservez raqeem.ma/app pour retrouver les liens officiels Raqeem.",
   },
   en: {
-    metaTitle: "Raqeem app for families",
-    metaDescription: "The official Raqeem page for family access to the mobile app and web experience, with verified store links when available.",
+    metaTitle: "Raqeem app for families | Google Play",
+    metaDescription: "The official Raqeem family app page. Download Raqeem for Android from Google Play or use the official web experience.",
     eyebrow: "Raqeem on your phone",
     title: "Everything about your children, closer to you.",
     description: "Follow timetables, homework, messages and receipts in one calm and secure experience connected directly to your school.",
     webCta: "Open Raqeem on the web",
-    downloadCta: "Download options",
+    downloadCta: "Download the app",
     safeLink: "Official link to save and share: raqeem.ma/app",
     family: "Family space",
     classLabel: "Grade 6",
@@ -139,24 +147,26 @@ const copy: Record<Locale, Copy> = {
       { title: "Receipts and dues", description: "Family financial information published by the school, clearly presented." },
     ],
     downloadTitle: "Get Raqeem on your phone",
-    downloadDescription: "Official store links will appear here as soon as the public releases are approved. Until then, use the official web experience.",
-    comingSoon: "Coming soon to the official store",
-    storeNote: "We will not show a download button until the link points to an official Raqeem release.",
-    needNow: "Need Raqeem now?",
-    webFallback: "There is no need to wait for the stores. Open the web version on your phone and sign in using the access provided by your school.",
-    openNow: "Open Raqeem now",
+    downloadDescription: "The official Raqeem app is now available on Google Play for Android. Always use the verified store link shown on this page.",
+    googlePlayCta: "Get Raqeem on Google Play",
+    availableNow: "Available now",
+    iosComingSoon: "Coming soon to the App Store",
+    storeNote: "Google Play is the official Android download link for Raqeem.",
+    needNow: "Prefer the browser?",
+    webFallback: "You can also open the web version on your phone and sign in using the access provided by your school.",
+    openNow: "Open Raqeem on the web",
     securityTitle: "Install Raqeem from official sources only",
-    securityDescription: "Avoid APK files or links from unknown sources. raqeem.ma/app is the official reference for download links.",
-    keepLink: "Save this link — your school will not need to send a new one when store downloads become available.",
+    securityDescription: "Avoid APK files or links from unknown sources. raqeem.ma/app and Google Play are the official references for Raqeem on Android.",
+    keepLink: "Save raqeem.ma/app to always find official Raqeem links.",
   },
   es: {
-    metaTitle: "Aplicación Raqeem para familias",
-    metaDescription: "La página oficial de Raqeem para acceder a la aplicación y a la versión web, con enlaces oficiales de descarga cuando estén disponibles.",
+    metaTitle: "Aplicación Raqeem para familias | Google Play",
+    metaDescription: "Página oficial de la aplicación Raqeem para familias. Descarga Raqeem para Android desde Google Play o usa la versión web oficial.",
     eyebrow: "Raqeem en tu teléfono",
     title: "Todo sobre tus hijos, más cerca de ti.",
     description: "Consulta horarios, deberes, mensajes y recibos desde una experiencia sencilla y segura conectada directamente con tu centro.",
     webCta: "Abrir Raqeem en la web",
-    downloadCta: "Opciones de descarga",
+    downloadCta: "Descargar la aplicación",
     safeLink: "Enlace oficial para guardar y compartir: raqeem.ma/app",
     family: "Espacio familiar",
     classLabel: "6.º de primaria",
@@ -172,15 +182,17 @@ const copy: Record<Locale, Copy> = {
       { title: "Recibos y pagos", description: "Información financiera publicada para la familia de forma clara." },
     ],
     downloadTitle: "Instala Raqeem en tu teléfono",
-    downloadDescription: "Los enlaces oficiales de las tiendas aparecerán aquí cuando se aprueben las versiones públicas. Mientras tanto, usa la versión web oficial.",
-    comingSoon: "Próximamente en la tienda oficial",
-    storeNote: "No mostraremos un botón de descarga hasta disponer de un enlace oficial de Raqeem.",
-    needNow: "¿Necesitas Raqeem ahora?",
-    webFallback: "No hace falta esperar a las tiendas. Abre la versión web desde el teléfono e inicia sesión con los accesos proporcionados por tu centro.",
-    openNow: "Abrir Raqeem ahora",
+    downloadDescription: "La aplicación oficial de Raqeem ya está disponible en Google Play para Android. Utiliza siempre el enlace oficial mostrado en esta página.",
+    googlePlayCta: "Descargar desde Google Play",
+    availableNow: "Disponible ahora",
+    iosComingSoon: "Próximamente en App Store",
+    storeNote: "Google Play es el enlace oficial de descarga de Raqeem para Android.",
+    needNow: "¿Prefieres el navegador?",
+    webFallback: "También puedes abrir la versión web desde el teléfono e iniciar sesión con los accesos proporcionados por tu centro.",
+    openNow: "Abrir Raqeem en la web",
     securityTitle: "Instala Raqeem solo desde fuentes oficiales",
-    securityDescription: "Evita archivos APK o enlaces de fuentes desconocidas. raqeem.ma/app es la referencia oficial para los enlaces de descarga.",
-    keepLink: "Guarda este enlace: tu centro no tendrá que enviarte uno nuevo cuando las tiendas estén disponibles.",
+    securityDescription: "Evita archivos APK o enlaces de fuentes desconocidas. raqeem.ma/app y Google Play son las referencias oficiales para Raqeem en Android.",
+    keepLink: "Guarda raqeem.ma/app para encontrar siempre los enlaces oficiales de Raqeem.",
   },
 };
 
@@ -203,7 +215,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         "x-default": `${SITE_URL}/ar/app`,
       },
     },
-    openGraph: { title: t.metaTitle, description: t.metaDescription, url: canonical, type: "website" },
+    openGraph: {
+      title: t.metaTitle,
+      description: t.metaDescription,
+      url: canonical,
+      type: "website",
+    },
   };
 }
 
@@ -214,6 +231,14 @@ export default async function AppLandingPage({ params }: PageProps) {
 
   return (
     <>
+      <JsonLd
+        data={softwareApplicationJsonLd({
+          name: "Raqeem",
+          description: t.metaDescription,
+          locale,
+        })}
+      />
+
       <section className="relative overflow-hidden bg-brand-ivory">
         <div className="bg-grid-soft absolute inset-0 opacity-70" aria-hidden="true" />
         <div className="absolute -top-24 end-[-5rem] h-80 w-80 rounded-full bg-brand-teal-100/80 blur-3xl" aria-hidden="true" />
@@ -227,11 +252,11 @@ export default async function AppLandingPage({ params }: PageProps) {
             <h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-brand-navy sm:text-5xl lg:text-6xl">{t.title}</h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-brand-navy-700/85 sm:text-xl">{t.description}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a href={APP_URL} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-brand-navy px-6 py-3 font-bold text-white shadow-lg shadow-brand-navy/10 transition hover:bg-brand-navy-700">
-                {t.webCta}<ExternalLink className="h-4 w-4" aria-hidden="true" />
+              <a href={GOOGLE_PLAY_URL} target="_blank" rel="noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-brand-navy px-6 py-3 font-bold text-white shadow-lg shadow-brand-navy/10 transition hover:bg-brand-navy-700">
+                {t.googlePlayCta}<ExternalLink className="h-4 w-4" aria-hidden="true" />
               </a>
-              <a href="#download" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-brand-navy-100 bg-white/80 px-6 py-3 font-bold text-brand-navy transition hover:border-brand-teal hover:bg-white">
-                {t.downloadCta}<ChevronDown className="h-4 w-4" aria-hidden="true" />
+              <a href={APP_URL} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-brand-navy-100 bg-white/80 px-6 py-3 font-bold text-brand-navy transition hover:border-brand-teal hover:bg-white">
+                {t.webCta}<ExternalLink className="h-4 w-4" aria-hidden="true" />
               </a>
             </div>
             <div className="mt-7 flex max-w-2xl items-start gap-3 rounded-xl border border-brand-navy-100/80 bg-white/65 px-4 py-3 text-sm leading-6 text-brand-navy-700 backdrop-blur">
@@ -279,7 +304,16 @@ export default async function AppLandingPage({ params }: PageProps) {
         <Container>
           <div className="mx-auto max-w-3xl text-center"><h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">{t.downloadTitle}</h2><p className="mt-4 text-lg leading-8 text-white/75">{t.downloadDescription}</p></div>
           <div className="mx-auto mt-10 grid max-w-4xl gap-4 md:grid-cols-2">
-            {["Android", "iPhone"].map((platform) => <div key={platform} className="rounded-2xl border border-white/10 bg-white/6 p-6 backdrop-blur"><div className="flex items-center justify-between gap-4"><div className="flex items-center gap-3"><div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10"><Smartphone className="h-5 w-5" aria-hidden="true" /></div><div><p className="text-sm text-white/60">Raqeem</p><h3 className="text-xl font-extrabold">{platform}</h3></div></div><span className="rounded-full border border-brand-gold/30 bg-brand-gold/10 px-3 py-1 text-xs font-bold text-brand-gold-100">{t.comingSoon}</span></div></div>)}
+            <a href={GOOGLE_PLAY_URL} target="_blank" rel="noreferrer" className="group rounded-2xl border border-brand-teal-300/40 bg-white/10 p-6 backdrop-blur transition hover:border-brand-teal-200 hover:bg-white/15">
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3"><div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10"><Smartphone className="h-5 w-5" aria-hidden="true" /></div><div><p className="text-sm text-white/60">Raqeem</p><h3 className="text-xl font-extrabold">Android · Google Play</h3></div></div>
+                <span className="rounded-full border border-brand-teal-200/30 bg-brand-teal-400/10 px-3 py-1 text-xs font-bold text-brand-teal-100">{t.availableNow}</span>
+              </div>
+              <span className="mt-5 inline-flex items-center gap-2 font-bold text-white">{t.googlePlayCta}<ExternalLink className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden="true" /></span>
+            </a>
+            <div className="rounded-2xl border border-white/10 bg-white/6 p-6 backdrop-blur">
+              <div className="flex items-center justify-between gap-4"><div className="flex items-center gap-3"><div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10"><Smartphone className="h-5 w-5" aria-hidden="true" /></div><div><p className="text-sm text-white/60">Raqeem</p><h3 className="text-xl font-extrabold">iPhone</h3></div></div><span className="rounded-full border border-brand-gold/30 bg-brand-gold/10 px-3 py-1 text-xs font-bold text-brand-gold-100">{t.iosComingSoon}</span></div>
+            </div>
           </div>
           <p className="mx-auto mt-5 max-w-3xl text-center text-sm leading-6 text-white/60">{t.storeNote}</p>
           <div className="mx-auto mt-10 max-w-4xl rounded-2xl bg-white p-6 text-brand-navy sm:p-8"><div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between"><div className="max-w-2xl"><h3 className="text-2xl font-extrabold">{t.needNow}</h3><p className="mt-3 leading-7 text-brand-navy-700/80">{t.webFallback}</p></div><a href={APP_URL} className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-brand-teal px-6 py-3 font-bold text-white transition hover:bg-brand-teal-600">{t.openNow}<ExternalLink className="h-4 w-4" aria-hidden="true" /></a></div></div>

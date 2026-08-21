@@ -9,6 +9,9 @@ export const SITE_URL = "https://www.raqeem.ma";
 
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.raqeem.ma";
 
+export const GOOGLE_PLAY_URL =
+  "https://play.google.com/store/apps/details?id=ma.raqeem.app";
+
 export const SOCIAL_LINKS = {
   facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL ?? "",
   instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "",
