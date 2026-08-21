@@ -50,6 +50,13 @@ export default function proxy(request: NextRequest) {
   const firstSegment = pathname.split("/").filter(Boolean)[0] ?? "";
   const alreadyLocalized = locales.some((locale) => firstSegment === locale);
 
+  // Meta account-activation links are intentionally locale-neutral. The
+  // route validates the opaque token and performs a tenant-allowlisted
+  // redirect; sending it through next-intl would rewrite it under /ar.
+  if (firstSegment === "welcome") {
+    return NextResponse.next();
+  }
+
   if (!alreadyLocalized && LEGACY_PUBLIC_ROOTS.has(firstSegment)) {
     const destination = request.nextUrl.clone();
     destination.pathname = `/ar${pathname}`;

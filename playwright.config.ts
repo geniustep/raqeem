@@ -23,5 +23,9 @@ export default defineConfig({
     port: PORT,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
+    env: {
+      ...process.env,
+      RAQEEM_ACTIVATION_ALLOWED_TENANTS: "school,nibras",
+    },
   },
 });
