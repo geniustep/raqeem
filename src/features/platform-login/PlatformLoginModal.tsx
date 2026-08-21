@@ -21,15 +21,13 @@ export function PlatformLoginModal({ open, onClose }: PlatformLoginModalProps) {
   const [value, setValue] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const loadingRef = useRef(false);
 
   useEffect(() => {
     if (!open) {
       return;
     }
 
-    setValue("");
-    setError(null);
-    setLoading(false);
     previouslyFocused.current = document.activeElement;
     document.body.style.overflow = "hidden";
 
@@ -40,7 +38,7 @@ export function PlatformLoginModal({ open, onClose }: PlatformLoginModalProps) {
     const panel = panelRef.current;
 
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape" && !loading) {
+      if (event.key === "Escape" && !loadingRef.current) {
         onClose();
         return;
       }
@@ -71,7 +69,7 @@ export function PlatformLoginModal({ open, onClose }: PlatformLoginModalProps) {
         previouslyFocused.current.focus();
       }
     };
-  }, [open, onClose, loading]);
+  }, [open, onClose]);
 
   if (!open) {
     return null;
@@ -90,10 +88,12 @@ export function PlatformLoginModal({ open, onClose }: PlatformLoginModalProps) {
     }
 
     setError(null);
+    loadingRef.current = true;
     setLoading(true);
 
     const result = await verifyTenant(slug);
 
+    loadingRef.current = false;
     setLoading(false);
 
     if (result === "ok") {
