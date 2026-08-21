@@ -19,7 +19,7 @@ test("role tabs follow the ARIA tabs pattern with keyboard support", async ({ pa
   await expect(tablist).toBeVisible();
 
   const tabs = tablist.getByRole("tab");
-  await expect(tabs).toHaveCount(4);
+  await expect(tabs).toHaveCount(6);
   await expect(tabs.first()).toHaveAttribute("aria-selected", "true");
 
   await tabs.first().focus();
@@ -29,7 +29,7 @@ test("role tabs follow the ARIA tabs pattern with keyboard support", async ({ pa
   await expect(page.getByRole("tabpanel")).toBeVisible();
 
   await page.keyboard.press("End");
-  await expect(tabs.nth(3)).toHaveAttribute("aria-selected", "true");
+  await expect(tabs.nth(5)).toHaveAttribute("aria-selected", "true");
 });
 
 test("every demo form control has an associated label", async ({ page }) => {
