@@ -76,7 +76,7 @@ test.describe("account activation welcome router", () => {
   });
 
   test("rejects double-encoded separators", async ({ request }) => {
-    const doubleEncoded = encodeURIComponent(encodeURIComponent(token("school")));
+    const doubleEncoded = token("school").replaceAll(".", "%252E");
     const response = await request.get(`/welcome/${doubleEncoded}`, { maxRedirects: 0 });
 
     expect(response.status()).toBe(404);
