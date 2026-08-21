@@ -24,9 +24,19 @@ import { SITE_URL } from "@/lib/constants";
 import { faqPageJsonLd, homePageJsonLd, softwareApplicationJsonLd } from "@/lib/jsonld";
 import { buildPageMetadata } from "@/lib/metadata";
 
-interface PageProps { params: Promise<{ locale: Locale }>; }
+interface PageProps {
+  params: Promise<{ locale: Locale }>;
+}
 
-const featuredGuideSlugs = ["choosing-school-management-system", "admission-to-student-record", "integrated-student-journey", "raqeem-and-massar", "school-data-isolation", "school-fees-collections-receipts", "governed-school-communication"] as const;
+const featuredGuideSlugs = [
+  "private-school-management-morocco",
+  "logiciel-gestion-scolaire-maroc",
+  "choosing-school-management-system",
+  "raqeem-and-massar",
+  "admission-to-student-record",
+  "school-fees-collections-receipts",
+  "integrated-student-journey",
+] as const;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
@@ -39,10 +49,23 @@ export default async function HomePage({ params }: PageProps) {
   const entity = getEntityProfile(locale);
   const faqItems = getFaqItems(locale).slice(0, 4);
   const url = `${SITE_URL}/${locale}`;
+
   return (
     <>
-      <JsonLd data={homePageJsonLd({ name: entity.descriptor, description: entity.description, locale })} />
-      <JsonLd data={softwareApplicationJsonLd({ name: entity.name, description: entity.description, locale })} />
+      <JsonLd
+        data={homePageJsonLd({
+          name: entity.descriptor,
+          description: entity.description,
+          locale,
+        })}
+      />
+      <JsonLd
+        data={softwareApplicationJsonLd({
+          name: entity.name,
+          description: entity.description,
+          locale,
+        })}
+      />
       <JsonLd data={faqPageJsonLd(faqItems, { url, inLanguage: locale })} />
       <Hero />
       <MarketScopeSection />
