@@ -21,7 +21,7 @@ import { getEntityProfile } from "@/content/entity-profile";
 import { getFaqItems } from "@/content/faq-catalog";
 import type { Locale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/constants";
-import { faqPageJsonLd, softwareApplicationJsonLd } from "@/lib/jsonld";
+import { faqPageJsonLd, homePageJsonLd, softwareApplicationJsonLd } from "@/lib/jsonld";
 import { buildPageMetadata } from "@/lib/metadata";
 
 interface PageProps { params: Promise<{ locale: Locale }>; }
@@ -41,6 +41,7 @@ export default async function HomePage({ params }: PageProps) {
   const url = `${SITE_URL}/${locale}`;
   return (
     <>
+      <JsonLd data={homePageJsonLd({ name: entity.descriptor, description: entity.description, locale })} />
       <JsonLd data={softwareApplicationJsonLd({ name: entity.name, description: entity.description, locale })} />
       <JsonLd data={faqPageJsonLd(faqItems, { url, inLanguage: locale })} />
       <Hero />
