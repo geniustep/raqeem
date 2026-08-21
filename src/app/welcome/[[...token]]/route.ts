@@ -20,9 +20,14 @@ function activationFailed(): NextResponse {
 }
 
 export async function GET(
-  _request: Request,
+  request: Request,
   { params }: { params: Promise<{ token?: string[] }> },
 ): Promise<NextResponse> {
+  const rawTokenSegment = new URL(request.url).pathname.split("/")[2] ?? "";
+  if (/%[0-9a-f]{2}/i.test(rawTokenSegment)) {
+    return activationFailed();
+  }
+
   const { token } = await params;
   const hint = token?.length === 1 ? parseActivationTokenHint(token[0] ?? "") : null;
 
