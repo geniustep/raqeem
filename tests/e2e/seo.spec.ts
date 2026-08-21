@@ -55,18 +55,25 @@ test("structured data includes Organization and FAQPage", async ({ page }) => {
 
 test("FAQ structured data identifies its canonical page and language", async ({ page }) => {
   await page.goto("/ar/faq");
-  const faq = page.locator("script[type='application/ld+json']").filter({ hasText: '"FAQPage"' });
-  const data = JSON.parse((await faq.textContent()) ?? "{}") as {
-    "@id"?: string;
-    url?: string;
-    inLanguage?: string;
-    mainEntityOfPage?: string;
-  };
+  const scripts = await page
+    .locator("script[type='application/ld+json']")
+    .evaluateAll((nodes) => nodes.map((node) => node.textContent ?? ""));
+  const data = scripts
+    .map((content) => JSON.parse(content) as Record<string, unknown>)
+    .find((entry) => entry["@type"] === "FAQPage") as
+    | {
+        "@id"?: string;
+        url?: string;
+        inLanguage?: string;
+        mainEntityOfPage?: string;
+      }
+    | undefined;
 
-  expect(data["@id"]).toMatch(/\/ar\/faq#faq$/);
-  expect(data.url).toMatch(/\/ar\/faq$/);
-  expect(data.inLanguage).toBe("ar");
-  expect(data.mainEntityOfPage).toBe(data.url);
+  expect(data).toBeDefined();
+  expect(data?.["@id"]).toMatch(/\/ar\/faq#faq$/);
+  expect(data?.url).toMatch(/\/ar\/faq$/);
+  expect(data?.inLanguage).toBe("ar");
+  expect(data?.mainEntityOfPage).toBe(data?.url);
 });
 
 test("sitemap and robots respond", async ({ request }) => {

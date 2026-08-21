@@ -15,10 +15,10 @@ test("main landmark and logical heading order exist", async ({ page }) => {
 
 test("role tabs follow the ARIA tabs pattern with keyboard support", async ({ page }) => {
   await page.goto("/en");
-  const tablist = page.getByRole("tablist");
+  const tablist = page.getByRole("tablist", { name: "Choose a role" });
   await expect(tablist).toBeVisible();
 
-  const tabs = page.getByRole("tab");
+  const tabs = tablist.getByRole("tab");
   await expect(tabs).toHaveCount(4);
   await expect(tabs.first()).toHaveAttribute("aria-selected", "true");
 
