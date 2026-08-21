@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import type { CatalogGuideSlug } from "@/content/guide-solution-links";
 import type { SolutionLandingSlug } from "@/content/solution-landing-pages";
 import type { Locale } from "@/i18n/routing";
 import { track } from "@/lib/analytics";
 import {
   buildSolutionDemoHref,
   readConversionAttribution,
+  type ConversionAttribution,
 } from "@/lib/conversion-attribution";
 
 interface SolutionDemoLinkProps {
@@ -24,14 +24,14 @@ export function SolutionDemoLink({
   label,
   className,
 }: SolutionDemoLinkProps) {
-  const [sourceGuideSlug, setSourceGuideSlug] = useState<CatalogGuideSlug | undefined>();
-  const [entrySource, setEntrySource] = useState<"guide" | "solution" | "site">("site");
-  const href = buildSolutionDemoHref(locale, solutionSlug, sourceGuideSlug);
+  const [attribution, setAttribution] = useState<ConversionAttribution>({ source: "site" });
+  const href = buildSolutionDemoHref(locale, solutionSlug, attribution.guideSlug);
 
   useEffect(() => {
-    const attribution = readConversionAttribution(window.location.search);
-    setSourceGuideSlug(attribution.guideSlug);
-    setEntrySource(attribution.source);
+    const frame = window.requestAnimationFrame(() => {
+      setAttribution(readConversionAttribution(window.location.search));
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   return (
@@ -42,8 +42,8 @@ export function SolutionDemoLink({
         track("solution_demo_cta_click", {
           locale,
           solution_slug: solutionSlug,
-          entry_source: entrySource,
-          guide_slug: sourceGuideSlug,
+          entry_source: attribution.source,
+          guide_slug: attribution.guideSlug,
           destination: "demo",
         })
       }

@@ -101,7 +101,7 @@ export default async function LocaleLayout({
       <body className="flex min-h-screen flex-col">
         <JsonLd data={organizationJsonLd({ name: entity.name, description: entity.description })} />
         <JsonLd data={brandJsonLd({ name: entity.name, description: entity.description })} />
-        <JsonLd data={websiteJsonLd({ name: entity.name, description: entity.description })} />
+        <JsonLd data={websiteJsonLd({ description: entity.description })} />
         <WebVitalsReporter />
         <NextIntlClientProvider>
           <RouteBreadcrumbJsonLd locale={typedLocale} />
