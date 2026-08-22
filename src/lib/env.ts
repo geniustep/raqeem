@@ -50,6 +50,7 @@ const envSchema = z.object({
   EMAIL_PROVIDER_API_KEY: optionalString,
   TURNSTILE_SITE_KEY: optionalString,
   TURNSTILE_SECRET_KEY: optionalString,
+  RAQEEM_ACTIVATION_ALLOWED_TENANTS: optionalString,
 });
 
 export type Env = z.infer<typeof envSchema>;
