@@ -6,7 +6,12 @@ const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 const BRAND_ID = `${SITE_URL}/#brand`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
 const SOFTWARE_ID = `${SITE_URL}/#software`;
-const BRAND_ALIASES = [organizationIdentity.brandNameAr, organizationIdentity.brandName, "raqeem.ma"];
+const BRAND_ALIASES = [
+  organizationIdentity.brandName,
+  organizationIdentity.brandNameAr,
+  "www.raqeem.ma",
+  "raqeem.ma",
+];
 
 function verifiedSocialProfiles(): string[] | undefined {
   const profiles = Object.values(SOCIAL_LINKS).filter((url): url is string => Boolean(url));
