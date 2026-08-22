@@ -23,7 +23,7 @@ export const ANALYTICS_ID = process.env.NEXT_PUBLIC_ANALYTICS_ID ?? "";
 export const BRAND = {
   nameAr: "رقيم",
   nameLatin: "Raqeem",
-  siteName: "رقيم | Raqeem",
+  siteName: "Raqeem",
   logo: "/brand/raqeem-logo.png",
   logoSmall: "/brand/raqeem-logo-small.png",
   logoWidth: 2549,
