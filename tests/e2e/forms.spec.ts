@@ -1,6 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 
 async function fillValidDemoForm(page: Page) {
+  await page.waitForLoadState("networkidle");
   await page.locator("#organizationName").fill("Atlas Test School");
   await page.locator("#organizationType").selectOption("school");
   await page.locator("#city").fill("Rabat");
