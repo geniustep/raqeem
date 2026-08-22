@@ -17,7 +17,6 @@ import { localeNames, locales, type Locale } from "@/i18n/routing";
 import { track } from "@/lib/analytics";
 import {
   readConversionAttribution,
-  type ConversionAttribution,
 } from "@/lib/conversion-attribution";
 import {
   demoInterests,
@@ -36,7 +35,6 @@ export function DemoForm() {
   const locale = useLocale() as Locale;
   const interestCopy = demoInterestCopy[locale];
   const [status, setStatus] = useState<Status>("idle");
-  const [attribution, setAttribution] = useState<ConversionAttribution>({ source: "site" });
 
   const {
     register,
@@ -62,14 +60,13 @@ export function DemoForm() {
   });
 
   useEffect(() => {
-    const nextAttribution = readConversionAttribution(window.location.search);
-    setAttribution(nextAttribution);
+    const attribution = readConversionAttribution(window.location.search);
 
     track("demo_view", {
       locale,
-      entry_source: nextAttribution.source,
-      guide_slug: nextAttribution.guideSlug,
-      solution_slug: nextAttribution.solutionSlug,
+      entry_source: attribution.source,
+      guide_slug: attribution.guideSlug,
+      solution_slug: attribution.solutionSlug,
     });
   }, [locale]);
 
@@ -88,6 +85,7 @@ export function DemoForm() {
       });
       const result = (await response.json()) as { ok?: boolean };
       if (response.ok && result.ok) {
+        const attribution = readConversionAttribution(window.location.search);
         setStatus("success");
         track("demo_submit_success", {
           locale,

@@ -89,7 +89,7 @@ export function brandJsonLd({ name, description }: { name: string; description: 
   };
 }
 
-export function websiteJsonLd({ name, description }: { name: string; description: string }) {
+export function websiteJsonLd({ description }: { description: string }) {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",

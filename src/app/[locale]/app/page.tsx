@@ -4,7 +4,6 @@ import {
   BookOpenCheck,
   CalendarDays,
   CheckCircle2,
-  ChevronDown,
   ExternalLink,
   MessageCircleMore,
   ReceiptText,
