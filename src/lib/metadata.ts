@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { getCorePageContent } from "@/content/core-pages";
 import { getEntityProfile } from "@/content/entity-profile";
 import { locales, type Locale } from "@/i18n/routing";
-import { SITE_URL } from "./constants";
+import { BRAND, SITE_URL } from "./constants";
 
 export type MetadataPageKey =
   | "home"
@@ -63,7 +63,6 @@ export function buildLocalizedMetadata({
   description,
   type = "website",
 }: BuildLocalizedMetadataOptions): Metadata {
-  const entity = getEntityProfile(locale);
   const url = `${SITE_URL}/${locale}${path}`;
 
   return {
@@ -77,7 +76,7 @@ export function buildLocalizedMetadata({
       title,
       description,
       url,
-      siteName: entity.name,
+      siteName: BRAND.siteName,
       locale,
       type,
       images: [
