@@ -1,5 +1,4 @@
 import "server-only";
-import { getEnv } from "./env";
 import { isValidTenantSlug, TENANT_DOMAIN } from "./tenant";
 
 const TOKEN_PART_PATTERN = /^[A-Za-z0-9_-]+$/;
@@ -44,17 +43,24 @@ export function parseActivationTokenHint(rawToken: string): ActivationTokenHint 
 }
 
 export function activationAllowedTenants(): ReadonlySet<string> {
-  const configured = getEnv().RAQEEM_ACTIVATION_ALLOWED_TENANTS;
-  if (!configured) {
-    return new Set();
+  const configured = process.env.RAQEEM_ACTIVATION_ALLOWED_TENANTS;
+  const tenants = new Set<string>();
+
+  // School is the only tenant approved for the current production rollout.
+  // Other tenants remain fail-closed until explicitly configured.
+  if (process.env.VERCEL_ENV === "production") {
+    tenants.add("school");
   }
 
-  return new Set(
-    configured
-      .split(",")
-      .map((tenant) => tenant.trim())
-      .filter((tenant) => isValidTenantSlug(tenant)),
-  );
+  if (configured) {
+    for (const tenant of configured.split(",").map((value) => value.trim())) {
+      if (isValidTenantSlug(tenant)) {
+        tenants.add(tenant);
+      }
+    }
+  }
+
+  return tenants;
 }
 
 export function buildActivationRedirectUrl(hint: ActivationTokenHint): URL {
