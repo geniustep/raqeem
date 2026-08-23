@@ -45,15 +45,16 @@ const LEGACY_PUBLIC_ROOTS = new Set([
   "responsible-ai",
 ]);
 
+const ACTIVATION_PUBLIC_ROOTS = new Set(["activate", "welcome"]);
+
 export default function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const firstSegment = pathname.split("/").filter(Boolean)[0] ?? "";
   const alreadyLocalized = locales.some((locale) => firstSegment === locale);
 
-  // Meta account-activation links are intentionally locale-neutral. The
-  // route validates the opaque token and performs a tenant-allowlisted
-  // redirect; sending it through next-intl would rewrite it under /ar.
-  if (firstSegment === "welcome") {
+  // Meta account-activation links are locale-neutral. They must reach the
+  // central tenant router before next-intl can rewrite them under /ar.
+  if (ACTIVATION_PUBLIC_ROOTS.has(firstSegment)) {
     return NextResponse.next();
   }
 
