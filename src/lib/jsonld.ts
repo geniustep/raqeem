@@ -1,6 +1,13 @@
 import type { Locale } from "@/i18n/routing";
 import { organizationIdentity } from "@/content/organization-identity";
-import { APP_URL, BRAND, GOOGLE_PLAY_URL, SITE_URL, SOCIAL_LINKS } from "./constants";
+import {
+  APP_STORE_URL,
+  APP_URL,
+  BRAND,
+  GOOGLE_PLAY_URL,
+  SITE_URL,
+  SOCIAL_LINKS,
+} from "./constants";
 
 const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 const BRAND_ID = `${SITE_URL}/#brand`;
@@ -153,8 +160,8 @@ export function softwareApplicationJsonLd({
     disambiguatingDescription:
       "Raqeem (رقيم) is an education and school operations software platform for private educational institutions in Morocco.",
     url: SITE_URL,
-    sameAs: [APP_URL, GOOGLE_PLAY_URL],
-    installUrl: GOOGLE_PLAY_URL,
+    sameAs: [APP_URL, GOOGLE_PLAY_URL, APP_STORE_URL],
+    installUrl: [GOOGLE_PLAY_URL, APP_STORE_URL],
     mainEntityOfPage: `${SITE_URL}/${locale}`,
     applicationCategory: "EducationalApplication",
     applicationSubCategory: "SchoolManagementSoftware",
