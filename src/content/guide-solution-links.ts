@@ -71,6 +71,15 @@ const guideSolutionLinks: Record<
     "school-communication",
     "attendance-absence",
   ],
+  "student-departure-during-school-year": [
+    "admissions-enrollment",
+    "school-fees-collections",
+  ],
+  "guardian-financial-responsible-pickup-roles": [
+    "admissions-enrollment",
+    "school-fees-collections",
+    "school-communication",
+  ],
 };
 
 export function getGuideSolutionSlugs(
