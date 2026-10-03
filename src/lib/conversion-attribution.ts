@@ -21,6 +21,8 @@ const allowedGuideSlugs = [
   "integrated-student-journey",
   "private-school-management-morocco",
   "logiciel-gestion-scolaire-maroc",
+  "student-departure-during-school-year",
+  "guardian-financial-responsible-pickup-roles",
 ] as const satisfies readonly CatalogGuideSlug[];
 
 const allowedSolutionSlugs = [
