@@ -24,6 +24,8 @@ const topicDefinitions = [
     slugs: [
       "admission-to-student-record",
       "integrated-student-journey",
+      "student-departure-during-school-year",
+      "guardian-financial-responsible-pickup-roles",
       "migrating-from-excel",
       "raqeem-and-massar",
     ],
