@@ -5,6 +5,7 @@ import { governedSchoolCommunicationGuide } from "@/content/guides/governed-scho
 import { cloudSchoolManagementGuide, integratedStudentJourneyGuide, mobileAndDesktopSchoolManagementGuide, raqeemAndMassarGuide } from "@/content/guides/local-context-and-platforms";
 import { privateSchoolManagementMoroccoGuide, schoolManagementSoftwareMoroccoGuide } from "@/content/guides/morocco-school-management-search";
 import { schoolFeesCollectionsReceiptsGuide } from "@/content/guides/school-fees-collections-receipts";
+import { guardianFinancialResponsiblePickupRolesGuide, studentDepartureDuringSchoolYearGuide } from "@/content/guides/student-departure-and-family-roles";
 import { getGuide as getBaseGuide, guideIndexPages, guideSlugs as baseGuideSlugs } from "@/content/guides";
 import type { Locale } from "@/i18n/routing";
 
@@ -12,23 +13,27 @@ export const stageFourGuideSlugs = ["school-fees-collections-receipts", "governe
 export const stageSixGuideSlugs = ["attendance-absence-parent-updates", "roles-permissions-sensitive-actions", "protecting-school-data", "timetable-conflict-management", "migrating-from-excel", "multi-branch-school-management"] as const;
 export const stageSevenGuideSlugs = ["raqeem-and-massar", "mobile-and-desktop-school-management", "cloud-school-management", "integrated-student-journey"] as const;
 export const searchGuideSlugs = ["private-school-management-morocco", "logiciel-gestion-scolaire-maroc"] as const;
+export const operationsGuideSlugs = ["student-departure-during-school-year", "guardian-financial-responsible-pickup-roles"] as const;
 
 type StageFourGuideSlug = (typeof stageFourGuideSlugs)[number];
 type StageSixGuideSlug = (typeof stageSixGuideSlugs)[number];
 type StageSevenGuideSlug = (typeof stageSevenGuideSlugs)[number];
 type SearchGuideSlug = (typeof searchGuideSlugs)[number];
+type OperationsGuideSlug = (typeof operationsGuideSlugs)[number];
 
-export const guideSlugs = [...baseGuideSlugs, ...stageFourGuideSlugs, ...stageSixGuideSlugs, ...stageSevenGuideSlugs, ...searchGuideSlugs] as const;
+export const guideSlugs = [...baseGuideSlugs, ...stageFourGuideSlugs, ...stageSixGuideSlugs, ...stageSevenGuideSlugs, ...searchGuideSlugs, ...operationsGuideSlugs] as const;
 
 const stageFourGuides: Record<StageFourGuideSlug, Record<Locale, CatalogGuideContent>> = { "school-fees-collections-receipts": schoolFeesCollectionsReceiptsGuide, "governed-school-communication": governedSchoolCommunicationGuide };
 const stageSixGuides: Record<StageSixGuideSlug, Record<Locale, CatalogGuideContent>> = { "attendance-absence-parent-updates": attendanceAbsenceParentUpdatesGuide, "roles-permissions-sensitive-actions": rolesPermissionsSensitiveActionsGuide, "protecting-school-data": protectingSchoolDataGuide, "timetable-conflict-management": timetableConflictManagementGuide, "migrating-from-excel": migratingFromExcelGuide, "multi-branch-school-management": multiBranchSchoolManagementGuide };
 const stageSevenGuides: Record<StageSevenGuideSlug, Record<Locale, CatalogGuideContent>> = { "raqeem-and-massar": raqeemAndMassarGuide, "mobile-and-desktop-school-management": mobileAndDesktopSchoolManagementGuide, "cloud-school-management": cloudSchoolManagementGuide, "integrated-student-journey": integratedStudentJourneyGuide };
 const searchGuides: Record<SearchGuideSlug, Record<Locale, CatalogGuideContent>> = { "private-school-management-morocco": privateSchoolManagementMoroccoGuide, "logiciel-gestion-scolaire-maroc": schoolManagementSoftwareMoroccoGuide };
+const operationsGuides: Record<OperationsGuideSlug, Record<Locale, CatalogGuideContent>> = { "student-departure-during-school-year": studentDepartureDuringSchoolYearGuide, "guardian-financial-responsible-pickup-roles": guardianFinancialResponsiblePickupRolesGuide };
 
 function isStageFourGuideSlug(value: string): value is StageFourGuideSlug { return stageFourGuideSlugs.includes(value as StageFourGuideSlug); }
 function isStageSixGuideSlug(value: string): value is StageSixGuideSlug { return stageSixGuideSlugs.includes(value as StageSixGuideSlug); }
 function isStageSevenGuideSlug(value: string): value is StageSevenGuideSlug { return stageSevenGuideSlugs.includes(value as StageSevenGuideSlug); }
 function isSearchGuideSlug(value: string): value is SearchGuideSlug { return searchGuideSlugs.includes(value as SearchGuideSlug); }
+function isOperationsGuideSlug(value: string): value is OperationsGuideSlug { return operationsGuideSlugs.includes(value as OperationsGuideSlug); }
 
 function massarMarketingGuide(locale: Locale, guide: CatalogGuideContent): CatalogGuideContent {
   const copy = {
@@ -109,6 +114,7 @@ export function getGuide(locale: Locale, slug: string): CatalogGuideContent | un
   else if (isStageSixGuideSlug(slug)) guide = stageSixGuides[slug][locale];
   else if (isStageSevenGuideSlug(slug)) guide = stageSevenGuides[slug][locale];
   else if (isSearchGuideSlug(slug)) guide = searchGuides[slug][locale];
+  else if (isOperationsGuideSlug(slug)) guide = operationsGuides[slug][locale];
   if (!guide) return undefined;
   return slug === "raqeem-and-massar" ? massarMarketingGuide(locale, guide) : guide;
 }
