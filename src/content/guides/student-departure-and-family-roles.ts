@@ -1,6 +1,7 @@
 import type { CatalogGuideContent } from "@/content/guide-types";
 import type { Locale } from "@/i18n/routing";
 
+// prettier-ignore
 export const studentDepartureDuringSchoolYearGuide: Record<Locale, CatalogGuideContent> = {
   ar: {
     slug: "student-departure-during-school-year", category: "دليل إدارة التلميذ",
@@ -115,6 +116,7 @@ export const studentDepartureDuringSchoolYearGuide: Record<Locale, CatalogGuideC
   }
 };
 
+// prettier-ignore
 export const guardianFinancialResponsiblePickupRolesGuide: Record<Locale, CatalogGuideContent> = {
   ar: {
     slug: "guardian-financial-responsible-pickup-roles", category: "دليل التلميذ والأسرة",
