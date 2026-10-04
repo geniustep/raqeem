@@ -4,21 +4,21 @@
 
 ## Official website
 
-- https://www.raqeem.ma/
-- Arabic: https://www.raqeem.ma/ar
-- French: https://www.raqeem.ma/fr
-- English: https://www.raqeem.ma/en
-- Spanish: https://www.raqeem.ma/es
+- [Raqeem official website](https://www.raqeem.ma/)
+- [Raqeem in Arabic](https://www.raqeem.ma/ar)
+- [Raqeem in French](https://www.raqeem.ma/fr)
+- [Raqeem in English](https://www.raqeem.ma/en)
+- [Raqeem in Spanish](https://www.raqeem.ma/es)
 
 ## Key resources
 
-- Guides: https://www.raqeem.ma/ar/guides
-- FAQ: https://www.raqeem.ma/ar/faq
-- Raqeem and Massar: https://www.raqeem.ma/ar/guides/raqeem-and-massar
-- Student departure during the school year: https://www.raqeem.ma/ar/guides/student-departure-during-school-year
-- Guardian, financial responsibility, and pickup roles: https://www.raqeem.ma/ar/guides/guardian-financial-responsible-pickup-roles
-- Security: https://www.raqeem.ma/ar/security
-- Privacy center: https://www.raqeem.ma/ar/privacy-center
+- [Guides](https://www.raqeem.ma/ar/guides)
+- [FAQ](https://www.raqeem.ma/ar/faq)
+- [Raqeem and Massar](https://www.raqeem.ma/ar/guides/raqeem-and-massar)
+- [Student departure during the school year](https://www.raqeem.ma/ar/guides/student-departure-during-school-year)
+- [Guardian, financial responsibility, and pickup roles](https://www.raqeem.ma/ar/guides/guardian-financial-responsible-pickup-roles)
+- [Security](https://www.raqeem.ma/ar/security)
+- [Privacy center](https://www.raqeem.ma/ar/privacy-center)
 
 ## Important clarification
 
@@ -26,5 +26,4 @@ Raqeem can prepare supported files for an authorized user to review and upload t
 
 ## Publisher
 
-Raqeem
-https://www.raqeem.ma/
+[Raqeem](https://www.raqeem.ma/)
