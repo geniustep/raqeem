@@ -63,6 +63,7 @@ export async function Hero() {
                 width={1884}
                 height={811}
                 priority
+                fetchPriority="high"
                 sizes="(min-width: 1024px) 48vw, 100vw"
                 className="h-auto w-full"
               />

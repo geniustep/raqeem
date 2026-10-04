@@ -1,0 +1,30 @@
+# Raqeem
+
+> Raqeem (رقيم) is a school management platform for private schools and educational institutions. It helps authorized school teams manage daily operations including student records, attendance, finance, timetables, communication, and administrative workflows.
+
+## Official website
+
+- https://www.raqeem.ma/
+- Arabic: https://www.raqeem.ma/ar
+- French: https://www.raqeem.ma/fr
+- English: https://www.raqeem.ma/en
+- Spanish: https://www.raqeem.ma/es
+
+## Key resources
+
+- Guides: https://www.raqeem.ma/ar/guides
+- FAQ: https://www.raqeem.ma/ar/faq
+- Raqeem and Massar: https://www.raqeem.ma/ar/guides/raqeem-and-massar
+- Student departure during the school year: https://www.raqeem.ma/ar/guides/student-departure-during-school-year
+- Guardian, financial responsibility, and pickup roles: https://www.raqeem.ma/ar/guides/guardian-financial-responsible-pickup-roles
+- Security: https://www.raqeem.ma/ar/security
+- Privacy center: https://www.raqeem.ma/ar/privacy-center
+
+## Important clarification
+
+Raqeem can prepare supported files for an authorized user to review and upload to Massar. This does not imply a permanent direct connection, official synchronization, or endorsement by Massar unless Raqeem explicitly announces such an integration.
+
+## Publisher
+
+Raqeem
+https://www.raqeem.ma/
