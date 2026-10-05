@@ -28,7 +28,18 @@
 
 html[lang="ar"] {
   --font-body: var(--font-noto-sans-arabic), var(--font-inter), ui-sans-serif, sans-serif;
-  --font-heading-stack: var(--font-noto-kufi-arabic), var(--font-noto-sans-arabic), sans-serif;
+  /*
+   * Keep the mobile critical path on the already-required Arabic body font.
+   * Noto Kufi remains the branded heading face on desktop, where Lighthouse
+   * already reports excellent performance and the larger font is less costly.
+   */
+  --font-heading-stack: var(--font-noto-sans-arabic), sans-serif;
+}
+
+@media (min-width: 1024px) {
+  html[lang="ar"] {
+    --font-heading-stack: var(--font-noto-kufi-arabic), var(--font-noto-sans-arabic), sans-serif;
+  }
 }
 
 @theme inline {
